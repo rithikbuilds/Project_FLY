@@ -22,6 +22,7 @@ from agents import axis
 from agents import icici
 from agents import canara
 from agents import bob
+from agents import market
 
 
 # ==========================================================
@@ -29,7 +30,9 @@ from agents import bob
 # ==========================================================
 
 DATA_DIR = ROOT_DIR / "data"
+
 LATEST_FILE = DATA_DIR / "latest.json"
+
 HISTORY_FILE = DATA_DIR / "history.csv"
 
 IST = ZoneInfo("Asia/Kolkata")
@@ -238,10 +241,148 @@ def deduplicate(records):
 
 
 # ==========================================================
+# MARKET RATE ENRICHMENT
+# ==========================================================
+
+def apply_market_rates(
+    records,
+    market_result
+):
+
+    market_rates = (
+        market_result.get("rates", {})
+    )
+
+    source_name = (
+        market_result.get("source")
+    )
+
+    source_url = (
+        market_result.get("source_url")
+    )
+
+    source_timestamp = (
+        market_result.get("source_timestamp")
+    )
+
+    market_fetched_at = (
+        market_result.get("fetched_at")
+    )
+
+    enriched = []
+
+    for record in records:
+
+        copied = dict(record)
+
+        currency = copied.get(
+            "currency"
+        )
+
+        bank_rate = copied.get(
+            "bank_rate"
+        )
+
+        market_rate = market_rates.get(
+            currency
+        )
+
+        if (
+            market_rate is None
+            or
+            bank_rate is None
+        ):
+
+            copied["market_rate"] = None
+
+            copied["markup_percent"] = None
+
+            copied["market_source"] = source_name
+
+            copied["market_source_url"] = source_url
+
+            copied["market_source_timestamp"] = (
+                source_timestamp
+            )
+
+            copied["market_fetched_at"] = (
+                market_fetched_at
+            )
+
+            enriched.append(
+                copied
+            )
+
+            continue
+
+        try:
+
+            bank_rate = float(
+                bank_rate
+            )
+
+            market_rate = float(
+                market_rate
+            )
+
+        except (TypeError, ValueError):
+
+            copied["market_rate"] = None
+
+            copied["markup_percent"] = None
+
+            enriched.append(
+                copied
+            )
+
+            continue
+
+        markup = (
+            (
+                bank_rate
+                /
+                market_rate
+            )
+            - 1
+        ) * 100
+
+        copied["market_rate"] = round(
+            market_rate,
+            4
+        )
+
+        copied["markup_percent"] = round(
+            markup,
+            4
+        )
+
+        copied["market_source"] = source_name
+
+        copied["market_source_url"] = source_url
+
+        copied["market_source_timestamp"] = (
+            source_timestamp
+        )
+
+        copied["market_fetched_at"] = (
+            market_fetched_at
+        )
+
+        enriched.append(
+            copied
+        )
+
+    return enriched
+
+
+# ==========================================================
 # SAVE LATEST
 # ==========================================================
 
-def save_latest(records):
+def save_latest(
+    records,
+    market_result
+):
 
     DATA_DIR.mkdir(
         parents=True,
@@ -249,9 +390,42 @@ def save_latest(records):
     )
 
     payload = {
-        "updated_at": now_ist().isoformat(),
-        "rate_type": RATE_TYPE,
-        "rates": records,
+        "updated_at":
+            now_ist().isoformat(),
+
+        "rate_type":
+            RATE_TYPE,
+
+        "market_reference": {
+            "source":
+                market_result.get(
+                    "source"
+                ),
+
+            "source_url":
+                market_result.get(
+                    "source_url"
+                ),
+
+            "source_timestamp":
+                market_result.get(
+                    "source_timestamp"
+                ),
+
+            "fetched_at":
+                market_result.get(
+                    "fetched_at"
+                ),
+
+            "rates":
+                market_result.get(
+                    "rates",
+                    {}
+                ),
+        },
+
+        "rates":
+            records,
     }
 
     with open(
@@ -286,6 +460,10 @@ HISTORY_FIELDS = [
     "source_time",
     "fetched_at",
     "status",
+    "market_source",
+    "market_source_url",
+    "market_source_timestamp",
+    "market_fetched_at",
 ]
 
 
@@ -333,11 +511,14 @@ def append_history(records):
         exist_ok=True
     )
 
-    existing_keys = load_history_keys()
+    existing_keys = (
+        load_history_keys()
+    )
 
     file_exists = (
         HISTORY_FILE.exists()
-        and HISTORY_FILE.stat().st_size > 0
+        and
+        HISTORY_FILE.stat().st_size > 0
     )
 
     with open(
@@ -378,14 +559,20 @@ def append_history(records):
                 continue
 
             writer.writerow({
-                field: record.get(
-                    field,
-                    ""
-                )
+
+                field:
+                    record.get(
+                        field,
+                        ""
+                    )
+
                 for field in HISTORY_FIELDS
+
             })
 
-            existing_keys.add(key)
+            existing_keys.add(
+                key
+            )
 
 
 # ==========================================================
@@ -399,6 +586,7 @@ def run_agent(
 ):
 
     print()
+
     print(
         "================================"
     )
@@ -419,8 +607,13 @@ def run_agent(
 
         for record in records:
 
-            if validate_record(record):
-                valid.append(record)
+            if validate_record(
+                record
+            ):
+
+                valid.append(
+                    record
+                )
 
         if not valid:
 
@@ -482,28 +675,42 @@ def sort_records(records):
 
     bank_order = {
         "SBI": 1,
-        "Axis Bank": 2,
-        "ICICI Bank": 3,
-        "Canara Bank": 4,
-        "Bank of Baroda": 5,
+        "Canara Bank": 2,
+        "Bank of Baroda": 3,
+        "ICICI Bank": 4,
+        "Axis Bank": 5,
         "HDFC": 6,
     }
 
     currency_order = {
+
         currency: index
+
         for index, currency
-        in enumerate(CURRENCIES)
+        in enumerate(
+            CURRENCIES
+        )
+
     }
 
     return sorted(
         records,
         key=lambda record: (
-            bank_order.get(
-                record.get("bank"),
-                999
-            ),
             currency_order.get(
                 record.get("currency"),
+                999
+            ),
+            (
+                record.get(
+                    "markup_percent"
+                )
+                if record.get(
+                    "markup_percent"
+                ) is not None
+                else 999
+            ),
+            bank_order.get(
+                record.get("bank"),
                 999
             )
         )
@@ -543,7 +750,7 @@ def main():
 
 
     # ======================================================
-    # ACTIVE BANK AGENTS
+    # BANK AGENTS
     # ======================================================
 
     agents = [
@@ -569,7 +776,6 @@ def main():
         ),
     ]
 
-
     for bank_name, collector in agents:
 
         bank_records = run_agent(
@@ -584,12 +790,48 @@ def main():
 
 
     # ======================================================
-    # CLEAN RESULTS
+    # CLEAN BANK RESULTS
     # ======================================================
 
     final_records = deduplicate(
         final_records
     )
+
+
+    # ======================================================
+    # MARKET AGENT
+    # ======================================================
+
+    print()
+
+    print(
+        "================================"
+    )
+
+    print(
+        "RUNNING MARKET RATE AGENT"
+    )
+
+    print(
+        "================================"
+    )
+
+    market_result = market.collect()
+
+
+    # ======================================================
+    # ADD MARKET RATE + MARKUP
+    # ======================================================
+
+    final_records = apply_market_rates(
+        final_records,
+        market_result
+    )
+
+
+    # ======================================================
+    # SORT
+    # ======================================================
 
     final_records = sort_records(
         final_records
@@ -601,7 +843,8 @@ def main():
     # ======================================================
 
     save_latest(
-        final_records
+        final_records,
+        market_result
     )
 
     append_history(
@@ -630,12 +873,16 @@ def main():
     for record in final_records:
 
         print(
-            record.get("bank"),
             record.get("currency"),
+            "|",
+            record.get("bank"),
+            "| Bank:",
             record.get("bank_rate"),
-            "| source:",
-            record.get("source_date"),
-            record.get("source_time"),
+            "| Market:",
+            record.get("market_rate"),
+            "| Markup:",
+            record.get("markup_percent"),
+            "%",
             "|",
             record.get("status")
         )
@@ -643,8 +890,15 @@ def main():
     print()
 
     print(
-        "Total rates:",
+        "Total bank rates:",
         len(final_records)
+    )
+
+    print(
+        "Market reference source:",
+        market_result.get(
+            "source"
+        )
     )
 
     print(
