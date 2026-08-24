@@ -23,7 +23,6 @@ SOURCE_URL = (
     "hdfc-bank-treasury-forex-card-rates.pdf"
 )
 
-
 CURRENCIES = [
     "USD",
     "CAD",
@@ -108,7 +107,7 @@ def now_ist():
 
 
 # ==========================================================
-# CLEAN TEXT
+# TEXT HELPERS
 # ==========================================================
 
 def clean_text(value):
@@ -118,6 +117,48 @@ def clean_text(value):
         " ",
         str(value or "")
     ).strip()
+
+
+def normalize_for_header(value):
+
+    text = str(
+        value or ""
+    ).lower()
+
+    # Replace line breaks/tabs with spaces
+    text = re.sub(
+        r"[\r\n\t]+",
+        " ",
+        text
+    )
+
+    # Collapse multiple spaces
+    text = re.sub(
+        r"\s+",
+        " ",
+        text
+    )
+
+    # Normalise variations
+    text = (
+        text
+        .replace("t.t.", "tt")
+        .replace("t. t.", "tt")
+        .replace("o / w", "o/w")
+        .replace("o/ w", "o/w")
+        .replace("o /w", "o/w")
+    )
+
+    return text.strip()
+
+
+def compact_text(value):
+
+    return re.sub(
+        r"[^a-z0-9/]+",
+        "",
+        normalize_for_header(value)
+    )
 
 
 # ==========================================================
@@ -134,25 +175,20 @@ def download_pdf():
         SOURCE_URL
     )
 
-
     response = requests.get(
         SOURCE_URL,
         headers=HEADERS,
         timeout=60
     )
 
-
     response.raise_for_status()
 
-
     content = response.content
-
 
     print(
         "HTTP:",
         response.status_code
     )
-
 
     print(
         "Content-Type:",
@@ -162,12 +198,10 @@ def download_pdf():
         )
     )
 
-
     print(
         "Bytes:",
         len(content)
     )
-
 
     if not content.startswith(
         b"%PDF"
@@ -177,17 +211,15 @@ def download_pdf():
             "HDFC source did not return a valid PDF."
         )
 
-
     print(
         "HDFC Agent: PDF downloaded successfully."
     )
-
 
     return content
 
 
 # ==========================================================
-# PDF → TEXT
+# PDF -> TEXT
 # ==========================================================
 
 def extract_pdf_text(
@@ -196,24 +228,18 @@ def extract_pdf_text(
 
     parts = []
 
-
     with pdfplumber.open(
         io.BytesIO(
             pdf_bytes
         )
     ) as pdf:
 
-
         for page in pdf.pages:
 
-
             parts.append(
-
                 page.extract_text()
                 or ""
-
             )
-
 
     return "\n".join(
         parts
@@ -226,15 +252,6 @@ def extract_pdf_text(
 
 def extract_source_date(text):
 
-    """
-    Supports HDFC formats such as:
-
-    DATE : 24-08-2026
-    DATE: 24/08/2026
-    24-08-2026
-    """
-
-
     patterns = [
 
         r"\bDATE\s*[:\-]?\s*"
@@ -246,40 +263,28 @@ def extract_source_date(text):
 
     ]
 
-
     for pattern in patterns:
 
-
         match = re.search(
-
             pattern,
-
             text,
-
             re.IGNORECASE
-
         )
 
-
         if not match:
-
             continue
-
 
         day = int(
             match.group(1)
         )
 
-
         month = int(
             match.group(2)
         )
 
-
         year = int(
             match.group(3)
         )
-
 
         try:
 
@@ -289,16 +294,13 @@ def extract_source_date(text):
                 day
             )
 
-
             return parsed.strftime(
                 "%Y-%m-%d"
             )
 
-
         except ValueError:
 
             continue
-
 
     return None
 
@@ -309,13 +311,6 @@ def extract_source_date(text):
 
 def extract_source_time(text):
 
-    """
-    Example:
-
-    TIME : 09:24:24 AM
-    """
-
-
     patterns = [
 
         r"\bTIME\s*[:\-]?\s*"
@@ -324,32 +319,28 @@ def extract_source_time(text):
         r"\bTIME\s*[:\-]?\s*"
         r"(\d{1,2}:\d{2}\s*[AP]M)",
 
-    ]
+        # fallback: any nearby time
+        r"\b"
+        r"(\d{1,2}:\d{2}:\d{2}\s*[AP]M)"
+        r"\b",
 
+    ]
 
     for pattern in patterns:
 
-
         match = re.search(
-
             pattern,
-
             text,
-
             re.IGNORECASE
-
         )
 
-
         if match:
-
 
             return (
                 match.group(1)
                 .strip()
                 .upper()
             )
-
 
     return None
 
@@ -366,16 +357,13 @@ def determine_status(
 
         return "date_unverified"
 
-
     today = now_ist().strftime(
         "%Y-%m-%d"
     )
 
-
     if source_date == today:
 
         return "current"
-
 
     return "stale"
 
@@ -409,16 +397,13 @@ def rate_is_reasonable(
 
     }
 
-
     if currency not in ranges:
 
         return False
 
-
     low, high = (
         ranges[currency]
     )
-
 
     return (
         low
@@ -428,627 +413,106 @@ def rate_is_reasonable(
 
 
 # ==========================================================
-# HEADER DETECTION
+# HDFC OUTWARD HEADER DETECTION
 # ==========================================================
-
-def is_currency_header(
-    value
-):
-
-    text = (
-        clean_text(
-            value
-        )
-        .lower()
-    )
-
-
-    return (
-
-        "currency" in text
-
-        or
-
-        text == "ccy"
-
-    )
-
 
 def is_outward_sell_header(
     value
 ):
 
-    text = (
-        clean_text(
-            value
-        )
-        .lower()
+    normalized = normalize_for_header(
+        value
     )
 
-
-    # Remove extra spaces so variants still work
-
-    compact = re.sub(
-        r"\s+",
-        "",
-        text
+    compact = compact_text(
+        value
     )
 
-
-    selling = (
-
-        "selling" in text
-
+    has_sell = (
+        "selling" in normalized
         or
-
-        "sell" in text
-
+        "sell" in normalized
+        or
+        "selling" in compact
     )
 
-
-    outward = (
-
-        "o/w" in text
-
+    has_outward = (
+        "o/w" in normalized
         or
-
+        "outward" in normalized
+        or
         "o/w" in compact
-
-        or
-
-        "outward" in text
-
     )
 
-
-    remittance = (
-
-        "rem" in text
-
+    has_remittance = (
+        "rem" in normalized
         or
-
-        "remittance" in text
-
+        "remittance" in normalized
+        or
+        "rem" in compact
     )
-
 
     return (
-
-        selling
+        has_sell
         and
-        outward
+        has_outward
         and
-        remittance
-
+        has_remittance
     )
 
 
-# ==========================================================
-# TABLE-BASED EXTRACTION
-# ==========================================================
-
-def extract_from_tables(
-    pdf_bytes,
-    source_date,
-    source_time
+def document_has_outward_header(
+    text
 ):
 
-    records = []
-
-
-    with pdfplumber.open(
-        io.BytesIO(
-            pdf_bytes
-        )
-    ) as pdf:
-
-
-        for page_number, page in enumerate(
-            pdf.pages,
-            start=1
-        ):
-
-
-            tables = (
-                page.extract_tables()
-                or []
-            )
-
-
-            print(
-                "HDFC page",
-                page_number,
-                "tables:",
-                len(tables)
-            )
-
-
-            for table in tables:
-
-
-                if not table:
-
-                    continue
-
-
-                currency_column = None
-
-                outward_column = None
-
-                header_row_index = None
-
-
-                # ------------------------------------------
-                # FIND HEADER ROW
-                # ------------------------------------------
-
-                for row_index, row in enumerate(
-                    table
-                ):
-
-
-                    if not row:
-
-                        continue
-
-
-                    cells = [
-
-                        clean_text(
-                            cell
-                        )
-
-                        for cell in row
-
-                    ]
-
-
-                    for column_index, cell in enumerate(
-                        cells
-                    ):
-
-
-                        if is_currency_header(
-                            cell
-                        ):
-
-                            currency_column = (
-                                column_index
-                            )
-
-
-                        if is_outward_sell_header(
-                            cell
-                        ):
-
-                            outward_column = (
-                                column_index
-                            )
-
-
-                    if (
-
-                        currency_column
-                        is not None
-
-                        and
-
-                        outward_column
-                        is not None
-
-                    ):
-
-
-                        header_row_index = (
-                            row_index
-                        )
-
-
-                        print(
-                            "HDFC table header detected."
-                        )
-
-
-                        print(
-                            "Currency column:",
-                            currency_column
-                        )
-
-
-                        print(
-                            "T.T. Selling O/w column:",
-                            outward_column
-                        )
-
-
-                        break
-
-
-                if header_row_index is None:
-
-                    continue
-
-
-                # ------------------------------------------
-                # READ DATA ROWS
-                # ------------------------------------------
-
-                for row in table[
-                    header_row_index + 1:
-                ]:
-
-
-                    if not row:
-
-                        continue
-
-
-                    cells = [
-
-                        clean_text(
-                            cell
-                        )
-
-                        for cell in row
-
-                    ]
-
-
-                    if (
-
-                        currency_column
-                        >= len(cells)
-
-                        or
-
-                        outward_column
-                        >= len(cells)
-
-                    ):
-
-                        continue
-
-
-                    currency_text = (
-                        cells[
-                            currency_column
-                        ]
-                        .upper()
-                    )
-
-
-                    currency = None
-
-
-                    for candidate in CURRENCIES:
-
-
-                        if re.search(
-
-                            rf"\b{candidate}\b",
-
-                            currency_text
-
-                        ):
-
-
-                            currency = (
-                                candidate
-                            )
-
-
-                            break
-
-
-                    if not currency:
-
-                        continue
-
-
-                    rate_text = (
-                        cells[
-                            outward_column
-                        ]
-                    )
-
-
-                    match = re.search(
-
-                        r"\d+(?:\.\d+)?",
-
-                        rate_text
-
-                    )
-
-
-                    if not match:
-
-                        continue
-
-
-                    rate = float(
-                        match.group()
-                    )
-
-
-                    if not rate_is_reasonable(
-                        currency,
-                        rate
-                    ):
-
-
-                        print(
-                            "HDFC rejected suspicious table rate:",
-                            currency,
-                            rate
-                        )
-
-
-                        continue
-
-
-                    records.append(
-
-                        build_record(
-
-                            currency,
-                            rate,
-                            source_date,
-                            source_time
-
-                        )
-
-                    )
-
-
-                    print(
-                        "HDFC table",
-                        currency,
-                        rate
-                    )
-
-
-    return records
-
-
-# ==========================================================
-# TEXT FALLBACK
-# ==========================================================
-
-def extract_from_text(
-    text,
-    source_date,
-    source_time
-):
-
-    print(
-        "HDFC Agent: trying text fallback."
-    )
-
-
-    normalized = clean_text(
+    normalized = normalize_for_header(
         text
     )
 
-
-    lower = normalized.lower()
-
-
-    # ------------------------------------------------------
-    # SAFETY:
-    # Confirm correct outward-remittance header exists
-    # ------------------------------------------------------
-
-    outward_header_present = (
-
-        (
-            "t.t. selling" in lower
-
-            or
-
-            "tt selling" in lower
-        )
-
-        and
-
-        (
-            "o/w rem" in lower
-
-            or
-
-            "o / w rem" in lower
-
-            or
-
-            "outward" in lower
-        )
-
+    compact = compact_text(
+        text
     )
 
+    # Handles:
+    #
+    # TT Selling (O/w Rem)
+    #
+    # and:
+    #
+    # T.T. Selling (O/w
+    # Rem)
 
-    if not outward_header_present:
+    patterns = [
 
+        r"tt\s*selling.*?o/w.*?rem",
 
-        raise RuntimeError(
+        r"ttselling.*?o/w.*?rem",
 
-            "HDFC T.T. Selling "
-            "(O/w Rem) header "
-            "could not be verified."
+        r"selling.*?o/w.*?rem",
 
-        )
+    ]
 
+    for pattern in patterns:
 
-    records = []
-
-
-    for currency in CURRENCIES:
-
-
-        names = (
-            CURRENCY_NAMES[
-                currency
-            ]
-        )
-
-
-        name_pattern = "|".join(
-
-            re.escape(name)
-
-            for name in names
-
-        )
-
-
-        # --------------------------------------------------
-        # HDFC row
-        #
-        # Currency Name
-        # Currency Code
-        # followed by rate values
-        # --------------------------------------------------
-
-        pattern = re.compile(
-
-            rf"(?:{name_pattern})"
-            rf"\s+{currency}\s+"
-            r"((?:-|\d+(?:\.\d+)?)"
-            r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
-
+        if re.search(
+            pattern,
+            normalized,
             re.IGNORECASE
-
-        )
-
-
-        match = pattern.search(
-            normalized
-        )
-
-
-        if not match:
-
-
-            # Some HDFC PDF extraction may show
-            # currency code before currency name.
-
-            pattern_reverse = re.compile(
-
-                rf"\b{currency}\b\s+"
-                rf"(?:{name_pattern})\s+"
-                r"((?:-|\d+(?:\.\d+)?)"
-                r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
-
-                re.IGNORECASE
-
-            )
-
-
-            match = pattern_reverse.search(
-                normalized
-            )
-
-
-        if not match:
-
-
-            print(
-                "HDFC fallback missing:",
-                currency
-            )
-
-
-            continue
-
-
-        values = re.findall(
-
-            r"-|\d+(?:\.\d+)?",
-
-            match.group(1)
-
-        )
-
-
-        print(
-            "HDFC",
-            currency,
-            "row values:",
-            values[:10]
-        )
-
-
-        # --------------------------------------------------
-        # HDFC official table order:
-        #
-        # 0 Cash Buying
-        # 1 Cash Selling
-        # 2 Bills Buying
-        # 3 Bills Selling
-        # 4 TT Buying
-        # 5 TT Selling (O/w Rem)
-        #
-        # The header itself was verified above before
-        # this fallback is allowed.
-        # --------------------------------------------------
-
-        if len(values) < 6:
-
-            continue
-
-
-        value = (
-            values[5]
-        )
-
-
-        if value == "-":
-
-            continue
-
-
-        rate = float(
-            value
-        )
-
-
-        if not rate_is_reasonable(
-            currency,
-            rate
         ):
 
+            return True
 
-            print(
-                "HDFC rejected suspicious fallback rate:",
-                currency,
-                rate
-            )
+    if (
+        "selling" in compact
+        and
+        "o/w" in compact
+        and
+        "rem" in compact
+    ):
 
+        return True
 
-            continue
-
-
-        records.append(
-
-            build_record(
-
-                currency,
-                rate,
-                source_date,
-                source_time
-
-            )
-
-        )
-
-
-        print(
-            "HDFC fallback",
-            currency,
-            rate
-        )
-
-
-    return records
+    return False
 
 
 # ==========================================================
@@ -1063,7 +527,6 @@ def build_record(
 ):
 
     fetched = now_ist()
-
 
     return {
 
@@ -1116,6 +579,190 @@ def build_record(
 
 
 # ==========================================================
+# TEXT EXTRACTION
+# ==========================================================
+
+def extract_from_text(
+    text,
+    source_date,
+    source_time
+):
+
+    print(
+        "HDFC Agent: extracting rates from PDF text."
+    )
+
+    if not document_has_outward_header(
+        text
+    ):
+
+        raise RuntimeError(
+            "HDFC T.T. Selling "
+            "(O/w Rem) header "
+            "could not be verified."
+        )
+
+    print(
+        "HDFC T.T. Selling (O/w Rem) header verified."
+    )
+
+    normalized = clean_text(
+        text
+    )
+
+    records = []
+
+    for currency in CURRENCIES:
+
+        names = (
+            CURRENCY_NAMES[
+                currency
+            ]
+        )
+
+        name_pattern = "|".join(
+            re.escape(name)
+            for name in names
+        )
+
+        # HDFC row commonly appears as:
+        #
+        # US Dollar USD
+        # 93.24 98.13 95.27 97.61 95.46 97.33 ...
+        #
+        # We take the 6th value = T.T. Selling (O/w Rem)
+
+        patterns = [
+
+            re.compile(
+                rf"(?:{name_pattern})"
+                rf"\s+{currency}\s+"
+                r"((?:-|\d+(?:\.\d+)?)"
+                r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
+                re.IGNORECASE
+            ),
+
+            re.compile(
+                rf"\b{currency}\b\s+"
+                rf"(?:{name_pattern})\s+"
+                r"((?:-|\d+(?:\.\d+)?)"
+                r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
+                re.IGNORECASE
+            ),
+
+            # Fallback: code itself followed by rates
+
+            re.compile(
+                rf"\b{currency}\b\s+"
+                r"((?:-|\d+(?:\.\d+)?)"
+                r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
+                re.IGNORECASE
+            ),
+
+        ]
+
+        match = None
+
+        for pattern in patterns:
+
+            match = pattern.search(
+                normalized
+            )
+
+            if match:
+                break
+
+        if not match:
+
+            print(
+                "HDFC missing:",
+                currency
+            )
+
+            continue
+
+        values = re.findall(
+            r"-|\d+(?:\.\d+)?",
+            match.group(1)
+        )
+
+        print(
+            "HDFC",
+            currency,
+            "row values:",
+            values[:10]
+        )
+
+        if len(values) < 6:
+
+            print(
+                "HDFC insufficient values:",
+                currency
+            )
+
+            continue
+
+        # Official HDFC table order:
+        #
+        # 0 Cash Buying
+        # 1 Cash Selling
+        # 2 Bills Buying
+        # 3 Bills Selling
+        # 4 TT Buying
+        # 5 TT Selling (O/w Rem)
+
+        tt_sell_value = (
+            values[5]
+        )
+
+        if tt_sell_value == "-":
+
+            print(
+                "HDFC TT Sell missing:",
+                currency
+            )
+
+            continue
+
+        rate = float(
+            tt_sell_value
+        )
+
+        if not rate_is_reasonable(
+            currency,
+            rate
+        ):
+
+            print(
+                "HDFC rejected suspicious rate:",
+                currency,
+                rate
+            )
+
+            continue
+
+        record = build_record(
+            currency,
+            rate,
+            source_date,
+            source_time
+        )
+
+        records.append(
+            record
+        )
+
+        print(
+            "HDFC",
+            currency,
+            "TT Sell:",
+            rate
+        )
+
+    return records
+
+
+# ==========================================================
 # REMOVE DUPLICATES
 # ==========================================================
 
@@ -1125,14 +772,11 @@ def deduplicate(
 
     unique = {}
 
-
     for record in records:
-
 
         unique[
             record["currency"]
         ] = record
-
 
     return list(
         unique.values()
@@ -1159,25 +803,22 @@ def collect():
         "=============================="
     )
 
-
     # ------------------------------------------------------
     # DOWNLOAD
     # ------------------------------------------------------
 
     pdf_bytes = download_pdf()
 
-
     # ------------------------------------------------------
-    # EXTRACT TEXT
+    # PDF TEXT
     # ------------------------------------------------------
 
     text = extract_pdf_text(
         pdf_bytes
     )
 
-
     # ------------------------------------------------------
-    # SOURCE DATE/TIME
+    # SOURCE DATE + TIME
     # ------------------------------------------------------
 
     source_date = (
@@ -1186,226 +827,95 @@ def collect():
         )
     )
 
-
     source_time = (
         extract_source_time(
             text
         )
     )
 
-
     print(
         "HDFC source date:",
         source_date
     )
-
 
     print(
         "HDFC source time:",
         source_time
     )
 
-
-    # ------------------------------------------------------
-    # REQUIRE SOURCE DATE
-    # ------------------------------------------------------
-
     if not source_date:
 
-
         raise RuntimeError(
-
             "HDFC PDF downloaded, "
             "but source date "
             "could not be verified."
-
         )
-
-
-    # ------------------------------------------------------
-    # REQUIRE TODAY'S CARD
-    # ------------------------------------------------------
 
     if determine_status(
         source_date
     ) != "current":
 
-
         raise RuntimeError(
-
             "HDFC rate card is not current. "
             f"Source date: {source_date}"
-
         )
-
 
     # ------------------------------------------------------
-    # VERIFY OUTWARD HEADER
+    # EXTRACT RATES
     # ------------------------------------------------------
 
-    lower_text = (
-        clean_text(
-            text
-        )
-        .lower()
-    )
-
-
-    if not (
-
-        (
-            "t.t. selling" in lower_text
-
-            or
-
-            "tt selling" in lower_text
-        )
-
-        and
-
-        (
-            "o/w rem" in lower_text
-
-            or
-
-            "o / w rem" in lower_text
-
-            or
-
-            "outward" in lower_text
-        )
-
-    ):
-
-
-        raise RuntimeError(
-
-            "HDFC outward-remittance "
-            "TT Selling header was not found."
-
-        )
-
-
-    print(
-        "HDFC T.T. Selling (O/w Rem) header verified."
-    )
-
-
-    # ------------------------------------------------------
-    # METHOD 1 — TABLE EXTRACTION
-    # ------------------------------------------------------
-
-    records = extract_from_tables(
-
-        pdf_bytes,
-
+    records = extract_from_text(
+        text,
         source_date,
-
         source_time
-
     )
-
 
     records = deduplicate(
         records
     )
 
-
     # ------------------------------------------------------
-    # METHOD 2 — TEXT FALLBACK
-    # ------------------------------------------------------
-
-    if len(records) < len(
-        CURRENCIES
-    ):
-
-
-        fallback_records = (
-            extract_from_text(
-
-                text,
-
-                source_date,
-
-                source_time
-
-            )
-        )
-
-
-        records.extend(
-            fallback_records
-        )
-
-
-        records = deduplicate(
-            records
-        )
-
-
-    # ------------------------------------------------------
-    # REQUIRE ALL 8
+    # REQUIRE ALL 8 CURRENCIES
     # ------------------------------------------------------
 
-    currencies_found = {
-
+    found = {
         record["currency"]
-
         for record in records
-
     }
 
-
     missing = (
-
         set(CURRENCIES)
-
-        - currencies_found
-
+        - found
     )
-
 
     if missing:
 
-
         raise RuntimeError(
-
             "HDFC Agent missing currencies: "
-
             + ", ".join(
                 sorted(missing)
             )
-
         )
-
 
     # ------------------------------------------------------
     # SORT
     # ------------------------------------------------------
 
     order = {
-
         currency: index
-
         for index, currency
         in enumerate(
             CURRENCIES
         )
-
     }
 
-
     records.sort(
-
         key=lambda item:
-
             order.get(
                 item["currency"],
                 999
             )
-
     )
-
 
     # ------------------------------------------------------
     # OUTPUT
@@ -1413,33 +923,21 @@ def collect():
 
     for record in records:
 
-
         print(
-
             "HDFC",
-
             record["currency"],
-
             record["bank_rate"],
-
             "| source:",
-
             record["source_date"],
-
             record["source_time"],
-
             "|",
-
             record["status"]
-
         )
-
 
     print(
         "HDFC Agent completed:",
         len(records),
         "rates"
     )
-
 
     return records
