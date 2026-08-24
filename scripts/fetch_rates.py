@@ -2,6 +2,8 @@ import csv
 import io
 import json
 import re
+import time
+
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -15,10 +17,13 @@ import requests
 # ==========================================================
 
 DATA_DIR = Path("data")
+
 LATEST_FILE = DATA_DIR / "latest.json"
+
 HISTORY_FILE = DATA_DIR / "history.csv"
 
 IST = ZoneInfo("Asia/Kolkata")
+
 
 CURRENCIES = [
     "USD",
@@ -32,32 +37,57 @@ CURRENCIES = [
 ]
 
 
-SBI_PDF_URL = (
+# ==========================================================
+# OFFICIAL BANK SOURCES
+# ==========================================================
+
+SBI_PDF_URLS = [
+
     "https://sbi.co.in/documents/16012/1400784/"
-    "FOREX_CARD_RATES.pdf"
-)
+    "FOREX_CARD_RATES.pdf",
+
+]
 
 
-HDFC_PDF_URL = (
+HDFC_PDF_URLS = [
+
+    # Try this static HDFC endpoint first
+    "https://v.hdfcbank.com/content/dam/"
+    "hdfc-aem-microsites/common-pdfs/pdf/"
+    "forex_rates/rates.pdf",
+
+    # Official HDFC content repository fallback
     "https://www.hdfcbank.com/content/bbp/repositories/"
     "723fb80a-2dde-42a3-9793-7ae1be57c87f/"
-    "?path=%2FPersonal%2FHome%2Fcontent%2Frates.pdf"
-)
+    "?path=%2FPersonal%2FHome%2Fcontent%2Frates.pdf",
 
+]
+
+
+# ==========================================================
+# HTTP SETTINGS
+# ==========================================================
 
 HEADERS = {
+
     "User-Agent": (
         "Mozilla/5.0 "
         "(Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 "
         "(KHTML, like Gecko) "
-        "Chrome/129 Safari/537.36"
+        "Chrome/129.0 Safari/537.36"
     ),
+
     "Accept": (
-        "text/html,application/xhtml+xml,"
-        "application/xml;q=0.9,"
-        "application/pdf;q=0.8,*/*;q=0.7"
-    )
+        "application/pdf,"
+        "text/html,"
+        "application/xhtml+xml,"
+        "*/*"
+    ),
+
+    "Accept-Language":
+        "en-US,en;q=0.9",
+
 }
 
 
@@ -93,25 +123,25 @@ def parse_number(value):
         return None
 
     try:
-        return float(match.group())
+
+        return float(
+            match.group()
+        )
 
     except ValueError:
+
         return None
 
 
 # ==========================================================
-# SOURCE DATE PARSER
+# PDF DATE
 # ==========================================================
 
 def parse_source_date(text):
 
     patterns = [
 
-        # 24-08-2026
         r"\b(\d{1,2})[-/](\d{1,2})[-/](20\d{2})\b",
-
-        # 24/08/2026
-        r"\b(\d{1,2})/(\d{1,2})/(20\d{2})\b",
 
     ]
 
@@ -123,48 +153,65 @@ def parse_source_date(text):
             text
         )
 
-        if match:
-
-            day = int(match.group(1))
-            month = int(match.group(2))
-            year = int(match.group(3))
-
-            try:
-
-                parsed = datetime(
-                    year,
-                    month,
-                    day
-                )
-
-                return parsed.strftime(
-                    "%Y-%m-%d"
-                )
-
-            except ValueError:
-
-                continue
+        if not match:
+            continue
 
 
-    # Example:
+        day = int(
+            match.group(1)
+        )
+
+        month = int(
+            match.group(2)
+        )
+
+        year = int(
+            match.group(3)
+        )
+
+
+        try:
+
+            parsed = datetime(
+                year,
+                month,
+                day
+            )
+
+
+            return parsed.strftime(
+                "%Y-%m-%d"
+            )
+
+
+        except ValueError:
+
+            continue
+
+
     # 24-Aug-2026
 
-    month_pattern = re.search(
+    match = re.search(
+
         r"\b(\d{1,2})[-\s]"
         r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
         r"[-\s](20\d{2})\b",
+
         text,
+
         re.IGNORECASE
+
     )
 
 
-    if month_pattern:
+    if match:
 
         raw = (
-            f"{month_pattern.group(1)}-"
-            f"{month_pattern.group(2)}-"
-            f"{month_pattern.group(3)}"
+            f"{match.group(1)}-"
+            f"{match.group(2)}-"
+            f"{match.group(3)}"
         )
+
 
         try:
 
@@ -173,9 +220,11 @@ def parse_source_date(text):
                 "%d-%b-%Y"
             )
 
+
             return parsed.strftime(
                 "%Y-%m-%d"
             )
+
 
         except ValueError:
 
@@ -186,7 +235,7 @@ def parse_source_date(text):
 
 
 # ==========================================================
-# SOURCE TIME PARSER
+# PDF TIME
 # ==========================================================
 
 def parse_source_time(text):
@@ -210,6 +259,7 @@ def parse_source_time(text):
             re.IGNORECASE
         )
 
+
         if match:
 
             return normalize_text(
@@ -221,78 +271,203 @@ def parse_source_time(text):
 
 
 # ==========================================================
-# STATUS
+# CURRENT / STALE
 # ==========================================================
 
 def determine_status(source_date):
 
     if not source_date:
+
         return "date_unverified"
+
 
     today = now_ist().strftime(
         "%Y-%m-%d"
     )
 
+
     if source_date == today:
+
         return "current"
+
 
     return "stale"
 
 
 # ==========================================================
-# DOWNLOAD
+# DOWNLOAD WITH RETRIES + FALLBACK URLS
 # ==========================================================
 
-def download_source(url):
+def download_pdf_from_sources(
+    bank_name,
+    urls
+):
 
-    print("\nDownloading:")
-    print(url)
+    errors = []
 
-    response = requests.get(
-        url,
-        headers=HEADERS,
-        timeout=45
-    )
 
-    response.raise_for_status()
+    for url in urls:
 
-    print(
-        "HTTP:",
-        response.status_code
-    )
 
-    print(
-        "Content-Type:",
-        response.headers.get(
-            "content-type",
-            ""
+        for attempt in range(
+            1,
+            4
+        ):
+
+
+            try:
+
+                print(
+                    f"\n{bank_name}: "
+                    f"trying source"
+                )
+
+                print(
+                    url
+                )
+
+                print(
+                    f"Attempt {attempt}/3"
+                )
+
+
+                response = requests.get(
+
+                    url,
+
+                    headers=HEADERS,
+
+                    timeout=30,
+
+                    allow_redirects=True
+
+                )
+
+
+                response.raise_for_status()
+
+
+                content = (
+                    response.content
+                )
+
+
+                print(
+                    "HTTP:",
+                    response.status_code
+                )
+
+
+                print(
+                    "Content-Type:",
+                    response.headers.get(
+                        "content-type",
+                        ""
+                    )
+                )
+
+
+                # PDF signature validation
+
+                if not content.startswith(
+                    b"%PDF"
+                ):
+
+
+                    raise RuntimeError(
+                        "Source returned something "
+                        "other than a PDF."
+                    )
+
+
+                print(
+                    f"{bank_name}: "
+                    "PDF downloaded successfully."
+                )
+
+
+                return (
+                    content,
+                    url
+                )
+
+
+            except Exception as error:
+
+
+                message = (
+                    f"{url} | "
+                    f"attempt {attempt} | "
+                    f"{error}"
+                )
+
+
+                errors.append(
+                    message
+                )
+
+
+                print(
+                    f"{bank_name}: "
+                    f"download attempt failed:"
+                )
+
+
+                print(
+                    str(error)
+                )
+
+
+                if attempt < 3:
+
+                    time.sleep(
+                        3
+                    )
+
+
+    raise RuntimeError(
+
+        f"{bank_name}: "
+        "all PDF sources failed.\n"
+
+        + "\n".join(
+            errors
         )
-    )
 
-    return response.content
+    )
 
 
 # ==========================================================
 # PDF TEXT
 # ==========================================================
 
-def extract_pdf_text(pdf_bytes):
+def extract_pdf_text(
+    pdf_bytes
+):
 
-    text_parts = []
+    parts = []
+
 
     with pdfplumber.open(
-        io.BytesIO(pdf_bytes)
+        io.BytesIO(
+            pdf_bytes
+        )
     ) as pdf:
+
 
         for page in pdf.pages:
 
-            text_parts.append(
+
+            parts.append(
+
                 page.extract_text()
                 or ""
+
             )
 
+
     return "\n".join(
-        text_parts
+        parts
     )
 
 
@@ -309,7 +484,10 @@ def build_record(
     source_time=None
 ):
 
-    current_time = now_ist()
+    current_time = (
+        now_ist()
+    )
+
 
     return {
 
@@ -333,7 +511,9 @@ def build_record(
             "TT Selling / Outward Remittance",
 
         "bank_rate":
-            float(bank_rate),
+            float(
+                bank_rate
+            ),
 
         "market_rate":
             None,
@@ -356,51 +536,71 @@ def build_record(
         "status":
             determine_status(
                 source_date
-            )
+            ),
 
     }
 
 
 # ==========================================================
-# VALIDATION
+# RATE VALIDATION
 # ==========================================================
 
-def validate_record(record):
+def validate_record(
+    record
+):
 
-    currency = record["currency"]
-    rate = record["bank_rate"]
+    currency = (
+        record["currency"]
+    )
+
+    rate = (
+        record["bank_rate"]
+    )
+
 
     ranges = {
 
         "USD": (70, 130),
+
         "CAD": (40, 100),
+
         "AUD": (40, 100),
+
         "GBP": (90, 180),
+
         "EUR": (80, 160),
+
         "SGD": (45, 110),
+
         "AED": (15, 40),
+
         "NZD": (30, 90),
 
     }
 
 
     if currency not in ranges:
+
         return False
 
 
-    low, high = ranges[currency]
+    low, high = (
+        ranges[currency]
+    )
 
 
     if not (
         low <= rate <= high
     ):
 
+
         print(
-            "REJECTED suspicious rate:",
+            "REJECTED RATE:",
             record["bank"],
             currency,
             rate
         )
+
 
         return False
 
@@ -409,7 +609,7 @@ def validate_record(record):
 
 
 # ==========================================================
-# SBI PARSER
+# SBI
 # ==========================================================
 
 def parse_sbi():
@@ -427,8 +627,14 @@ def parse_sbi():
     )
 
 
-    pdf_bytes = download_source(
-        SBI_PDF_URL
+    pdf_bytes, used_url = (
+        download_pdf_from_sources(
+
+            "SBI",
+
+            SBI_PDF_URLS
+
+        )
     )
 
 
@@ -437,13 +643,17 @@ def parse_sbi():
     )
 
 
-    source_date = parse_source_date(
-        text
+    source_date = (
+        parse_source_date(
+            text
+        )
     )
 
 
-    source_time = parse_source_time(
-        text
+    source_time = (
+        parse_source_time(
+            text
+        )
     )
 
 
@@ -451,6 +661,7 @@ def parse_sbi():
         "SBI source date:",
         source_date
     )
+
 
     print(
         "SBI source time:",
@@ -461,19 +672,27 @@ def parse_sbi():
     if not source_date:
 
         raise RuntimeError(
-            "SBI rate-card date could not be detected."
+            "SBI source date "
+            "could not be verified."
         )
 
 
     aliases = {
 
         "USD": "USD/INR",
+
         "CAD": "CAD/INR",
+
         "AUD": "AUD/INR",
+
         "GBP": "GBP/INR",
+
         "EUR": "EUR/INR",
+
         "SGD": "SGD/INR",
+
         "AED": "AED/INR",
+
         "NZD": "NZD/INR",
 
     }
@@ -482,14 +701,21 @@ def parse_sbi():
     records = []
 
 
-    for currency, pair in aliases.items():
+    for currency, pair in (
+        aliases.items()
+    ):
+
 
         found = False
 
 
-        for line in text.splitlines():
+        for line in (
+            text.splitlines()
+        ):
+
 
             if pair not in line:
+
                 continue
 
 
@@ -498,30 +724,36 @@ def parse_sbi():
             )
 
 
-            pair_position = cleaned.find(
+            position = cleaned.find(
                 pair
             )
 
 
             after_pair = cleaned[
-                pair_position
+
+                position
                 + len(pair):
+
             ]
 
 
             numbers = re.findall(
+
                 r"\d+(?:\.\d+)?",
+
                 after_pair
+
             )
 
 
-            # SBI's current card:
-            # first numeric rate = TT BUY
-            # second numeric rate = TT SELL
-
             if len(numbers) < 2:
+
                 continue
 
+
+            # SBI:
+            # 1st rate = TT BUY
+            # 2nd rate = TT SELL
 
             tt_sell = float(
                 numbers[1]
@@ -536,7 +768,7 @@ def parse_sbi():
 
                 bank_rate=tt_sell,
 
-                source_url=SBI_PDF_URL,
+                source_url=used_url,
 
                 source_date=source_date,
 
@@ -549,9 +781,11 @@ def parse_sbi():
                 record
             ):
 
+
                 records.append(
                     record
                 )
+
 
                 print(
                     currency,
@@ -559,12 +793,15 @@ def parse_sbi():
                     record["status"]
                 )
 
+
                 found = True
+
 
                 break
 
 
         if not found:
+
 
             print(
                 "SBI missing:",
@@ -575,7 +812,8 @@ def parse_sbi():
     if not records:
 
         raise RuntimeError(
-            "No valid SBI rates found."
+            "SBI returned "
+            "no valid rates."
         )
 
 
@@ -583,65 +821,101 @@ def parse_sbi():
 
 
 # ==========================================================
-# HDFC HEADER NORMALIZATION
+# HDFC HEADER HELPERS
 # ==========================================================
 
-def is_currency_header(text):
+def is_currency_header(
+    text
+):
 
-    text = normalize_text(
-        text
-    ).lower()
+    lower = (
+        normalize_text(
+            text
+        )
+        .lower()
+    )
+
 
     return (
 
-        text == "currency"
+        lower == "currency"
 
-        or text == "currency (in rs.)"
+        or
 
-        or text == "currency code"
+        lower == "currency code"
 
-        or "currency (in rs" in text
+        or
+
+        "currency (in rs" in lower
+
+        or
+
+        lower == "ccy"
 
     )
 
 
-def is_outward_sell_header(text):
+def is_outward_sell_header(
+    text
+):
 
-    text = normalize_text(
-        text
-    ).lower()
+    lower = (
+        normalize_text(
+            text
+        )
+        .lower()
+    )
 
 
     has_sell = (
-        "selling" in text
-        or "sell" in text
+
+        "selling" in lower
+
+        or
+
+        "sell" in lower
+
     )
 
 
     has_outward = (
 
-        "o/w" in text
+        "o/w" in lower
 
-        or "outward" in text
+        or
 
-        or "o / w" in text
+        "o / w" in lower
+
+        or
+
+        "outward" in lower
 
     )
 
 
     has_remittance = (
 
-        "rem" in text
+        "rem" in lower
 
-        or "remittance" in text
+        or
+
+        "remittance" in lower
 
     )
 
 
     return (
+
         has_sell
-        and has_outward
-        and has_remittance
+
+        and
+
+        has_outward
+
+        and
+
+        has_remittance
+
     )
 
 
@@ -651,6 +925,7 @@ def is_outward_sell_header(text):
 
 def parse_hdfc_tables(
     pdf_bytes,
+    used_url,
     source_date,
     source_time
 ):
@@ -659,11 +934,16 @@ def parse_hdfc_tables(
 
 
     with pdfplumber.open(
-        io.BytesIO(pdf_bytes)
+        io.BytesIO(
+            pdf_bytes
+        )
     ) as pdf:
 
 
-        for page in pdf.pages:
+        for page_number, page in enumerate(
+            pdf.pages,
+            start=1
+        ):
 
 
             tables = (
@@ -672,21 +952,28 @@ def parse_hdfc_tables(
             )
 
 
+            print(
+                "HDFC page",
+                page_number,
+                "tables:",
+                len(tables)
+            )
+
+
             for table in tables:
 
 
                 if not table:
+
                     continue
 
 
-                header_row_index = None
+                header_index = None
+
                 currency_column = None
+
                 outward_column = None
 
-
-                # ----------------------------------
-                # FIND HEADERS
-                # ----------------------------------
 
                 for row_index, row in enumerate(
                     table
@@ -694,6 +981,7 @@ def parse_hdfc_tables(
 
 
                     if not row:
+
                         continue
 
 
@@ -717,6 +1005,7 @@ def parse_hdfc_tables(
                             cell
                         ):
 
+
                             currency_column = (
                                 column_index
                             )
@@ -725,6 +1014,7 @@ def parse_hdfc_tables(
                         if is_outward_sell_header(
                             cell
                         ):
+
 
                             outward_column = (
                                 column_index
@@ -743,41 +1033,44 @@ def parse_hdfc_tables(
 
                     ):
 
-                        header_row_index = (
+
+                        header_index = (
                             row_index
                         )
 
+
                         print(
-                            "HDFC table header detected"
+                            "HDFC header found."
                         )
+
 
                         print(
                             "Currency column:",
                             currency_column
                         )
 
+
                         print(
-                            "Outward column:",
+                            "Outward TT Sell column:",
                             outward_column
                         )
+
 
                         break
 
 
-                if header_row_index is None:
+                if header_index is None:
+
                     continue
 
 
-                # ----------------------------------
-                # READ DATA
-                # ----------------------------------
-
                 for row in table[
-                    header_row_index + 1:
+                    header_index + 1:
                 ]:
 
 
                     if not row:
+
                         continue
 
 
@@ -793,6 +1086,7 @@ def parse_hdfc_tables(
 
 
                     if (
+
                         currency_column
                         >= len(cells)
 
@@ -800,6 +1094,7 @@ def parse_hdfc_tables(
 
                         outward_column
                         >= len(cells)
+
                     ):
 
                         continue
@@ -817,27 +1112,40 @@ def parse_hdfc_tables(
 
                     for candidate in CURRENCIES:
 
+
                         if re.search(
+
                             rf"\b{candidate}\b",
+
                             currency_text
+
                         ):
 
-                            currency = candidate
+
+                            currency = (
+                                candidate
+                            )
+
+
                             break
 
 
                     if not currency:
+
                         continue
 
 
                     rate = parse_number(
+
                         cells[
                             outward_column
                         ]
+
                     )
 
 
                     if rate is None:
+
                         continue
 
 
@@ -849,7 +1157,7 @@ def parse_hdfc_tables(
 
                         bank_rate=rate,
 
-                        source_url=HDFC_PDF_URL,
+                        source_url=used_url,
 
                         source_date=source_date,
 
@@ -862,8 +1170,16 @@ def parse_hdfc_tables(
                         record
                     ):
 
+
                         records.append(
                             record
+                        )
+
+
+                        print(
+                            "HDFC",
+                            currency,
+                            rate
                         )
 
 
@@ -876,48 +1192,62 @@ def parse_hdfc_tables(
 
 def parse_hdfc_text_fallback(
     text,
+    used_url,
     source_date,
     source_time
 ):
 
     print(
-        "Trying HDFC text fallback..."
+        "Trying HDFC "
+        "text fallback..."
     )
 
 
-    normalized = normalize_text(
-        text
+    normalized = (
+        normalize_text(
+            text
+        )
     )
 
 
-    lower = normalized.lower()
+    lower = (
+        normalized.lower()
+    )
 
-
-    # We MUST first prove that this
-    # document actually contains the
-    # outward-remittance column.
 
     outward_markers = [
 
         "t.t. selling (o/w rem)",
 
-        "t.t. selling (o / w rem)",
+        "t.t.selling(o/w rem)",
 
         "tt selling (o/w rem)",
 
-        "t.t.selling(o/w rem)",
+        "t.t. selling (o / w rem)",
+
+        "t.t.selling(o / w rem)",
 
     ]
 
 
-    if not any(
+    marker_found = any(
+
         marker in lower
+
         for marker in outward_markers
-    ):
+
+    )
+
+
+    if not marker_found:
+
 
         raise RuntimeError(
-            "HDFC outward-remittance header "
-            "not found in extracted text."
+
+            "HDFC PDF downloaded, "
+            "but the outward TT Selling "
+            "header was not detected."
+
         )
 
 
@@ -926,48 +1256,40 @@ def parse_hdfc_text_fallback(
 
     currency_names = {
 
-        "USD":
-            [
-                "United States Dollar",
-                "US Dollar"
-            ],
+        "USD": [
+            "United States Dollar",
+            "US Dollar"
+        ],
 
-        "CAD":
-            [
-                "Canadian Dollar"
-            ],
+        "CAD": [
+            "Canadian Dollar"
+        ],
 
-        "AUD":
-            [
-                "Australian Dollar"
-            ],
+        "AUD": [
+            "Australian Dollar"
+        ],
 
-        "GBP":
-            [
-                "Great Britain Pound",
-                "British Pound"
-            ],
+        "GBP": [
+            "British Pound",
+            "Great Britain Pound"
+        ],
 
-        "EUR":
-            [
-                "Euro"
-            ],
+        "EUR": [
+            "Euro"
+        ],
 
-        "SGD":
-            [
-                "Singapore Dollar"
-            ],
+        "SGD": [
+            "Singapore Dollar"
+        ],
 
-        "AED":
-            [
-                "U.A.E. Dirham",
-                "UAE Dirham"
-            ],
+        "AED": [
+            "UAE Dirham",
+            "U.A.E. Dirham"
+        ],
 
-        "NZD":
-            [
-                "New Zealand Dollar"
-            ],
+        "NZD": [
+            "New Zealand Dollar"
+        ],
 
     }
 
@@ -975,35 +1297,30 @@ def parse_hdfc_text_fallback(
     for currency in CURRENCIES:
 
 
-        # Locate row using currency code.
-        # The expected HDFC row structure is:
-        #
-        # Currency name
-        # Code
-        # Cash Buy
-        # Cash Sell
-        # Bills Buy
-        # Bills Sell
-        # TT Buy
-        # TT Sell
-        # ...
+        names = currency_names[
+            currency
+        ]
+
+
+        name_pattern = (
+
+            "|".join(
+
+                re.escape(name)
+
+                for name in names
+
+            )
+
+        )
 
 
         pattern = re.compile(
 
-            rf"(?:"
-            + "|".join(
-
-                re.escape(name)
-
-                for name in currency_names[
-                    currency
-                ]
-
-            )
-            + rf")\s+{currency}\s+"
-            + r"((?:-|\d+(?:\.\d+)?)"
-            + r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
+            rf"(?:{name_pattern})"
+            rf"\s+{currency}\s+"
+            r"((?:-|\d+(?:\.\d+)?)"
+            r"(?:\s+(?:-|\d+(?:\.\d+)?)){5,})",
 
             re.IGNORECASE
 
@@ -1017,41 +1334,37 @@ def parse_hdfc_text_fallback(
 
         if not match:
 
+
             print(
                 "HDFC fallback missing:",
                 currency
             )
 
+
             continue
 
 
         values = re.findall(
+
             r"-|\d+(?:\.\d+)?",
+
             match.group(1)
+
         )
 
 
-        # HDFC official table order:
-        #
-        # 0 Cash Buying
-        # 1 Cash Selling
-        # 2 Bills Buying
-        # 3 Bills Selling
-        # 4 TT Buying
-        # 5 TT Selling (Outward)
-        #
-        # We only use this fallback because
-        # we already verified that the document
-        # contains the named outward header.
-
         if len(values) < 6:
+
             continue
 
 
-        tt_sell_text = values[5]
+        tt_sell_text = (
+            values[5]
+        )
 
 
         if tt_sell_text == "-":
+
             continue
 
 
@@ -1068,7 +1381,7 @@ def parse_hdfc_text_fallback(
 
             bank_rate=rate,
 
-            source_url=HDFC_PDF_URL,
+            source_url=used_url,
 
             source_date=source_date,
 
@@ -1081,12 +1394,14 @@ def parse_hdfc_text_fallback(
             record
         ):
 
+
             records.append(
                 record
             )
 
+
             print(
-                "HDFC fallback:",
+                "HDFC fallback",
                 currency,
                 rate
             )
@@ -1114,37 +1429,39 @@ def parse_hdfc():
     )
 
 
-    source_bytes = download_source(
-        HDFC_PDF_URL
-    )
+    pdf_bytes, used_url = (
+        download_pdf_from_sources(
 
+            "HDFC",
 
-    # Verify it really is a PDF.
-    # A website error page should never
-    # be parsed as a rate card.
+            HDFC_PDF_URLS
 
-    if not source_bytes.startswith(
-        b"%PDF"
-    ):
-
-        raise RuntimeError(
-            "HDFC source did not return a PDF. "
-            "No HDFC rates will be published."
         )
+    )
 
 
     text = extract_pdf_text(
-        source_bytes
+        pdf_bytes
     )
 
 
-    source_date = parse_source_date(
-        text
+    source_date = (
+        parse_source_date(
+            text
+        )
     )
 
 
-    source_time = parse_source_time(
-        text
+    source_time = (
+        parse_source_time(
+            text
+        )
+    )
+
+
+    print(
+        "HDFC source URL:",
+        used_url
     )
 
 
@@ -1152,6 +1469,7 @@ def parse_hdfc():
         "HDFC source date:",
         source_date
     )
+
 
     print(
         "HDFC source time:",
@@ -1161,19 +1479,24 @@ def parse_hdfc():
 
     if not source_date:
 
+
         raise RuntimeError(
-            "HDFC rate-card date could not "
-            "be verified."
+
+            "HDFC PDF downloaded "
+            "but source date "
+            "could not be verified."
+
         )
 
 
-    # --------------------------------------
-    # METHOD 1 — TABLE HEADER DETECTION
-    # --------------------------------------
+    # METHOD 1:
+    # Read actual table headers.
 
     records = parse_hdfc_tables(
 
-        source_bytes,
+        pdf_bytes,
+
+        used_url,
 
         source_date,
 
@@ -1182,31 +1505,34 @@ def parse_hdfc():
     )
 
 
-    # --------------------------------------
-    # METHOD 2 — SAFE TEXT FALLBACK
-    # --------------------------------------
+    # METHOD 2:
+    # Text fallback.
 
     if not records:
 
-        records = parse_hdfc_text_fallback(
 
-            text,
+        records = (
+            parse_hdfc_text_fallback(
 
-            source_date,
+                text,
 
-            source_time
+                used_url,
 
+                source_date,
+
+                source_time
+
+            )
         )
 
 
-    # --------------------------------------
-    # REMOVE DUPLICATES
-    # --------------------------------------
+    # Deduplicate currency
 
     unique = {}
 
 
     for record in records:
+
 
         unique[
             record["currency"]
@@ -1220,9 +1546,13 @@ def parse_hdfc():
 
     if not records:
 
+
         raise RuntimeError(
-            "HDFC outward rates could not "
-            "be extracted safely."
+
+            "HDFC outward TT Selling "
+            "rates could not be "
+            "extracted safely."
+
         )
 
 
@@ -1230,7 +1560,7 @@ def parse_hdfc():
 
 
 # ==========================================================
-# LOAD PREVIOUS LATEST
+# PREVIOUS LATEST DATA
 # ==========================================================
 
 def load_previous_latest():
@@ -1242,14 +1572,18 @@ def load_previous_latest():
 
     try:
 
+
         with open(
             LATEST_FILE,
             "r",
             encoding="utf-8"
         ) as file:
 
-            payload = json.load(
-                file
+
+            payload = (
+                json.load(
+                    file
+                )
             )
 
 
@@ -1265,7 +1599,7 @@ def load_previous_latest():
 
 
 # ==========================================================
-# KEEP LAST VALID BANK DATA
+# PRESERVE FAILED BANK AS STALE
 # ==========================================================
 
 def preserve_failed_bank(
@@ -1291,16 +1625,9 @@ def preserve_failed_bank(
         )
 
 
-        copied["status"] = (
-            "stale"
-        )
-
-
-        copied["fetched_at"] = (
-            record.get(
-                "fetched_at"
-            )
-        )
+        copied[
+            "status"
+        ] = "stale"
 
 
         preserved.append(
@@ -1315,7 +1642,9 @@ def preserve_failed_bank(
 # SAVE LATEST
 # ==========================================================
 
-def save_latest(records):
+def save_latest(
+    records
+):
 
     DATA_DIR.mkdir(
         parents=True,
@@ -1332,7 +1661,7 @@ def save_latest(records):
             "TT Selling / Outward Remittance",
 
         "rates":
-            records
+            records,
 
     }
 
@@ -1343,11 +1672,17 @@ def save_latest(records):
         encoding="utf-8"
     ) as file:
 
+
         json.dump(
+
             payload,
+
             file,
+
             indent=2,
+
             ensure_ascii=False
+
         )
 
 
@@ -1361,6 +1696,7 @@ def load_history_keys():
 
 
     if not HISTORY_FILE.exists():
+
         return keys
 
 
@@ -1403,22 +1739,36 @@ def load_history_keys():
     return keys
 
 
-def append_history(records):
+def append_history(
+    records
+):
 
     fields = [
 
         "date",
+
         "time",
+
         "bank",
+
         "currency",
+
         "rate_type",
+
         "bank_rate",
+
         "market_rate",
+
         "markup_percent",
+
         "source_url",
+
         "source_date",
+
         "source_time",
+
         "fetched_at",
+
         "status",
 
     ]
@@ -1461,9 +1811,6 @@ def append_history(records):
         for record in records:
 
 
-            # Do not write stale fallback
-            # records again into history.
-
             if record.get(
                 "status"
             ) == "stale":
@@ -1471,8 +1818,10 @@ def append_history(records):
                 continue
 
 
-            source_date = record.get(
-                "source_date"
+            source_date = (
+                record.get(
+                    "source_date"
+                )
             )
 
 
@@ -1567,7 +1916,9 @@ def main():
     ]
 
 
-    for bank_name, collector in collectors:
+    for bank_name, collector in (
+        collectors
+    ):
 
 
         try:
@@ -1599,12 +1950,13 @@ def main():
                 "FAILED:"
             )
 
+
             print(
                 str(error)
             )
 
 
-            stale_records = (
+            stale = (
                 preserve_failed_bank(
 
                     bank_name,
@@ -1615,23 +1967,24 @@ def main():
             )
 
 
-            if stale_records:
+            if stale:
+
 
                 print(
-                    "Preserving",
-                    len(stale_records),
+                    "Keeping",
+                    len(stale),
                     bank_name,
-                    "previous rates as stale."
+                    "old records as stale."
                 )
 
 
                 final_records.extend(
-                    stale_records
+                    stale
                 )
 
 
     # ======================================================
-    # FINAL VALIDATION
+    # VALIDATE
     # ======================================================
 
     validated = []
@@ -1644,6 +1997,7 @@ def main():
             record
         ):
 
+
             validated.append(
                 record
             )
@@ -1654,16 +2008,19 @@ def main():
     # ======================================================
 
     bank_order = {
+
         "SBI": 1,
-        "HDFC": 2
+
+        "HDFC": 2,
+
     }
 
 
     currency_order = {
 
-        currency: index
+        value: index
 
-        for index, currency
+        for index, value
         in enumerate(
             CURRENCIES
         )
@@ -1705,7 +2062,7 @@ def main():
 
 
     # ======================================================
-    # SUMMARY
+    # RESULT SUMMARY
     # ======================================================
 
     print(
@@ -1744,7 +2101,9 @@ def main():
 
             "|",
 
-            record["status"]
+            record.get(
+                "status"
+            )
 
         )
 
