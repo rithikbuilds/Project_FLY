@@ -1,0 +1,47 @@
+name: Update FX Rates
+
+on:
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "30 3 * * 1-5"
+    - cron: "30 6 * * 1-5"
+    - cron: "30 9 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+
+  update-rates:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run FX collector
+        run: |
+          python scripts/fetch_rates.py
+
+      - name: Commit updated rates
+        run: |
+
+          git config user.name "FX Rate Bot"
+
+          git config user.email "actions@github.com"
+
+          git add data/latest.json data/history.csv
+
+          git diff --cached --quiet || \
+          git commit -m "Update daily FX rates"
+
+          git push
