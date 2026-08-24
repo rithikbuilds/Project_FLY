@@ -28,9 +28,18 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run FX collector
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch outward FX rates
         run: |
           python scripts/fetch_rates.py
+
+      - name: Show latest rates
+        run: |
+          cat data/latest.json
 
       - name: Commit updated rates
         run: |
@@ -42,6 +51,6 @@ jobs:
           git add data/latest.json data/history.csv
 
           git diff --cached --quiet || \
-          git commit -m "Update daily FX rates"
+          git commit -m "Update outward FX rates"
 
           git push
