@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SBI TCS Calculator</title>
+<title>Flywire Internal Tools</title>
 
 <style>
 
@@ -869,6 +869,128 @@ input[readonly] {
 
 }
 
+
+
+/* ==============================
+   TOOL NAVIGATION
+============================== */
+.tool-title {
+    padding: 0 10px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    opacity: .78;
+}
+
+.side-nav {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,.86);
+    text-align: left;
+    padding: 13px 14px;
+    margin-bottom: 7px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 650;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.side-nav:hover { background: rgba(255,255,255,.10); }
+.side-nav.active { background: rgba(255,255,255,.18); color: #fff; box-shadow: inset 3px 0 0 rgba(255,255,255,.92); }
+.side-nav span { width: 18px; text-align: center; font-size: 16px; }
+
+.tool-page { display: none; }
+.tool-page.active { display: block; }
+
+/* ==============================
+   FX COMPARISON
+============================== */
+.fx-live-pill {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 12px;
+    border-radius: 999px;
+    color: var(--green);
+    background: #edf9f3;
+    border: 1px solid #ccebd9;
+}
+
+.fx-controls { margin-bottom: 20px; }
+.fx-control-grid { display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 16px; align-items: end; }
+.fx-field { margin-bottom: 0; }
+
+select {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #cfddea;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-size: 14px;
+    color: var(--navy);
+    outline: none;
+    background: white;
+}
+select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.08); }
+
+.fx-updated-box { min-height: 67px; }
+.fx-updated-value { height: 45px; border: 1px solid #cfddea; background: #f3f7fb; border-radius: 8px; display: flex; align-items: center; padding: 0 14px; color: #526b86; font-size: 14px; }
+.fx-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.fx-presets button { border: 1px solid #cfddea; background: #fff; color: var(--navy); border-radius: 999px; padding: 7px 13px; cursor: pointer; font-size: 12px; font-weight: 700; }
+.fx-presets button:hover { border-color: var(--blue); color: var(--blue); background: #f5faff; }
+
+.fx-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.fx-stat-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 12px rgba(20,60,100,.04); }
+.fx-stat-card.best-card { border-color: #bce6cf; background: linear-gradient(135deg,#ffffff,#f4fbf7); }
+.fx-stat-label { font-size: 12px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+.fx-stat-value { font-size: 25px; font-weight: 800; color: var(--navy); }
+.best-card .fx-stat-value { color: var(--green); }
+.fx-stat-note { font-size: 11px; color: var(--muted); margin-top: 5px; min-height: 16px; }
+
+.fx-table-card, .fx-history-card { margin-bottom: 20px; }
+.fx-table-head { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 15px; }
+.fx-section-title { margin-bottom: 3px; }
+.fx-download-current { width: auto; padding: 0 16px; white-space: nowrap; }
+.fx-table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 9px; }
+.fx-table { width: 100%; min-width: 980px; border-collapse: collapse; font-size: 12px; }
+.fx-table th { background: #f4f8fc; color: #526b86; text-align: left; padding: 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.fx-table td { padding: 12px; border-bottom: 1px solid #edf1f5; white-space: nowrap; }
+.fx-table tbody tr:last-child td { border-bottom: none; }
+.fx-table tbody tr:hover { background: #fafcff; }
+.fx-table .best-row { background: #f2fbf6; }
+.fx-table .best-row:hover { background: #edf9f2; }
+.fx-rank { width: 28px; height: 28px; border-radius: 50%; display: inline-grid; place-items: center; background: #edf3f8; font-weight: 800; color: #526b86; }
+.best-row .fx-rank { background: var(--green); color: white; }
+.fx-bank-name { font-weight: 750; color: var(--navy); }
+.fx-rate { font-weight: 800; color: var(--blue); }
+.fx-markup-low { color: var(--green); font-weight: 800; }
+.fx-markup-mid { color: #a06c00; font-weight: 800; }
+.fx-markup-high { color: var(--red); font-weight: 800; }
+.fx-status-current { display: inline-block; padding: 4px 7px; border-radius: 999px; background: #edf9f3; color: var(--green); font-size: 10px; font-weight: 800; }
+.fx-status-stale { display: inline-block; padding: 4px 7px; border-radius: 999px; background: #fff4e5; color: #9b6500; font-size: 10px; font-weight: 800; }
+.fx-empty { text-align: center; padding: 28px !important; color: var(--muted); }
+.fx-disclaimer { margin-top: 14px; }
+
+.fx-history-filters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 14px; }
+.fx-history-meta { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.fx-history-wrap { max-height: 470px; overflow: auto; }
+
+@media (max-width: 1100px) {
+    .fx-stat-grid { grid-template-columns: 1fr 1fr; }
+    .fx-control-grid { grid-template-columns: 1fr 1fr; }
+    .fx-updated-box { grid-column: 1 / -1; }
+}
+
+@media (max-width: 700px) {
+    .fx-control-grid, .fx-stat-grid, .fx-history-filters { grid-template-columns: 1fr; }
+    .fx-table-head { align-items: flex-start; flex-direction: column; }
+    .fx-download-current { width: 100%; }
+}
+
 </style>
 
 </head>
@@ -897,11 +1019,19 @@ input[readonly] {
 </div>
 
 
-<div class="tool">
+<div class="tool-title">
 
 ▣ &nbsp; Tools
 
 </div>
+
+<button class="side-nav active" id="navTcs" onclick="showTool('tcs')">
+<span>₹</span> TCS Calculator
+</button>
+
+<button class="side-nav" id="navFx" onclick="showTool('fx')">
+<span>⇄</span> FX Rate Comparison
+</button>
 
 
 <div class="support">
@@ -912,8 +1042,8 @@ Internal Tool
 
 <br><br>
 
-SBI TCS estimation reference
-for the team.
+TCS and outward FX rate tools
+for the internal team.
 
 </div>
 
@@ -928,6 +1058,8 @@ for the team.
 
 <main class="main">
 
+
+<section id="tcsPage" class="tool-page active">
 
 <header class="header">
 
@@ -1763,6 +1895,190 @@ SBI TCS Estimation Tool
 
 </footer>
 
+
+
+</section>
+
+<!-- ==============================
+     FX RATE COMPARISON PAGE
+============================== -->
+<section id="fxPage" class="tool-page">
+
+<header class="header">
+    <div>
+        <h1>FX Rate Comparison</h1>
+        <div class="subtitle">
+            Compare current outward remittance / TT selling rates across banks against the market reference rate.
+        </div>
+    </div>
+    <div class="fx-live-pill" id="fxStatus">● Loading rates...</div>
+</header>
+
+<div class="fx-controls card">
+    <div class="fx-control-grid">
+        <div class="field fx-field">
+            <label>Currency</label>
+            <select id="fxCurrency" onchange="renderFxComparison()">
+                <option value="USD">USD — US Dollar</option>
+                <option value="CAD">CAD — Canadian Dollar</option>
+                <option value="AUD">AUD — Australian Dollar</option>
+                <option value="GBP">GBP — British Pound</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="SGD">SGD — Singapore Dollar</option>
+                <option value="AED">AED — UAE Dirham</option>
+                <option value="NZD">NZD — New Zealand Dollar</option>
+            </select>
+        </div>
+
+        <div class="field fx-field">
+            <label>Foreign Currency Amount</label>
+            <div class="input-wrap">
+                <input id="fxAmount" type="text" inputmode="numeric" value="5,000" autocomplete="off">
+                <span id="fxAmountCode">USD</span>
+            </div>
+            <div class="hint">Enter the amount to be remitted in the selected foreign currency.</div>
+        </div>
+
+        <div class="field fx-field fx-updated-box">
+            <label>Data Last Refreshed</label>
+            <div class="fx-updated-value" id="fxLastUpdated">—</div>
+            <div class="hint">Each bank row also shows its own source date/time.</div>
+        </div>
+    </div>
+
+    <div class="fx-presets">
+        <button type="button" onclick="setFxAmount(5000)">5,000</button>
+        <button type="button" onclick="setFxAmount(10000)">10,000</button>
+        <button type="button" onclick="setFxAmount(15000)">15,000</button>
+        <button type="button" onclick="setFxAmount(20000)">20,000</button>
+        <button type="button" onclick="setFxAmount(25000)">25,000</button>
+    </div>
+</div>
+
+<div class="fx-stat-grid">
+    <div class="fx-stat-card">
+        <div class="fx-stat-label">Reference Market Rate</div>
+        <div class="fx-stat-value" id="fxMarketRate">—</div>
+        <div class="fx-stat-note" id="fxMarketSource">Reference feed</div>
+    </div>
+
+    <div class="fx-stat-card best-card">
+        <div class="fx-stat-label">Best Bank Rate</div>
+        <div class="fx-stat-value" id="fxBestRate">—</div>
+        <div class="fx-stat-note" id="fxBestBank">—</div>
+    </div>
+
+    <div class="fx-stat-card">
+        <div class="fx-stat-label">Lowest Markup</div>
+        <div class="fx-stat-value" id="fxLowestMarkup">—</div>
+        <div class="fx-stat-note">vs market reference</div>
+    </div>
+
+    <div class="fx-stat-card">
+        <div class="fx-stat-label">Potential Saving</div>
+        <div class="fx-stat-value" id="fxPotentialSaving">—</div>
+        <div class="fx-stat-note">best bank vs highest current bank cost</div>
+    </div>
+</div>
+
+<section class="card fx-table-card">
+    <div class="fx-table-head">
+        <div>
+            <div class="section-title fx-section-title">Current Bank Comparison</div>
+            <div class="hint">Ranked from lowest bank rate to highest for the selected currency.</div>
+        </div>
+        <button class="secondary-button fx-download-current" onclick="downloadCurrentFxComparison()">⇩ Download Comparison</button>
+    </div>
+
+    <div class="fx-table-wrap">
+        <table class="fx-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Bank</th>
+                    <th>TT Sell Rate</th>
+                    <th>Market Rate</th>
+                    <th>Markup %</th>
+                    <th>INR Cost</th>
+                    <th>Extra vs Market</th>
+                    <th>Source Updated</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="fxTableBody">
+                <tr><td colspan="9" class="fx-empty">Loading current bank rates...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="disclaimer fx-disclaimer">
+        <strong>Reference:</strong> Bank rates are the collected outward remittance / TT selling rates from each bank's published source. Market rate is a reference rate and not an executable customer rate. Final rates, charges and applicable taxes may differ at transaction time.
+    </div>
+</section>
+
+<section class="card fx-history-card">
+    <div class="fx-table-head">
+        <div>
+            <div class="section-title fx-section-title">Historical Rate Data</div>
+            <div class="hint">Filter previously stored daily observations and download them as CSV.</div>
+        </div>
+        <button class="secondary-button fx-download-current" onclick="downloadFxHistory()">⇩ Download History</button>
+    </div>
+
+    <div class="fx-history-filters">
+        <div class="field fx-field">
+            <label>From Date</label>
+            <input type="date" id="historyFrom" onchange="renderFxHistory()">
+        </div>
+        <div class="field fx-field">
+            <label>To Date</label>
+            <input type="date" id="historyTo" onchange="renderFxHistory()">
+        </div>
+        <div class="field fx-field">
+            <label>Bank</label>
+            <select id="historyBank" onchange="renderFxHistory()">
+                <option value="ALL">All Banks</option>
+            </select>
+        </div>
+        <div class="field fx-field">
+            <label>Currency</label>
+            <select id="historyCurrency" onchange="renderFxHistory()">
+                <option value="ALL">All Currencies</option>
+                <option>USD</option><option>CAD</option><option>AUD</option><option>GBP</option>
+                <option>EUR</option><option>SGD</option><option>AED</option><option>NZD</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="fx-history-meta" id="historyMeta">Historical data will load from data/history.csv.</div>
+
+    <div class="fx-table-wrap fx-history-wrap">
+        <table class="fx-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Bank</th>
+                    <th>Currency</th>
+                    <th>Bank Rate</th>
+                    <th>Market Rate</th>
+                    <th>Markup %</th>
+                    <th>Source Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody">
+                <tr><td colspan="8" class="fx-empty">Open FX Rate Comparison to load history.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<footer class="footer">
+    <span>Outward FX Rate Comparison Tool</span>
+    <span id="fxFooterTime"></span>
+</footer>
+
+</section>
 
 </main>
 
@@ -2979,6 +3295,386 @@ setInterval(
 
 );
 
+
+
+
+/* =========================================
+   TOOL NAVIGATION
+========================================= */
+
+let fxLatestData = null;
+let fxHistoryData = [];
+let fxHistoryLoaded = false;
+
+function showTool(tool) {
+    const tcsPage = document.getElementById("tcsPage");
+    const fxPage = document.getElementById("fxPage");
+    const navTcs = document.getElementById("navTcs");
+    const navFx = document.getElementById("navFx");
+
+    if (tool === "fx") {
+        tcsPage.classList.remove("active");
+        fxPage.classList.add("active");
+        navTcs.classList.remove("active");
+        navFx.classList.add("active");
+        if (!fxLatestData) loadFxRates();
+        if (!fxHistoryLoaded) loadFxHistory();
+    } else {
+        fxPage.classList.remove("active");
+        tcsPage.classList.add("active");
+        navFx.classList.remove("active");
+        navTcs.classList.add("active");
+    }
+}
+
+/* =========================================
+   FX HELPERS
+========================================= */
+
+function fxNumber(value, decimals = 2) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return "—";
+    return n.toLocaleString("en-IN", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    });
+}
+
+function fxINR(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return "—";
+    return "₹" + Math.round(n).toLocaleString("en-IN");
+}
+
+function getFxAmount() {
+    const raw = document.getElementById("fxAmount").value.replace(/[^0-9]/g, "");
+    return Number(raw) || 0;
+}
+
+function formatFxAmountInput() {
+    const el = document.getElementById("fxAmount");
+    const clean = el.value.replace(/[^0-9]/g, "");
+    el.value = (Number(clean) || 0).toLocaleString("en-IN");
+}
+
+function setFxAmount(value) {
+    document.getElementById("fxAmount").value = Number(value).toLocaleString("en-IN");
+    renderFxComparison();
+}
+
+function formatFxDateTime(value) {
+    if (!value) return "—";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    }) + " IST";
+}
+
+function bankSourceUpdated(record) {
+    const date = record.source_date || "—";
+    const time = record.source_time || "";
+    return time ? `${date} ${time}` : date;
+}
+
+function markupClass(value) {
+    const v = Number(value);
+    if (!Number.isFinite(v)) return "";
+    if (v <= 1) return "fx-markup-low";
+    if (v <= 2) return "fx-markup-mid";
+    return "fx-markup-high";
+}
+
+/* =========================================
+   LOAD CURRENT FX DATA
+========================================= */
+
+async function loadFxRates() {
+    const status = document.getElementById("fxStatus");
+    try {
+        const response = await fetch("data/latest.json?ts=" + Date.now(), { cache: "no-store" });
+        if (!response.ok) throw new Error("latest.json returned HTTP " + response.status);
+        fxLatestData = await response.json();
+        status.textContent = "● Current data loaded";
+        status.style.color = "var(--green)";
+        document.getElementById("fxLastUpdated").textContent = formatFxDateTime(fxLatestData.updated_at);
+        renderFxComparison();
+    } catch (error) {
+        console.error(error);
+        status.textContent = "● Rate data unavailable";
+        status.style.color = "var(--red)";
+        document.getElementById("fxTableBody").innerHTML = '<tr><td colspan="9" class="fx-empty">Could not load data/latest.json. Run the FX workflow and refresh this page.</td></tr>';
+    }
+}
+
+function renderFxComparison() {
+    if (!fxLatestData) return;
+
+    const currency = document.getElementById("fxCurrency").value;
+    const amount = getFxAmount();
+    document.getElementById("fxAmountCode").textContent = currency;
+
+    const records = (fxLatestData.rates || [])
+        .filter(r => r.currency === currency)
+        .sort((a, b) => Number(a.bank_rate) - Number(b.bank_rate));
+
+    const marketRate = Number(
+        fxLatestData.market_reference &&
+        fxLatestData.market_reference.rates &&
+        fxLatestData.market_reference.rates[currency]
+    );
+
+    document.getElementById("fxMarketRate").textContent = Number.isFinite(marketRate)
+        ? "₹" + fxNumber(marketRate, 4)
+        : "—";
+
+    const marketSource = fxLatestData.market_reference?.source || "Reference feed";
+    document.getElementById("fxMarketSource").textContent = marketSource;
+
+    if (!records.length) {
+        document.getElementById("fxBestRate").textContent = "—";
+        document.getElementById("fxBestBank").textContent = "No current bank rate";
+        document.getElementById("fxLowestMarkup").textContent = "—";
+        document.getElementById("fxPotentialSaving").textContent = "—";
+        document.getElementById("fxTableBody").innerHTML = '<tr><td colspan="9" class="fx-empty">No bank rates are available for this currency.</td></tr>';
+        return;
+    }
+
+    const best = records[0];
+    const highest = records[records.length - 1];
+    document.getElementById("fxBestRate").textContent = "₹" + fxNumber(best.bank_rate, 4);
+    document.getElementById("fxBestBank").textContent = best.bank;
+    document.getElementById("fxLowestMarkup").textContent = Number.isFinite(Number(best.markup_percent))
+        ? fxNumber(best.markup_percent, 2) + "%"
+        : "—";
+
+    const saving = amount > 0
+        ? amount * (Number(highest.bank_rate) - Number(best.bank_rate))
+        : 0;
+    document.getElementById("fxPotentialSaving").textContent = amount > 0 ? fxINR(saving) : "₹0";
+
+    const body = document.getElementById("fxTableBody");
+    body.innerHTML = records.map((record, index) => {
+        const bankRate = Number(record.bank_rate);
+        const rowMarket = Number(record.market_rate ?? marketRate);
+        const markup = Number(record.markup_percent);
+        const inrCost = amount * bankRate;
+        const marketCost = amount * rowMarket;
+        const extra = Number.isFinite(rowMarket) ? inrCost - marketCost : NaN;
+        const statusClass = record.status === "current" ? "fx-status-current" : "fx-status-stale";
+        const statusText = record.status === "current" ? "Current" : "Stale";
+
+        return `
+            <tr class="${index === 0 ? 'best-row' : ''}">
+                <td><span class="fx-rank">${index + 1}</span></td>
+                <td><span class="fx-bank-name">${record.bank}</span></td>
+                <td><span class="fx-rate">₹${fxNumber(bankRate, 4)}</span></td>
+                <td>${Number.isFinite(rowMarket) ? '₹' + fxNumber(rowMarket, 4) : '—'}</td>
+                <td class="${markupClass(markup)}">${Number.isFinite(markup) ? fxNumber(markup, 2) + '%' : '—'}</td>
+                <td>${amount > 0 ? fxINR(inrCost) : '₹0'}</td>
+                <td>${amount > 0 && Number.isFinite(extra) ? fxINR(extra) : '—'}</td>
+                <td>${bankSourceUpdated(record)}</td>
+                <td><span class="${statusClass}">${statusText}</span></td>
+            </tr>`;
+    }).join("");
+}
+
+/* =========================================
+   DOWNLOAD CURRENT COMPARISON
+========================================= */
+
+function csvEscape(value) {
+    const text = String(value ?? "");
+    if (/[",\n]/.test(text)) return '"' + text.replace(/"/g, '""') + '"';
+    return text;
+}
+
+function triggerCsvDownload(filename, rows) {
+    const csv = rows.map(row => row.map(csvEscape).join(",")).join("\n");
+    const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+function downloadCurrentFxComparison() {
+    if (!fxLatestData) return;
+    const currency = document.getElementById("fxCurrency").value;
+    const amount = getFxAmount();
+    const records = (fxLatestData.rates || [])
+        .filter(r => r.currency === currency)
+        .sort((a, b) => Number(a.bank_rate) - Number(b.bank_rate));
+
+    const rows = [[
+        "Rank", "Bank", "Currency", "Foreign Amount", "TT Sell Rate", "Market Rate",
+        "Markup %", "INR Cost", "Extra vs Market", "Source Date", "Source Time", "Status"
+    ]];
+
+    records.forEach((r, i) => {
+        const bankRate = Number(r.bank_rate);
+        const marketRate = Number(r.market_rate);
+        rows.push([
+            i + 1, r.bank, currency, amount, bankRate,
+            Number.isFinite(marketRate) ? marketRate : "",
+            r.markup_percent ?? "",
+            amount * bankRate,
+            Number.isFinite(marketRate) ? amount * (bankRate - marketRate) : "",
+            r.source_date || "", r.source_time || "", r.status || ""
+        ]);
+    });
+
+    const date = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+    triggerCsvDownload(`FX-Comparison-${currency}-${date}.csv`, rows);
+}
+
+/* =========================================
+   HISTORY CSV
+========================================= */
+
+function parseCsv(text) {
+    const rows = [];
+    let row = [], field = "", inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        const next = text[i + 1];
+        if (c === '"' && inQuotes && next === '"') { field += '"'; i++; }
+        else if (c === '"') inQuotes = !inQuotes;
+        else if (c === ',' && !inQuotes) { row.push(field); field = ""; }
+        else if ((c === '\n' || c === '\r') && !inQuotes) {
+            if (c === '\r' && next === '\n') i++;
+            row.push(field); field = "";
+            if (row.some(v => v !== "")) rows.push(row);
+            row = [];
+        } else field += c;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    if (!rows.length) return [];
+    const headers = rows[0].map(h => h.trim());
+    return rows.slice(1).map(values => {
+        const obj = {};
+        headers.forEach((h, idx) => obj[h] = values[idx] ?? "");
+        return obj;
+    });
+}
+
+async function loadFxHistory() {
+    try {
+        const response = await fetch("data/history.csv?ts=" + Date.now(), { cache: "no-store" });
+        if (!response.ok) throw new Error("history.csv returned HTTP " + response.status);
+        const text = await response.text();
+        fxHistoryData = parseCsv(text);
+        fxHistoryLoaded = true;
+
+        const bankSelect = document.getElementById("historyBank");
+        const banks = [...new Set(fxHistoryData.map(r => r.bank).filter(Boolean))].sort();
+        bankSelect.innerHTML = '<option value="ALL">All Banks</option>' + banks.map(b => `<option value="${b}">${b}</option>`).join("");
+
+        const dates = fxHistoryData.map(r => r.source_date || r.date).filter(Boolean).sort();
+        if (dates.length) {
+            document.getElementById("historyFrom").value = dates[0];
+            document.getElementById("historyTo").value = dates[dates.length - 1];
+        }
+        renderFxHistory();
+    } catch (error) {
+        console.error(error);
+        document.getElementById("historyMeta").textContent = "Historical data could not be loaded.";
+        document.getElementById("historyTableBody").innerHTML = '<tr><td colspan="8" class="fx-empty">Could not load data/history.csv.</td></tr>';
+    }
+}
+
+function filteredFxHistory() {
+    const from = document.getElementById("historyFrom").value;
+    const to = document.getElementById("historyTo").value;
+    const bank = document.getElementById("historyBank").value;
+    const currency = document.getElementById("historyCurrency").value;
+
+    return fxHistoryData.filter(r => {
+        const date = r.source_date || r.date || "";
+        if (from && date < from) return false;
+        if (to && date > to) return false;
+        if (bank !== "ALL" && r.bank !== bank) return false;
+        if (currency !== "ALL" && r.currency !== currency) return false;
+        return true;
+    }).sort((a, b) => {
+        const d = (b.source_date || b.date || "").localeCompare(a.source_date || a.date || "");
+        if (d !== 0) return d;
+        return String(a.bank).localeCompare(String(b.bank));
+    });
+}
+
+function renderFxHistory() {
+    if (!fxHistoryLoaded) return;
+    const rows = filteredFxHistory();
+    document.getElementById("historyMeta").textContent = `${rows.length.toLocaleString("en-IN")} historical observations shown.`;
+
+    const displayRows = rows.slice(0, 500);
+    document.getElementById("historyTableBody").innerHTML = displayRows.length
+        ? displayRows.map(r => `
+            <tr>
+                <td>${r.source_date || r.date || '—'}</td>
+                <td><span class="fx-bank-name">${r.bank || '—'}</span></td>
+                <td>${r.currency || '—'}</td>
+                <td>${r.bank_rate ? '₹' + fxNumber(r.bank_rate, 4) : '—'}</td>
+                <td>${r.market_rate ? '₹' + fxNumber(r.market_rate, 4) : '—'}</td>
+                <td class="${markupClass(r.markup_percent)}">${r.markup_percent ? fxNumber(r.markup_percent, 2) + '%' : '—'}</td>
+                <td>${r.source_time || '—'}</td>
+                <td><span class="${r.status === 'current' ? 'fx-status-current' : 'fx-status-stale'}">${r.status || '—'}</span></td>
+            </tr>`).join("")
+        : '<tr><td colspan="8" class="fx-empty">No historical observations match these filters.</td></tr>';
+}
+
+function downloadFxHistory() {
+    if (!fxHistoryLoaded) return;
+    const rows = filteredFxHistory();
+    if (!rows.length) return;
+    const headers = [
+        "source_date", "source_time", "bank", "currency", "bank_rate", "market_rate",
+        "markup_percent", "rate_type", "source_url", "fetched_at", "status"
+    ];
+    const csvRows = [headers];
+    rows.forEach(r => csvRows.push(headers.map(h => r[h] ?? "")));
+    const date = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+    triggerCsvDownload(`FX-History-${date}.csv`, csvRows);
+}
+
+/* =========================================
+   FX EVENTS + CLOCK
+========================================= */
+
+document.getElementById("fxAmount").addEventListener("input", function() {
+    formatFxAmountInput();
+    renderFxComparison();
+});
+
+function updateFxFooterTime() {
+    const target = document.getElementById("fxFooterTime");
+    if (!target) return;
+    const now = new Date();
+    target.textContent = now.toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+    }) + " IST";
+}
+
+updateFxFooterTime();
+setInterval(updateFxFooterTime, 1000);
 
 </script>
 
