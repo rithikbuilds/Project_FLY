@@ -1066,6 +1066,173 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
     .fx-currency-tabs { grid-template-columns: repeat(2, 1fr); }
 }
 
+
+/* ==============================
+   FX POLISHED DASHBOARD LAYOUT
+============================== */
+.fx-controls.card {
+    padding: 20px 18px 18px;
+}
+
+.fx-control-grid {
+    grid-template-columns: 1.08fr 1.08fr 1.3fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.fx-field label {
+    min-height: 18px;
+}
+
+.fx-presets {
+    margin-top: 12px;
+}
+
+.fx-presets button.active {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+.fx-stat-card {
+    position: relative;
+    min-height: 132px;
+    padding: 20px 20px 18px 64px;
+}
+
+.fx-stat-card::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 24px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    font-weight: 800;
+    background: #eef5ff;
+    color: var(--blue);
+}
+
+.fx-stat-card.market-card::before { content: "↗"; }
+.fx-stat-card.best-card::before { content: "★"; background: #eaf8ef; color: var(--green); }
+.fx-stat-card.coverage-card::before { content: "●"; background: #fff4df; color: #c47a00; }
+.fx-stat-card.saving-card::before { content: "₹"; background: #f4ecff; color: #7a46c5; }
+
+.fx-stat-card.coverage-card {
+    border-color: #f1dfbd;
+    background: linear-gradient(135deg,#ffffff,#fffaf1);
+}
+
+.fx-stat-card.saving-card {
+    border-color: #e8dcf7;
+    background: linear-gradient(135deg,#ffffff,#fbf8ff);
+}
+
+.fx-saving-context {
+    margin-top: 5px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.fx-coverage-missing {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #a06c00;
+    font-weight: 700;
+}
+
+.fx-table {
+    min-width: 1180px;
+}
+
+.fx-table th {
+    vertical-align: bottom;
+}
+
+.fx-th-note {
+    display: block;
+    font-size: 9px;
+    color: #8090a0;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.fx-table td {
+    vertical-align: middle;
+}
+
+.fx-unavailable-reason {
+    display: block;
+    white-space: normal;
+    max-width: 170px;
+    font-size: 9px;
+    line-height: 1.25;
+    margin-top: 3px;
+    color: #7a8998;
+}
+
+.fx-table .unavailable-row .fx-rank {
+    background: #eef1f4;
+    color: #7a8998;
+}
+
+.fx-table-legend {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 10px;
+    color: #607388;
+}
+
+.fx-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.fx-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.fx-legend-dot.best { background: var(--green); }
+.fx-legend-dot.mid { background: #c47a00; }
+.fx-legend-dot.high { background: var(--red); }
+.fx-legend-dot.missing { background: #8998a8; }
+
+.fx-info-strip {
+    margin-top: 10px;
+    background: #eef6ff;
+    border-radius: 7px;
+    padding: 9px 12px;
+    color: #47637e;
+    font-size: 10px;
+}
+
+.fx-summary-meta {
+    margin-top: -8px;
+    margin-bottom: 14px;
+    font-size: 10px;
+    color: #526b86;
+}
+
+@media (max-width: 1100px) {
+    .fx-control-grid { grid-template-columns: 1fr 1fr; }
+    .fx-updated-box { grid-column: 1 / -1; }
+}
+
+@media (max-width: 700px) {
+    .fx-control-grid { grid-template-columns: 1fr; }
+    .fx-stat-card { padding-left: 58px; }
+}
+
 </style>
 
 </head>
@@ -1996,14 +2163,14 @@ SBI TCS Estimation Tool
         <div class="field fx-field">
             <label>Currency</label>
             <select id="fxCurrency" onchange="renderFxComparison()">
-                <option value="USD">USD — US Dollar</option>
-                <option value="CAD">CAD — Canadian Dollar</option>
-                <option value="AUD">AUD — Australian Dollar</option>
-                <option value="GBP">GBP — British Pound</option>
-                <option value="EUR">EUR — Euro</option>
-                <option value="SGD">SGD — Singapore Dollar</option>
-                <option value="AED">AED — UAE Dirham</option>
-                <option value="NZD">NZD — New Zealand Dollar</option>
+                <option value="USD">🇺🇸 USD — US Dollar</option>
+                <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+                <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+                <option value="GBP">🇬🇧 GBP — British Pound</option>
+                <option value="EUR">🇪🇺 EUR — Euro</option>
+                <option value="SGD">🇸🇬 SGD — Singapore Dollar</option>
+                <option value="AED">🇦🇪 AED — UAE Dirham</option>
+                <option value="NZD">🇳🇿 NZD — New Zealand Dollar</option>
             </select>
         </div>
 
@@ -2033,7 +2200,7 @@ SBI TCS Estimation Tool
 </div>
 
 <div class="fx-stat-grid">
-    <div class="fx-stat-card">
+    <div class="fx-stat-card market-card">
         <div class="fx-stat-label">Reference Market Rate</div>
         <div class="fx-stat-value" id="fxMarketRate">—</div>
         <div class="fx-stat-note" id="fxMarketSource">Reference feed</div>
@@ -2045,18 +2212,22 @@ SBI TCS Estimation Tool
         <div class="fx-stat-note" id="fxBestBank">—</div>
     </div>
 
-    <div class="fx-stat-card">
+    <div class="fx-stat-card coverage-card">
         <div class="fx-stat-label">Bank Coverage</div>
         <div class="fx-stat-value fx-coverage-value" id="fxCoverage">—</div>
         <div class="fx-stat-note" id="fxCoverageNote">Published TT sell rates</div>
+        <div class="fx-coverage-missing" id="fxCoverageMissing"></div>
     </div>
 
-    <div class="fx-stat-card">
+    <div class="fx-stat-card saving-card">
         <div class="fx-stat-label">Potential Saving</div>
         <div class="fx-stat-value" id="fxPotentialSaving">—</div>
         <div class="fx-stat-note">best bank vs highest current bank cost</div>
+        <div class="fx-saving-context" id="fxSavingContext"></div>
     </div>
 </div>
+
+<div class="fx-summary-meta" id="fxSummaryMeta"></div>
 
 <section class="card fx-table-card">
     <div class="fx-table-head">
@@ -2073,12 +2244,12 @@ SBI TCS Estimation Tool
                 <tr>
                     <th>Rank</th>
                     <th>Bank</th>
-                    <th>TT Sell Rate</th>
-                    <th>Market Rate</th>
-                    <th>Markup %</th>
-                    <th>INR Cost</th>
-                    <th>Extra vs Market</th>
-                    <th>Difference vs Best</th>
+                    <th>TT Sell Rate<span class="fx-th-note">Outward / TT Selling</span></th>
+                    <th>Market Rate<span class="fx-th-note">Reference</span></th>
+                    <th>Markup %<span class="fx-th-note">vs market</span></th>
+                    <th>INR Cost<span class="fx-th-note" id="fxInrCostNote">selected amount</span></th>
+                    <th>Extra vs Market<span class="fx-th-note">INR</span></th>
+                    <th>Difference vs Best<span class="fx-th-note">INR</span></th>
                     <th>Source Updated</th>
                     <th>Status</th>
                 </tr>
@@ -2087,6 +2258,18 @@ SBI TCS Estimation Tool
                 <tr><td colspan="10" class="fx-empty">Loading current bank rates...</td></tr>
             </tbody>
         </table>
+    </div>
+
+
+    <div class="fx-table-legend">
+        <span class="fx-legend-item"><span class="fx-legend-dot best"></span> Best rate (lowest cost)</span>
+        <span class="fx-legend-item"><span class="fx-legend-dot mid"></span> Higher markup vs market</span>
+        <span class="fx-legend-item"><span class="fx-legend-dot high"></span> Highest markup vs market</span>
+        <span class="fx-legend-item"><span class="fx-legend-dot missing"></span> Rate not published for TT outward</span>
+    </div>
+
+    <div class="fx-info-strip">
+        ⓘ TT Sell Rate = outward remittance / TT selling rate published by the bank. Final executable rates may vary by transaction time, charges and applicable taxes.
     </div>
 
     <div class="disclaimer fx-disclaimer">
@@ -3395,6 +3578,18 @@ const FX_BANKS = [
 
 const FX_CURRENCIES = ["USD", "CAD", "AUD", "GBP", "EUR", "SGD", "AED", "NZD"];
 
+const FX_CURRENCY_FLAGS = {
+    USD: "🇺🇸",
+    CAD: "🇨🇦",
+    AUD: "🇦🇺",
+    GBP: "🇬🇧",
+    EUR: "🇪🇺",
+    SGD: "🇸🇬",
+    AED: "🇦🇪",
+    NZD: "🇳🇿"
+};
+
+
 function showTool(tool) {
     const tcsPage = document.getElementById("tcsPage");
     const fxPage = document.getElementById("fxPage");
@@ -3448,6 +3643,9 @@ function formatFxAmountInput() {
 
 function setFxAmount(value) {
     document.getElementById("fxAmount").value = Number(value).toLocaleString("en-IN");
+    document.querySelectorAll(".fx-presets button").forEach(btn => {
+        btn.classList.toggle("active", Number(btn.textContent.replace(/[^0-9]/g, "")) === Number(value));
+    });
     renderFxComparison();
 }
 
@@ -3561,6 +3759,7 @@ function renderFxComparison() {
     const currency = document.getElementById("fxCurrency").value;
     const amount = getFxAmount();
     document.getElementById("fxAmountCode").textContent = currency;
+    document.getElementById("fxInrCostNote").textContent = amount > 0 ? `for ${amount.toLocaleString("en-IN")} ${currency}` : "selected amount";
 
     const published = getPublishedFxRecords(currency)
         .sort((a, b) => Number(a.bank_rate) - Number(b.bank_rate));
@@ -3589,12 +3788,18 @@ function renderFxComparison() {
     coverageNote.className = "fx-stat-note fx-coverage-note " +
         (coverageCount === FX_BANKS.length ? "complete" : "gap");
 
+    const missingBanks = FX_BANKS.filter(bank => !byBank.has(bank));
+    document.getElementById("fxCoverageMissing").textContent =
+        missingBanks.length ? missingBanks.join(", ") : "";
+
     renderFxCurrencyTabs();
 
     if (!published.length) {
         document.getElementById("fxBestRate").textContent = "—";
         document.getElementById("fxBestBank").textContent = "No published bank rate";
         document.getElementById("fxPotentialSaving").textContent = "—";
+        document.getElementById("fxSavingContext").textContent = "";
+        document.getElementById("fxSummaryMeta").textContent = "";
     } else {
         const best = published[0];
         const highest = published[published.length - 1];
@@ -3608,6 +3813,10 @@ function renderFxComparison() {
             : NaN;
         document.getElementById("fxPotentialSaving").textContent =
             amount > 0 && Number.isFinite(saving) ? fxINR(saving) : "—";
+        document.getElementById("fxSavingContext").textContent =
+            amount > 0 ? `for ${amount.toLocaleString("en-IN")} ${currency}` : "";
+        document.getElementById("fxSummaryMeta").textContent =
+            amount > 0 ? `ⓘ Savings calculated for ${amount.toLocaleString("en-IN")} ${currency}` : "";
     }
 
     const bestRate = published.length ? Number(published[0].bank_rate) : NaN;
@@ -3628,9 +3837,12 @@ function renderFxComparison() {
         if (!record) {
             return `
                 <tr class="unavailable-row">
-                    <td><span class="fx-rank">—</span></td>
-                    <td><span class="fx-bank-name">${item.bank}</span></td>
-                    <td><span class="fx-rate-missing">Not published</span></td>
+                    <td><span class="fx-rank">${published.length + rows.filter(x => !x.record).findIndex(x => x.bank === item.bank) + 1}</span></td>
+                    <td>
+                        <span class="fx-bank-name">${item.bank}</span>
+                        <span class="fx-unavailable-reason">${currency} not published for TT outward rate</span>
+                    </td>
+                    <td><span class="fx-rate-missing">—</span></td>
                     <td>${Number.isFinite(marketRate) ? '₹' + fxNumber(marketRate, 4) : '—'}</td>
                     <td>—</td>
                     <td>—</td>
@@ -3668,7 +3880,7 @@ function renderFxComparison() {
                 <td class="${markupClass(markup)}">${Number.isFinite(markup) ? fxNumber(markup, 2) + '%' : '—'}</td>
                 <td>${Number.isFinite(inrCost) ? fxINR(inrCost) : '—'}</td>
                 <td>${Number.isFinite(extra) ? fxINR(extra) : '—'}</td>
-                <td class="fx-diff-best">${Number.isFinite(diffBest) ? (diffBest === 0 ? 'Best' : '+' + fxINR(diffBest)) : '—'}</td>
+                <td class="fx-diff-best">${Number.isFinite(diffBest) ? (diffBest === 0 ? '—' : '+' + fxINR(diffBest)) : '—'}</td>
                 <td>${formatBankSourceUpdated(record)}</td>
                 <td><span class="${statusClass}">${statusText}</span></td>
             </tr>`;
