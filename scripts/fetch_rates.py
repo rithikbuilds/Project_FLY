@@ -10,13 +10,27 @@ import pdfplumber
 import requests
 
 
+# ==========================================================
+# PATHS
+# ==========================================================
+
 DATA_DIR = Path("data")
 
 LATEST_FILE = DATA_DIR / "latest.json"
+
 HISTORY_FILE = DATA_DIR / "history.csv"
+
+
+# ==========================================================
+# TIMEZONE
+# ==========================================================
 
 IST = ZoneInfo("Asia/Kolkata")
 
+
+# ==========================================================
+# CURRENCIES
+# ==========================================================
 
 CURRENCIES = [
     "USD",
@@ -30,6 +44,10 @@ CURRENCIES = [
 ]
 
 
+# ==========================================================
+# OFFICIAL BANK SOURCES
+# ==========================================================
+
 SBI_PDF_URL = (
     "https://sbi.co.in/documents/16012/1400784/"
     "FOREX_CARD_RATES.pdf"
@@ -42,6 +60,10 @@ HDFC_PDF_URL = (
 )
 
 
+# ==========================================================
+# REQUEST HEADERS
+# ==========================================================
+
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 "
@@ -53,47 +75,49 @@ HEADERS = {
 }
 
 
+# ==========================================================
+# TIME
+# ==========================================================
+
 def now_ist():
 
     return datetime.now(IST)
 
 
-def format_date():
-
-    return now_ist().strftime("%Y-%m-%d")
-
-
-def format_time():
-
-    return now_ist().strftime("%H:%M:%S")
-
+# ==========================================================
+# DOWNLOAD PDF
+# ==========================================================
 
 def download_pdf(url):
 
-    print(f"Downloading: {url}")
+    print("\nDownloading:")
+    print(url)
 
     response = requests.get(
         url,
         headers=HEADERS,
-        timeout=40
+        timeout=45
     )
 
     response.raise_for_status()
 
-    if "pdf" not in response.headers.get(
-        "content-type",
-        ""
-    ).lower():
+    content_type = (
+        response.headers
+        .get("content-type", "")
+        .lower()
+    )
 
-        print(
-            "Warning: response content-type is",
-            response.headers.get(
-                "content-type"
-            )
-        )
+    print(
+        "Content-Type:",
+        content_type
+    )
 
     return response.content
 
+
+# ==========================================================
+# EXTRACT PDF TEXT
+# ==========================================================
 
 def extract_pdf_text(pdf_bytes):
 
@@ -117,6 +141,10 @@ def extract_pdf_text(pdf_bytes):
 
     return text
 
+
+# ==========================================================
+# BUILD STANDARD RECORD
+# ==========================================================
 
 def build_record(
     bank,
@@ -177,20 +205,107 @@ def build_record(
 
 
 # ==========================================================
-# SBI
+# RATE VALIDATION
+# ==========================================================
+
+def validate_record(record):
+
+    currency = record[
+        "currency"
+    ]
+
+    rate = record[
+        "bank_rate"
+    ]
+
+
+    ranges = {
+
+        "USD":
+            (50, 150),
+
+        "CAD":
+            (30, 120),
+
+        "AUD":
+            (30, 120),
+
+        "GBP":
+            (70, 200),
+
+        "EUR":
+            (60, 180),
+
+        "SGD":
+            (30, 120),
+
+        "AED":
+            (10, 50),
+
+        "NZD":
+            (25, 100),
+
+    }
+
+
+    if currency not in ranges:
+
+        print(
+            "Unknown currency:",
+            currency
+        )
+
+        return False
+
+
+    low, high = ranges[
+        currency
+    ]
+
+
+    if not (
+        low <= rate <= high
+    ):
+
+        print(
+            "Rejected suspicious rate:",
+            record
+        )
+
+        return False
+
+
+    return True
+
+
+# ==========================================================
+# SBI PARSER
 # ==========================================================
 
 def parse_sbi():
 
-    print("\nFetching SBI...")
+    print(
+        "\n===================="
+    )
+
+    print(
+        "FETCHING SBI"
+    )
+
+    print(
+        "===================="
+    )
+
 
     pdf_bytes = download_pdf(
         SBI_PDF_URL
     )
 
+
     text = extract_pdf_text(
         pdf_bytes
     )
+
 
     records = []
 
@@ -234,129 +349,10 @@ def parse_sbi():
 
         for line in lines:
 
-            if pair in line:
+            if pair not in line:
 
-                cleaned = re.sub(
-                    r"\s+",
-                    " ",
-                    line.strip()
-                )
+                continue
 
-                print(
-                    "SBI candidate:",
-                    cleaned
-                )
-
-
-                numbers = re.findall(
-                    r"\d+\.\d+|\d+",
-                    cleaned
-                )
-
-
-                """
-                SBI rows normally look like:
-
-                UNITED STATES DOLLAR
-                USD/INR
-                TT BUY
-                TT SELL
-                BILL BUY
-                BILL SELL
-                ...
-
-                Therefore after the pair,
-                the first number is normally
-                TT BUY and the second number
-                is TT SELL.
-                """
-
-
-                pair_index = cleaned.find(
-                    pair
-                )
-
-
-                after_pair = cleaned[
-                    pair_index
-                    + len(pair):
-                ]
-
-
-                values = re.findall(
-                    r"\d+\.\d+|\d+",
-                    after_pair
-                )
-
-
-                if len(values) >= 2:
-
-                    tt_sell = float(
-                        values[1]
-                    )
-
-
-                    if tt_sell > 0:
-
-                        records.append(
-
-                            build_record(
-
-                                bank="SBI",
-
-                                currency=currency,
-
-                                bank_rate=tt_sell,
-
-                                source_url=SBI_PDF_URL
-
-                            )
-
-                        )
-
-                        found = True
-
-                        break
-
-
-        if not found:
-
-            print(
-                f"SBI: could not find {currency}"
-            )
-
-
-    return records
-
-
-# ==========================================================
-# HDFC
-# ==========================================================
-
-def parse_hdfc():
-
-    print("\nFetching HDFC...")
-
-    pdf_bytes = download_pdf(
-        HDFC_PDF_URL
-    )
-
-    text = extract_pdf_text(
-        pdf_bytes
-    )
-
-    records = []
-
-
-    lines = text.splitlines()
-
-
-    for currency in CURRENCIES:
-
-        found = False
-
-
-        for line in lines:
 
             cleaned = re.sub(
                 r"\s+",
@@ -365,190 +361,542 @@ def parse_hdfc():
             )
 
 
-            """
-            HDFC rows contain:
-
-            Currency Name
-            Currency Code
-            Cash Buying
-            Cash Selling
-            Bills Buying
-            Bills Selling
-            TT Buying
-            TT Selling (O/w Rem)
-            ...
-
-            Currency code is followed
-            by several rate numbers.
-
-            TT Selling is normally
-            the sixth numeric rate
-            after the currency code.
-            """
-
-
-            if re.search(
-                rf"\b{currency}\b",
+            print(
+                "SBI candidate:",
                 cleaned
-            ):
+            )
 
-                code_index = cleaned.find(
-                    currency
+
+            pair_index = (
+                cleaned.find(
+                    pair
+                )
+            )
+
+
+            after_pair = cleaned[
+                pair_index
+                + len(pair):
+            ]
+
+
+            values = re.findall(
+                r"\d+\.\d+|\d+",
+                after_pair
+            )
+
+
+            # SBI layout usually gives
+            # TT BUY first
+            # TT SELL second
+
+            if len(values) >= 2:
+
+                tt_sell = float(
+                    values[1]
                 )
 
 
-                after_code = cleaned[
-                    code_index
-                    + len(currency):
-                ]
+                record = build_record(
 
+                    bank="SBI",
 
-                values = re.findall(
-                    r"-|\d+\.\d+|\d+",
-                    after_code
+                    currency=currency,
+
+                    bank_rate=tt_sell,
+
+                    source_url=SBI_PDF_URL
+
                 )
 
 
-                numeric_values = []
+                if validate_record(
+                    record
+                ):
 
-
-                for value in values:
-
-                    if value == "-":
-                        continue
-
-                    try:
-
-                        numeric_values.append(
-                            float(value)
-                        )
-
-                    except ValueError:
-
-                        pass
-
-
-                print(
-                    "HDFC candidate:",
-                    cleaned
-                )
-
-
-                """
-                HDFC order:
-                1 Cash Buy
-                2 Cash Sell
-                3 Bills Buy
-                4 Bills Sell
-                5 TT Buy
-                6 TT Sell
-                """
-
-
-                if len(
-                    numeric_values
-                ) >= 6:
-
-                    tt_sell = (
-                        numeric_values[5]
+                    records.append(
+                        record
                     )
 
+                    print(
+                        f"SBI {currency}:",
+                        tt_sell
+                    )
 
-                    if tt_sell > 0:
+                    found = True
 
-                        records.append(
-
-                            build_record(
-
-                                bank="HDFC",
-
-                                currency=currency,
-
-                                bank_rate=tt_sell,
-
-                                source_url=HDFC_PDF_URL
-
-                            )
-
-                        )
-
-                        found = True
-
-                        break
+                    break
 
 
         if not found:
 
             print(
-                f"HDFC: could not find {currency}"
+                f"SBI {currency}: NOT FOUND"
             )
+
+
+    if not records:
+
+        raise RuntimeError(
+            "SBI parser returned no valid rates."
+        )
 
 
     return records
 
 
 # ==========================================================
-# VALIDATION
+# HDFC HEADER MATCHER
 # ==========================================================
 
-def validate_record(record):
+def looks_like_hdfc_tt_sell_header(
+    text
+):
 
-    currency = record[
-        "currency"
-    ]
-
-    rate = record[
-        "bank_rate"
-    ]
-
-
-    ranges = {
-
-        "USD":
-            (50, 150),
-
-        "CAD":
-            (30, 120),
-
-        "AUD":
-            (30, 120),
-
-        "GBP":
-            (70, 200),
-
-        "EUR":
-            (60, 180),
-
-        "SGD":
-            (30, 120),
-
-        "AED":
-            (10, 50),
-
-        "NZD":
-            (25, 100),
-
-    }
+    text = (
+        text
+        .lower()
+        .replace("\n", " ")
+    )
 
 
-    low, high = ranges[
-        currency
-    ]
+    text = re.sub(
+        r"\s+",
+        " ",
+        text
+    )
 
 
-    if not (
-        low <= rate <= high
-    ):
+    has_sell = (
+        "selling" in text
+        or "sell" in text
+    )
 
-        print(
-            "Rejected suspicious rate:",
-            record
+
+    has_outward = (
+
+        "o/w rem" in text
+
+        or "o/w" in text
+
+        or "outward" in text
+
+        or "remittance" in text
+
+        or "rem" in text
+
+    )
+
+
+    return (
+        has_sell
+        and has_outward
+    )
+
+
+# ==========================================================
+# HDFC PARSER
+# ==========================================================
+
+def parse_hdfc():
+
+    print(
+        "\n===================="
+    )
+
+    print(
+        "FETCHING HDFC"
+    )
+
+    print(
+        "===================="
+    )
+
+
+    pdf_bytes = download_pdf(
+        HDFC_PDF_URL
+    )
+
+
+    records = []
+
+
+    with pdfplumber.open(
+        io.BytesIO(
+            pdf_bytes
+        )
+    ) as pdf:
+
+
+        for page_number, page in enumerate(
+            pdf.pages,
+            start=1
+        ):
+
+
+            tables = (
+                page.extract_tables()
+                or []
+            )
+
+
+            print(
+                f"HDFC page {page_number}: "
+                f"{len(tables)} tables found"
+            )
+
+
+            for table_number, table in enumerate(
+                tables,
+                start=1
+            ):
+
+
+                if not table:
+
+                    continue
+
+
+                print(
+                    f"Checking table "
+                    f"{table_number}"
+                )
+
+
+                # --------------------------------
+                # FIND HEADER DYNAMICALLY
+                # --------------------------------
+
+                header_index = None
+
+                currency_col = None
+
+                tt_sell_col = None
+
+
+                for row_index, row in enumerate(
+                    table
+                ):
+
+
+                    if not row:
+
+                        continue
+
+
+                    cleaned_row = [
+
+                        re.sub(
+                            r"\s+",
+                            " ",
+                            str(
+                                cell
+                                or ""
+                            )
+                        ).strip()
+
+                        for cell
+                        in row
+
+                    ]
+
+
+                    print(
+                        "HDFC header candidate:",
+                        cleaned_row
+                    )
+
+
+                    for col_index, cell in enumerate(
+                        cleaned_row
+                    ):
+
+
+                        lower = (
+                            cell.lower()
+                        )
+
+
+                        # ------------------------
+                        # FIND CURRENCY COLUMN
+                        # ------------------------
+
+                        if (
+
+                            "currency" in lower
+
+                            or lower in [
+                                "ccy",
+                                "curr",
+                                "currency code"
+                            ]
+
+                        ):
+
+
+                            if currency_col is None:
+
+                                currency_col = (
+                                    col_index
+                                )
+
+
+                        # ------------------------
+                        # FIND TT SELLING COLUMN
+                        # ------------------------
+
+                        if looks_like_hdfc_tt_sell_header(
+                            cell
+                        ):
+
+
+                            tt_sell_col = (
+                                col_index
+                            )
+
+
+                    if (
+                        currency_col is not None
+                        and
+                        tt_sell_col is not None
+                    ):
+
+
+                        header_index = (
+                            row_index
+                        )
+
+
+                        print(
+                            "HDFC HEADER FOUND"
+                        )
+
+
+                        print(
+                            "Header row:",
+                            cleaned_row
+                        )
+
+
+                        print(
+                            "Currency column:",
+                            currency_col
+                        )
+
+
+                        print(
+                            "TT Sell column:",
+                            tt_sell_col
+                        )
+
+
+                        break
+
+
+                # --------------------------------
+                # DO NOT GUESS
+                # --------------------------------
+
+                if header_index is None:
+
+                    print(
+                        "No usable header "
+                        "in this table."
+                    )
+
+                    continue
+
+
+                # --------------------------------
+                # READ DATA ROWS
+                # --------------------------------
+
+                for row in table[
+                    header_index + 1:
+                ]:
+
+
+                    if not row:
+
+                        continue
+
+
+                    cleaned_row = [
+
+                        re.sub(
+                            r"\s+",
+                            " ",
+                            str(
+                                cell
+                                or ""
+                            )
+                        ).strip()
+
+                        for cell
+                        in row
+
+                    ]
+
+
+                    if (
+
+                        currency_col
+                        >= len(cleaned_row)
+
+                        or
+
+                        tt_sell_col
+                        >= len(cleaned_row)
+
+                    ):
+
+
+                        continue
+
+
+                    currency_cell = (
+
+                        cleaned_row[
+                            currency_col
+                        ]
+                        .upper()
+                    )
+
+
+                    # --------------------------------
+                    # DETECT CURRENCY CODE
+                    # --------------------------------
+
+                    currency = None
+
+
+                    for candidate in CURRENCIES:
+
+                        if re.search(
+
+                            rf"\b{candidate}\b",
+
+                            currency_cell
+
+                        ):
+
+
+                            currency = (
+                                candidate
+                            )
+
+                            break
+
+
+                    if not currency:
+
+                        continue
+
+
+                    # --------------------------------
+                    # GET OUTWARD TT SELL RATE
+                    # --------------------------------
+
+                    rate_text = (
+
+                        cleaned_row[
+                            tt_sell_col
+                        ]
+                    )
+
+
+                    rate_match = re.search(
+
+                        r"\d+(?:\.\d+)?",
+
+                        rate_text
+
+                    )
+
+
+                    if not rate_match:
+
+                        print(
+                            f"HDFC {currency}: "
+                            "rate missing"
+                        )
+
+                        continue
+
+
+                    tt_sell = float(
+
+                        rate_match.group()
+
+                    )
+
+
+                    record = build_record(
+
+                        bank="HDFC",
+
+                        currency=currency,
+
+                        bank_rate=tt_sell,
+
+                        source_url=HDFC_PDF_URL
+
+                    )
+
+
+                    if validate_record(
+                        record
+                    ):
+
+
+                        print(
+                            f"HDFC {currency}:",
+                            tt_sell
+                        )
+
+
+                        records.append(
+                            record
+                        )
+
+
+    # ======================================================
+    # REMOVE DUPLICATES
+    # ======================================================
+
+    unique = {}
+
+
+    for record in records:
+
+        unique[
+            record["currency"]
+        ] = record
+
+
+    records = list(
+        unique.values()
+    )
+
+
+    # ======================================================
+    # SAFETY CHECK
+    # ======================================================
+
+    if not records:
+
+        raise RuntimeError(
+
+            "HDFC TT Selling / "
+            "Outward Remittance "
+            "column could not be "
+            "detected safely. "
+            "No HDFC rates saved."
+
         )
 
-        return False
 
-
-    return True
+    return records
 
 
 # ==========================================================
@@ -583,16 +931,75 @@ def save_latest(records):
         encoding="utf-8"
     ) as file:
 
+
         json.dump(
+
             payload,
+
             file,
+
             indent=2,
+
             ensure_ascii=False
+
         )
 
 
 # ==========================================================
-# SAVE HISTORY
+# LOAD HISTORY KEYS
+# ==========================================================
+
+def load_history_keys():
+
+    keys = set()
+
+
+    if not HISTORY_FILE.exists():
+
+        return keys
+
+
+    with open(
+        HISTORY_FILE,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+
+        reader = csv.DictReader(
+            file
+        )
+
+
+        for row in reader:
+
+
+            keys.add(
+
+                (
+
+                    row.get(
+                        "date"
+                    ),
+
+                    row.get(
+                        "bank"
+                    ),
+
+                    row.get(
+                        "currency"
+                    ),
+
+                )
+
+            )
+
+
+    return keys
+
+
+# ==========================================================
+# APPEND HISTORY
 # ==========================================================
 
 def append_history(records):
@@ -632,43 +1039,9 @@ def append_history(records):
     ]
 
 
-    existing_keys = set()
-
-
-    if HISTORY_FILE.exists():
-
-        with open(
-            HISTORY_FILE,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            reader = csv.DictReader(
-                file
-            )
-
-
-            for row in reader:
-
-                existing_keys.add(
-
-                    (
-
-                        row.get(
-                            "date"
-                        ),
-
-                        row.get(
-                            "bank"
-                        ),
-
-                        row.get(
-                            "currency"
-                        ),
-
-                    )
-
-                )
+    existing_keys = (
+        load_history_keys()
+    )
 
 
     file_exists = (
@@ -683,9 +1056,13 @@ def append_history(records):
         encoding="utf-8"
     ) as file:
 
+
         writer = csv.DictWriter(
+
             file,
+
             fieldnames=fields
+
         )
 
 
@@ -695,6 +1072,7 @@ def append_history(records):
 
 
         for record in records:
+
 
             key = (
 
@@ -713,16 +1091,12 @@ def append_history(records):
             )
 
 
-            """
-            Store one closing observation
-            per bank/currency/day for now.
-
-            Later we can change this to
-            intraday snapshots if wanted.
-            """
-
-
             if key in existing_keys:
+
+                print(
+                    "History already exists:",
+                    key
+                )
 
                 continue
 
@@ -741,6 +1115,17 @@ def append_history(records):
             })
 
 
+            existing_keys.add(
+                key
+            )
+
+
+            print(
+                "History saved:",
+                key
+            )
+
+
 # ==========================================================
 # MAIN
 # ==========================================================
@@ -748,11 +1133,20 @@ def append_history(records):
 def main():
 
     print(
-        "Starting outward FX collector"
+        "\n================================"
     )
 
     print(
-        "IST:",
+        "OUTWARD FX RATE COLLECTOR"
+    )
+
+    print(
+        "================================"
+    )
+
+
+    print(
+        "Run time:",
         now_ist().isoformat()
     )
 
@@ -775,9 +1169,15 @@ def main():
     ]
 
 
-    for name, collector in collectors:
+    # ======================================================
+    # RUN EACH BANK SEPARATELY
+    # ======================================================
+
+    for bank_name, collector in collectors:
+
 
         try:
+
 
             bank_records = (
                 collector()
@@ -790,54 +1190,96 @@ def main():
 
 
             print(
-                f"{name}: "
+                f"\n{bank_name}: "
                 f"{len(bank_records)} "
-                f"rates collected"
+                f"valid rates collected"
             )
 
 
         except Exception as error:
 
+
             print(
-                f"{name} FAILED:",
+                f"\n{bank_name} FAILED"
+            )
+
+
+            print(
                 str(error)
             )
 
 
-    records = [
+    # ======================================================
+    # FINAL VALIDATION
+    # ======================================================
 
-        record
+    valid_records = []
 
-        for record
-        in records
+
+    for record in records:
+
 
         if validate_record(
             record
-        )
+        ):
 
-    ]
 
+            valid_records.append(
+                record
+            )
+
+
+    # ======================================================
+    # SAVE
+    # ======================================================
 
     save_latest(
-        records
+        valid_records
     )
 
 
-    if records:
+    if valid_records:
 
         append_history(
-            records
+            valid_records
         )
 
 
+    # ======================================================
+    # SUMMARY
+    # ======================================================
+
     print(
-        "\nFinished."
+        "\n================================"
     )
+
+    print(
+        "COLLECTOR FINISHED"
+    )
+
+    print(
+        "================================"
+    )
+
 
     print(
         "Total valid rates:",
-        len(records)
+        len(valid_records)
     )
+
+
+    for record in valid_records:
+
+
+        print(
+
+            record["bank"],
+
+            record["currency"],
+
+            record["bank_rate"]
+
+        )
 
 
 if __name__ == "__main__":
