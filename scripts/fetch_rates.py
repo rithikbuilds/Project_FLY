@@ -9,7 +9,6 @@ from zoneinfo import ZoneInfo
 
 # ==========================================================
 # PATH SETUP
-# Allows scripts/fetch_rates.py to import agents/
 # ==========================================================
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -19,6 +18,7 @@ if str(ROOT_DIR) not in sys.path:
 
 
 from agents import sbi
+from agents import axis
 
 
 # ==========================================================
@@ -57,7 +57,7 @@ def now_ist():
 
 
 # ==========================================================
-# RATE VALIDATION
+# VALIDATION
 # ==========================================================
 
 def validate_record(record):
@@ -108,9 +108,11 @@ def validate_record(record):
         return False
 
     try:
+
         rate = float(
             record["bank_rate"]
         )
+
     except (TypeError, ValueError):
 
         print(
@@ -200,7 +202,7 @@ def preserve_failed_bank(
 
 
 # ==========================================================
-# REMOVE DUPLICATES
+# DEDUPLICATE
 # ==========================================================
 
 def deduplicate(records):
@@ -221,7 +223,7 @@ def deduplicate(records):
             unique[key] = record
             continue
 
-        # Prefer current data over stale data.
+        # Prefer current data over stale data
 
         if (
             existing.get("status") != "current"
@@ -237,7 +239,7 @@ def deduplicate(records):
 
 
 # ==========================================================
-# SAVE LATEST.JSON
+# SAVE LATEST
 # ==========================================================
 
 def save_latest(records):
@@ -362,8 +364,8 @@ def append_history(records):
 
         for record in records:
 
-            # Only verified CURRENT rates
-            # become new historical observations.
+            # Only current verified records
+            # get written into history
 
             if record.get("status") != "current":
                 continue
@@ -409,9 +411,11 @@ def run_agent(
     print(
         "================================"
     )
+
     print(
         f"RUNNING {bank_name} AGENT"
     )
+
     print(
         "================================"
     )
@@ -445,6 +449,7 @@ def run_agent(
     except Exception as error:
 
         print()
+
         print(
             f"{bank_name} AGENT FAILED:"
         )
@@ -486,8 +491,8 @@ def sort_records(records):
 
     bank_order = {
         "SBI": 1,
-        "HDFC": 2,
-        "Axis Bank": 3,
+        "Axis Bank": 2,
+        "HDFC": 3,
         "ICICI Bank": 4,
         "Canara Bank": 5,
         "Bank of Baroda": 6,
@@ -521,12 +526,15 @@ def sort_records(records):
 def main():
 
     print()
+
     print(
         "================================"
     )
+
     print(
         "FX RATE AGENT CONTROLLER"
     )
+
     print(
         "================================"
     )
@@ -542,11 +550,9 @@ def main():
 
     final_records = []
 
+
     # ======================================================
-    # AGENT REGISTRY
-    #
-    # Every new bank will simply be added here.
-    # One failed agent will NOT stop another agent.
+    # ACTIVE BANK AGENTS
     # ======================================================
 
     agents = [
@@ -554,7 +560,12 @@ def main():
             "SBI",
             sbi.collect
         ),
+        (
+            "Axis Bank",
+            axis.collect
+        ),
     ]
+
 
     for bank_name, collector in agents:
 
@@ -568,6 +579,7 @@ def main():
             bank_records
         )
 
+
     # ======================================================
     # CLEAN RESULTS
     # ======================================================
@@ -579,6 +591,7 @@ def main():
     final_records = sort_records(
         final_records
     )
+
 
     # ======================================================
     # SAVE
@@ -592,17 +605,21 @@ def main():
         final_records
     )
 
+
     # ======================================================
     # SUMMARY
     # ======================================================
 
     print()
+
     print(
         "================================"
     )
+
     print(
         "FINAL RESULTS"
     )
+
     print(
         "================================"
     )
