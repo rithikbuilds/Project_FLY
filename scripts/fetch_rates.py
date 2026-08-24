@@ -20,6 +20,7 @@ if str(ROOT_DIR) not in sys.path:
 from agents import sbi
 from agents import axis
 from agents import icici
+from agents import canara
 
 
 # ==========================================================
@@ -54,6 +55,7 @@ CURRENCIES = [
 # ==========================================================
 
 def now_ist():
+
     return datetime.now(IST)
 
 
@@ -83,6 +85,7 @@ def validate_record(record):
         "status",
     ]
 
+
     for field in required_fields:
 
         if record.get(field) is None:
@@ -97,7 +100,9 @@ def validate_record(record):
 
             return False
 
+
     currency = record["currency"]
+
 
     if currency not in ranges:
 
@@ -107,6 +112,7 @@ def validate_record(record):
         )
 
         return False
+
 
     try:
 
@@ -125,7 +131,11 @@ def validate_record(record):
 
         return False
 
-    low, high = ranges[currency]
+
+    low, high = ranges[
+        currency
+    ]
+
 
     if not low <= rate <= high:
 
@@ -137,6 +147,7 @@ def validate_record(record):
         )
 
         return False
+
 
     return True
 
@@ -150,6 +161,7 @@ def load_previous_latest():
     if not LATEST_FILE.exists():
         return []
 
+
     try:
 
         with open(
@@ -158,12 +170,16 @@ def load_previous_latest():
             encoding="utf-8"
         ) as file:
 
-            payload = json.load(file)
+            payload = json.load(
+                file
+            )
+
 
         return payload.get(
             "rates",
             []
         )
+
 
     except Exception as error:
 
@@ -186,18 +202,25 @@ def preserve_failed_bank(
 
     preserved = []
 
+
     for record in previous_records:
 
         if record.get("bank") != bank_name:
             continue
 
-        copied = dict(record)
+
+        copied = dict(
+            record
+        )
+
 
         copied["status"] = "stale"
+
 
         preserved.append(
             copied
         )
+
 
     return preserved
 
@@ -210,6 +233,7 @@ def deduplicate(records):
 
     unique = {}
 
+
     for record in records:
 
         key = (
@@ -217,12 +241,18 @@ def deduplicate(records):
             record.get("currency")
         )
 
-        existing = unique.get(key)
+
+        existing = unique.get(
+            key
+        )
+
 
         if existing is None:
 
             unique[key] = record
+
             continue
+
 
         if (
             existing.get("status") != "current"
@@ -231,6 +261,7 @@ def deduplicate(records):
         ):
 
             unique[key] = record
+
 
     return list(
         unique.values()
@@ -248,11 +279,18 @@ def save_latest(records):
         exist_ok=True
     )
 
+
     payload = {
-        "updated_at": now_ist().isoformat(),
-        "rate_type": RATE_TYPE,
-        "rates": records,
+        "updated_at":
+            now_ist().isoformat(),
+
+        "rate_type":
+            RATE_TYPE,
+
+        "rates":
+            records,
     }
+
 
     with open(
         LATEST_FILE,
@@ -293,8 +331,10 @@ def load_history_keys():
 
     keys = set()
 
+
     if not HISTORY_FILE.exists():
         return keys
+
 
     try:
 
@@ -308,6 +348,7 @@ def load_history_keys():
                 file
             )
 
+
             for row in reader:
 
                 key = (
@@ -316,7 +357,10 @@ def load_history_keys():
                     row.get("currency"),
                 )
 
-                keys.add(key)
+                keys.add(
+                    key
+                )
+
 
     except Exception as error:
 
@@ -324,6 +368,7 @@ def load_history_keys():
             "Could not read history.csv:",
             error
         )
+
 
     return keys
 
@@ -335,15 +380,18 @@ def append_history(records):
         exist_ok=True
     )
 
+
     existing_keys = (
         load_history_keys()
     )
+
 
     file_exists = (
         HISTORY_FILE.exists()
         and
         HISTORY_FILE.stat().st_size > 0
     )
+
 
     with open(
         HISTORY_FILE,
@@ -358,20 +406,26 @@ def append_history(records):
             extrasaction="ignore"
         )
 
+
         if not file_exists:
+
             writer.writeheader()
+
 
         for record in records:
 
             if record.get("status") != "current":
                 continue
 
+
             source_date = record.get(
                 "source_date"
             )
 
+
             if not source_date:
                 continue
+
 
             key = (
                 source_date,
@@ -379,18 +433,27 @@ def append_history(records):
                 record.get("currency"),
             )
 
+
             if key in existing_keys:
                 continue
 
+
             writer.writerow({
-                field: record.get(
-                    field,
-                    ""
-                )
+
+                field:
+                    record.get(
+                        field,
+                        ""
+                    )
+
                 for field in HISTORY_FIELDS
+
             })
 
-            existing_keys.add(key)
+
+            existing_keys.add(
+                key
+            )
 
 
 # ==========================================================
@@ -404,6 +467,7 @@ def run_agent(
 ):
 
     print()
+
     print(
         "================================"
     )
@@ -416,23 +480,32 @@ def run_agent(
         "================================"
     )
 
+
     try:
 
         records = collector()
 
+
         valid = []
+
 
         for record in records:
 
-            if validate_record(record):
-                valid.append(record)
+            if validate_record(
+                record
+            ):
+
+                valid.append(
+                    record
+                )
+
 
         if not valid:
 
             raise RuntimeError(
-                f"{bank_name} agent returned "
-                "no valid records."
+                f"{bank_name} agent returned no valid records."
             )
+
 
         print(
             f"{bank_name} AGENT SUCCESS:",
@@ -440,7 +513,9 @@ def run_agent(
             "valid rates"
         )
 
+
         return valid
+
 
     except Exception as error:
 
@@ -454,10 +529,12 @@ def run_agent(
             str(error)
         )
 
+
         stale = preserve_failed_bank(
             bank_name,
             previous_records
         )
+
 
         if stale:
 
@@ -468,6 +545,7 @@ def run_agent(
                 "previous rates as stale."
             )
 
+
         else:
 
             print(
@@ -475,6 +553,7 @@ def run_agent(
                 bank_name,
                 "rates available."
             )
+
 
         return stale
 
@@ -489,29 +568,42 @@ def sort_records(records):
         "SBI": 1,
         "Axis Bank": 2,
         "ICICI Bank": 3,
-        "HDFC": 4,
-        "Canara Bank": 5,
+        "Canara Bank": 4,
+        "HDFC": 5,
         "Bank of Baroda": 6,
     }
 
+
     currency_order = {
+
         currency: index
+
         for index, currency
-        in enumerate(CURRENCIES)
+        in enumerate(
+            CURRENCIES
+        )
+
     }
 
+
     return sorted(
+
         records,
+
         key=lambda record: (
+
             bank_order.get(
                 record.get("bank"),
                 999
             ),
+
             currency_order.get(
                 record.get("currency"),
                 999
             )
+
         )
+
     )
 
 
@@ -535,14 +627,17 @@ def main():
         "================================"
     )
 
+
     print(
         "Run time:",
         now_ist().isoformat()
     )
 
+
     previous_records = (
         load_previous_latest()
     )
+
 
     final_records = []
 
@@ -552,18 +647,27 @@ def main():
     # ======================================================
 
     agents = [
+
         (
             "SBI",
             sbi.collect
         ),
+
         (
             "Axis Bank",
             axis.collect
         ),
+
         (
             "ICICI Bank",
             icici.collect
         ),
+
+        (
+            "Canara Bank",
+            canara.collect
+        ),
+
     ]
 
 
@@ -574,6 +678,7 @@ def main():
             collector,
             previous_records
         )
+
 
         final_records.extend(
             bank_records
@@ -588,6 +693,7 @@ def main():
         final_records
     )
 
+
     final_records = sort_records(
         final_records
     )
@@ -600,6 +706,7 @@ def main():
     save_latest(
         final_records
     )
+
 
     append_history(
         final_records
@@ -624,6 +731,7 @@ def main():
         "================================"
     )
 
+
     for record in final_records:
 
         print(
@@ -637,12 +745,15 @@ def main():
             record.get("status")
         )
 
+
     print()
+
 
     print(
         "Total rates:",
         len(final_records)
     )
+
 
     print(
         "Controller completed successfully."
@@ -650,4 +761,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
