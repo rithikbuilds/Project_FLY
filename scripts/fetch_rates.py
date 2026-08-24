@@ -22,6 +22,7 @@ from agents import axis
 from agents import icici
 from agents import canara
 from agents import bob
+from agents import hdfc
 from agents import market
 
 
@@ -57,6 +58,7 @@ CURRENCIES = [
 # ==========================================================
 
 def now_ist():
+
     return datetime.now(IST)
 
 
@@ -77,6 +79,7 @@ def validate_record(record):
         "NZD": (30, 90),
     }
 
+
     required_fields = [
         "bank",
         "currency",
@@ -85,6 +88,7 @@ def validate_record(record):
         "source_date",
         "status",
     ]
+
 
     for field in required_fields:
 
@@ -100,7 +104,9 @@ def validate_record(record):
 
             return False
 
+
     currency = record["currency"]
+
 
     if currency not in ranges:
 
@@ -110,6 +116,7 @@ def validate_record(record):
         )
 
         return False
+
 
     try:
 
@@ -128,7 +135,11 @@ def validate_record(record):
 
         return False
 
-    low, high = ranges[currency]
+
+    low, high = ranges[
+        currency
+    ]
+
 
     if not low <= rate <= high:
 
@@ -141,6 +152,7 @@ def validate_record(record):
 
         return False
 
+
     return True
 
 
@@ -151,7 +163,9 @@ def validate_record(record):
 def load_previous_latest():
 
     if not LATEST_FILE.exists():
+
         return []
+
 
     try:
 
@@ -161,12 +175,16 @@ def load_previous_latest():
             encoding="utf-8"
         ) as file:
 
-            payload = json.load(file)
+            payload = json.load(
+                file
+            )
+
 
         return payload.get(
             "rates",
             []
         )
+
 
     except Exception as error:
 
@@ -189,18 +207,26 @@ def preserve_failed_bank(
 
     preserved = []
 
+
     for record in previous_records:
 
         if record.get("bank") != bank_name:
+
             continue
 
-        copied = dict(record)
+
+        copied = dict(
+            record
+        )
+
 
         copied["status"] = "stale"
+
 
         preserved.append(
             copied
         )
+
 
     return preserved
 
@@ -213,6 +239,7 @@ def deduplicate(records):
 
     unique = {}
 
+
     for record in records:
 
         key = (
@@ -220,12 +247,18 @@ def deduplicate(records):
             record.get("currency")
         )
 
-        existing = unique.get(key)
+
+        existing = unique.get(
+            key
+        )
+
 
         if existing is None:
 
             unique[key] = record
+
             continue
+
 
         if (
             existing.get("status") != "current"
@@ -234,6 +267,7 @@ def deduplicate(records):
         ):
 
             unique[key] = record
+
 
     return list(
         unique.values()
@@ -250,42 +284,78 @@ def apply_market_rates(
 ):
 
     market_rates = (
-        market_result.get("rates", {})
+        market_result.get(
+            "rates",
+            {}
+        )
     )
+
 
     source_name = (
-        market_result.get("source")
+        market_result.get(
+            "source"
+        )
     )
+
 
     source_url = (
-        market_result.get("source_url")
+        market_result.get(
+            "source_url"
+        )
     )
+
 
     source_timestamp = (
-        market_result.get("source_timestamp")
+        market_result.get(
+            "source_timestamp"
+        )
     )
 
+
     market_fetched_at = (
-        market_result.get("fetched_at")
+        market_result.get(
+            "fetched_at"
+        )
     )
+
 
     enriched = []
 
+
     for record in records:
 
-        copied = dict(record)
+        copied = dict(
+            record
+        )
+
 
         currency = copied.get(
             "currency"
         )
 
+
         bank_rate = copied.get(
             "bank_rate"
         )
 
+
         market_rate = market_rates.get(
             currency
         )
+
+
+        copied["market_source"] = source_name
+
+        copied["market_source_url"] = source_url
+
+        copied["market_source_timestamp"] = (
+            source_timestamp
+        )
+
+        copied["market_fetched_at"] = (
+            market_fetched_at
+        )
+
 
         if (
             market_rate is None
@@ -297,23 +367,12 @@ def apply_market_rates(
 
             copied["markup_percent"] = None
 
-            copied["market_source"] = source_name
-
-            copied["market_source_url"] = source_url
-
-            copied["market_source_timestamp"] = (
-                source_timestamp
-            )
-
-            copied["market_fetched_at"] = (
-                market_fetched_at
-            )
-
             enriched.append(
                 copied
             )
 
             continue
+
 
         try:
 
@@ -337,6 +396,7 @@ def apply_market_rates(
 
             continue
 
+
         markup = (
             (
                 bank_rate
@@ -346,31 +406,23 @@ def apply_market_rates(
             - 1
         ) * 100
 
+
         copied["market_rate"] = round(
             market_rate,
             4
         )
+
 
         copied["markup_percent"] = round(
             markup,
             4
         )
 
-        copied["market_source"] = source_name
-
-        copied["market_source_url"] = source_url
-
-        copied["market_source_timestamp"] = (
-            source_timestamp
-        )
-
-        copied["market_fetched_at"] = (
-            market_fetched_at
-        )
 
         enriched.append(
             copied
         )
+
 
     return enriched
 
@@ -389,7 +441,9 @@ def save_latest(
         exist_ok=True
     )
 
+
     payload = {
+
         "updated_at":
             now_ist().isoformat(),
 
@@ -397,6 +451,7 @@ def save_latest(
             RATE_TYPE,
 
         "market_reference": {
+
             "source":
                 market_result.get(
                     "source"
@@ -427,6 +482,7 @@ def save_latest(
         "rates":
             records,
     }
+
 
     with open(
         LATEST_FILE,
@@ -471,8 +527,11 @@ def load_history_keys():
 
     keys = set()
 
+
     if not HISTORY_FILE.exists():
+
         return keys
+
 
     try:
 
@@ -482,7 +541,10 @@ def load_history_keys():
             encoding="utf-8"
         ) as file:
 
-            reader = csv.DictReader(file)
+            reader = csv.DictReader(
+                file
+            )
+
 
             for row in reader:
 
@@ -492,7 +554,10 @@ def load_history_keys():
                     row.get("currency"),
                 )
 
-                keys.add(key)
+                keys.add(
+                    key
+                )
+
 
     except Exception as error:
 
@@ -500,6 +565,7 @@ def load_history_keys():
             "Could not read history.csv:",
             error
         )
+
 
     return keys
 
@@ -511,15 +577,18 @@ def append_history(records):
         exist_ok=True
     )
 
+
     existing_keys = (
         load_history_keys()
     )
+
 
     file_exists = (
         HISTORY_FILE.exists()
         and
         HISTORY_FILE.stat().st_size > 0
     )
+
 
     with open(
         HISTORY_FILE,
@@ -534,20 +603,28 @@ def append_history(records):
             extrasaction="ignore"
         )
 
+
         if not file_exists:
+
             writer.writeheader()
+
 
         for record in records:
 
             if record.get("status") != "current":
+
                 continue
+
 
             source_date = record.get(
                 "source_date"
             )
 
+
             if not source_date:
+
                 continue
+
 
             key = (
                 source_date,
@@ -555,8 +632,11 @@ def append_history(records):
                 record.get("currency"),
             )
 
+
             if key in existing_keys:
+
                 continue
+
 
             writer.writerow({
 
@@ -569,6 +649,7 @@ def append_history(records):
                 for field in HISTORY_FIELDS
 
             })
+
 
             existing_keys.add(
                 key
@@ -591,19 +672,24 @@ def run_agent(
         "================================"
     )
 
+
     print(
         f"RUNNING {bank_name} AGENT"
     )
+
 
     print(
         "================================"
     )
 
+
     try:
 
         records = collector()
 
+
         valid = []
+
 
         for record in records:
 
@@ -615,12 +701,13 @@ def run_agent(
                     record
                 )
 
+
         if not valid:
 
             raise RuntimeError(
-                f"{bank_name} agent returned "
-                "no valid records."
+                f"{bank_name} agent returned no valid records."
             )
+
 
         print(
             f"{bank_name} AGENT SUCCESS:",
@@ -628,7 +715,9 @@ def run_agent(
             "valid rates"
         )
 
+
         return valid
+
 
     except Exception as error:
 
@@ -638,14 +727,17 @@ def run_agent(
             f"{bank_name} AGENT FAILED:"
         )
 
+
         print(
             str(error)
         )
+
 
         stale = preserve_failed_bank(
             bank_name,
             previous_records
         )
+
 
         if stale:
 
@@ -656,6 +748,7 @@ def run_agent(
                 "previous rates as stale."
             )
 
+
         else:
 
             print(
@@ -663,6 +756,7 @@ def run_agent(
                 bank_name,
                 "rates available."
             )
+
 
         return stale
 
@@ -677,10 +771,11 @@ def sort_records(records):
         "SBI": 1,
         "Canara Bank": 2,
         "Bank of Baroda": 3,
-        "ICICI Bank": 4,
-        "Axis Bank": 5,
-        "HDFC": 6,
+        "HDFC Bank": 4,
+        "ICICI Bank": 5,
+        "Axis Bank": 6,
     }
+
 
     currency_order = {
 
@@ -693,13 +788,18 @@ def sort_records(records):
 
     }
 
+
     return sorted(
+
         records,
+
         key=lambda record: (
+
             currency_order.get(
                 record.get("currency"),
                 999
             ),
+
             (
                 record.get(
                     "markup_percent"
@@ -709,11 +809,14 @@ def sort_records(records):
                 ) is not None
                 else 999
             ),
+
             bank_order.get(
                 record.get("bank"),
                 999
             )
+
         )
+
     )
 
 
@@ -729,52 +832,69 @@ def main():
         "================================"
     )
 
+
     print(
         "FX RATE AGENT CONTROLLER"
     )
 
+
     print(
         "================================"
     )
+
 
     print(
         "Run time:",
         now_ist().isoformat()
     )
 
+
     previous_records = (
         load_previous_latest()
     )
+
 
     final_records = []
 
 
     # ======================================================
-    # BANK AGENTS
+    # ACTIVE BANK AGENTS
     # ======================================================
 
     agents = [
+
         (
             "SBI",
             sbi.collect
         ),
+
         (
             "Axis Bank",
             axis.collect
         ),
+
         (
             "ICICI Bank",
             icici.collect
         ),
+
         (
             "Canara Bank",
             canara.collect
         ),
+
         (
             "Bank of Baroda",
             bob.collect
         ),
+
+        (
+            "HDFC Bank",
+            hdfc.collect
+        ),
+
     ]
+
 
     for bank_name, collector in agents:
 
@@ -783,6 +903,7 @@ def main():
             collector,
             previous_records
         )
+
 
         final_records.extend(
             bank_records
@@ -799,7 +920,7 @@ def main():
 
 
     # ======================================================
-    # MARKET AGENT
+    # MARKET RATE AGENT
     # ======================================================
 
     print()
@@ -808,13 +929,16 @@ def main():
         "================================"
     )
 
+
     print(
         "RUNNING MARKET RATE AGENT"
     )
 
+
     print(
         "================================"
     )
+
 
     market_result = market.collect()
 
@@ -847,6 +971,7 @@ def main():
         market_result
     )
 
+
     append_history(
         final_records
     )
@@ -862,13 +987,16 @@ def main():
         "================================"
     )
 
+
     print(
         "FINAL RESULTS"
     )
 
+
     print(
         "================================"
     )
+
 
     for record in final_records:
 
@@ -883,16 +1011,22 @@ def main():
             "| Markup:",
             record.get("markup_percent"),
             "%",
+            "| source:",
+            record.get("source_date"),
+            record.get("source_time"),
             "|",
             record.get("status")
         )
 
+
     print()
+
 
     print(
         "Total bank rates:",
         len(final_records)
     )
+
 
     print(
         "Market reference source:",
@@ -901,10 +1035,12 @@ def main():
         )
     )
 
+
     print(
         "Controller completed successfully."
     )
 
 
 if __name__ == "__main__":
+
     main()
