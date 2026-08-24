@@ -991,6 +991,81 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
     .fx-download-current { width: 100%; }
 }
 
+
+/* ==============================
+   FX COVERAGE + GAP VISIBILITY
+============================== */
+.fx-currency-tabs {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(92px, 1fr));
+    gap: 8px;
+    margin: 0 0 16px;
+}
+.fx-currency-tab {
+    border: 1px solid #cfddea;
+    background: #fff;
+    color: var(--navy);
+    border-radius: 9px;
+    padding: 10px 8px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+.fx-currency-tab:hover {
+    border-color: var(--blue);
+    background: #f5faff;
+}
+.fx-currency-tab.active {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: #eef7ff;
+    box-shadow: 0 0 0 2px rgba(8,117,209,.06);
+}
+.fx-currency-tab small {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+}
+.fx-currency-tab.complete small { color: var(--green); }
+.fx-currency-tab.gap small { color: #a06c00; }
+
+.fx-coverage-value { color: var(--navy); }
+.fx-coverage-note.complete { color: var(--green); font-weight: 700; }
+.fx-coverage-note.gap { color: #a06c00; font-weight: 700; }
+
+.fx-table .unavailable-row {
+    background: #fafbfc;
+    color: #8190a0;
+}
+.fx-table .unavailable-row:hover { background: #f7f9fb; }
+.fx-table .unavailable-row .fx-bank-name { color: #62758a; }
+.fx-rate-missing { color: #8190a0; font-weight: 700; }
+.fx-status-missing {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 999px;
+    background: #f1f3f5;
+    color: #697887;
+    font-size: 10px;
+    font-weight: 800;
+}
+.fx-gap-note {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 11px;
+}
+.fx-diff-best { font-weight: 700; color: #526b86; }
+
+@media (max-width: 1200px) {
+    .fx-currency-tabs { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 700px) {
+    .fx-currency-tabs { grid-template-columns: repeat(2, 1fr); }
+}
+
 </style>
 
 </head>
@@ -1914,6 +1989,8 @@ SBI TCS Estimation Tool
     <div class="fx-live-pill" id="fxStatus">● Loading rates...</div>
 </header>
 
+<div class="fx-currency-tabs" id="fxCurrencyTabs"></div>
+
 <div class="fx-controls card">
     <div class="fx-control-grid">
         <div class="field fx-field">
@@ -1933,7 +2010,7 @@ SBI TCS Estimation Tool
         <div class="field fx-field">
             <label>Foreign Currency Amount</label>
             <div class="input-wrap">
-                <input id="fxAmount" type="text" inputmode="numeric" value="5,000" autocomplete="off">
+                <input id="fxAmount" type="text" inputmode="numeric" value="0" autocomplete="off">
                 <span id="fxAmountCode">USD</span>
             </div>
             <div class="hint">Enter the amount to be remitted in the selected foreign currency.</div>
@@ -1969,9 +2046,9 @@ SBI TCS Estimation Tool
     </div>
 
     <div class="fx-stat-card">
-        <div class="fx-stat-label">Lowest Markup</div>
-        <div class="fx-stat-value" id="fxLowestMarkup">—</div>
-        <div class="fx-stat-note">vs market reference</div>
+        <div class="fx-stat-label">Bank Coverage</div>
+        <div class="fx-stat-value fx-coverage-value" id="fxCoverage">—</div>
+        <div class="fx-stat-note" id="fxCoverageNote">Published TT sell rates</div>
     </div>
 
     <div class="fx-stat-card">
@@ -2001,12 +2078,13 @@ SBI TCS Estimation Tool
                     <th>Markup %</th>
                     <th>INR Cost</th>
                     <th>Extra vs Market</th>
+                    <th>Difference vs Best</th>
                     <th>Source Updated</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody id="fxTableBody">
-                <tr><td colspan="9" class="fx-empty">Loading current bank rates...</td></tr>
+                <tr><td colspan="10" class="fx-empty">Loading current bank rates...</td></tr>
             </tbody>
         </table>
     </div>
@@ -3306,6 +3384,17 @@ let fxLatestData = null;
 let fxHistoryData = [];
 let fxHistoryLoaded = false;
 
+const FX_BANKS = [
+    "SBI",
+    "Axis Bank",
+    "ICICI Bank",
+    "Canara Bank",
+    "Bank of Baroda",
+    "HDFC Bank"
+];
+
+const FX_CURRENCIES = ["USD", "CAD", "AUD", "GBP", "EUR", "SGD", "AED", "NZD"];
+
 function showTool(tool) {
     const tcsPage = document.getElementById("tcsPage");
     const fxPage = document.getElementById("fxPage");
@@ -3391,6 +3480,59 @@ function markupClass(value) {
     return "fx-markup-high";
 }
 
+
+function getPublishedFxRecords(currency) {
+    return (fxLatestData?.rates || [])
+        .filter(r =>
+            r.currency === currency &&
+            Number.isFinite(Number(r.bank_rate)) &&
+            Number(r.bank_rate) > 0
+        );
+}
+
+function selectFxCurrency(currency) {
+    document.getElementById("fxCurrency").value = currency;
+    renderFxComparison();
+}
+
+function renderFxCurrencyTabs() {
+    const container = document.getElementById("fxCurrencyTabs");
+    if (!container || !fxLatestData) return;
+
+    const selected = document.getElementById("fxCurrency").value;
+    container.innerHTML = FX_CURRENCIES.map(currency => {
+        const count = getPublishedFxRecords(currency).length;
+        const complete = count === FX_BANKS.length;
+        return `
+            <button type="button"
+                class="fx-currency-tab ${currency === selected ? 'active' : ''} ${complete ? 'complete' : 'gap'}"
+                onclick="selectFxCurrency('${currency}')">
+                ${currency}
+                <small>${count}/${FX_BANKS.length} banks</small>
+            </button>`;
+    }).join("");
+}
+
+function formatBankSourceUpdated(record) {
+    if (!record) return "—";
+    const date = record.source_date || "";
+    const time = record.source_time || "";
+    if (!date && !time) return "—";
+
+    // Keep source values authoritative, but make common ISO dates easier to read.
+    let prettyDate = date;
+    const m = String(date).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (m) {
+        const d = new Date(`${date}T00:00:00`);
+        if (!Number.isNaN(d.getTime())) {
+            prettyDate = d.toLocaleDateString("en-IN", {
+                day: "2-digit", month: "short", year: "numeric"
+            });
+        }
+    }
+    return [prettyDate, time].filter(Boolean).join(" · ");
+}
+
 /* =========================================
    LOAD CURRENT FX DATA
 ========================================= */
@@ -3409,7 +3551,7 @@ async function loadFxRates() {
         console.error(error);
         status.textContent = "● Rate data unavailable";
         status.style.color = "var(--red)";
-        document.getElementById("fxTableBody").innerHTML = '<tr><td colspan="9" class="fx-empty">Could not load data/latest.json. Run the FX workflow and refresh this page.</td></tr>';
+        document.getElementById("fxTableBody").innerHTML = '<tr><td colspan="10" class="fx-empty">Could not load data/latest.json. Run the FX workflow and refresh this page.</td></tr>';
     }
 }
 
@@ -3420,9 +3562,10 @@ function renderFxComparison() {
     const amount = getFxAmount();
     document.getElementById("fxAmountCode").textContent = currency;
 
-    const records = (fxLatestData.rates || [])
-        .filter(r => r.currency === currency)
+    const published = getPublishedFxRecords(currency)
         .sort((a, b) => Number(a.bank_rate) - Number(b.bank_rate));
+
+    const byBank = new Map(published.map(r => [r.bank, r]));
 
     const marketRate = Number(
         fxLatestData.market_reference &&
@@ -3434,52 +3577,99 @@ function renderFxComparison() {
         ? "₹" + fxNumber(marketRate, 4)
         : "—";
 
-    const marketSource = fxLatestData.market_reference?.source || "Reference feed";
-    document.getElementById("fxMarketSource").textContent = marketSource;
+    document.getElementById("fxMarketSource").textContent =
+        fxLatestData.market_reference?.source || "Reference feed";
 
-    if (!records.length) {
+    const coverageCount = published.length;
+    document.getElementById("fxCoverage").textContent = `${coverageCount}/${FX_BANKS.length}`;
+    const coverageNote = document.getElementById("fxCoverageNote");
+    coverageNote.textContent = coverageCount === FX_BANKS.length
+        ? "All tracked banks published"
+        : `${FX_BANKS.length - coverageCount} bank${FX_BANKS.length - coverageCount === 1 ? "" : "s"} missing this currency`;
+    coverageNote.className = "fx-stat-note fx-coverage-note " +
+        (coverageCount === FX_BANKS.length ? "complete" : "gap");
+
+    renderFxCurrencyTabs();
+
+    if (!published.length) {
         document.getElementById("fxBestRate").textContent = "—";
-        document.getElementById("fxBestBank").textContent = "No current bank rate";
-        document.getElementById("fxLowestMarkup").textContent = "—";
+        document.getElementById("fxBestBank").textContent = "No published bank rate";
         document.getElementById("fxPotentialSaving").textContent = "—";
-        document.getElementById("fxTableBody").innerHTML = '<tr><td colspan="9" class="fx-empty">No bank rates are available for this currency.</td></tr>';
-        return;
+    } else {
+        const best = published[0];
+        const highest = published[published.length - 1];
+
+        document.getElementById("fxBestRate").textContent =
+            "₹" + fxNumber(best.bank_rate, 4);
+        document.getElementById("fxBestBank").textContent = best.bank;
+
+        const saving = amount > 0
+            ? amount * (Number(highest.bank_rate) - Number(best.bank_rate))
+            : NaN;
+        document.getElementById("fxPotentialSaving").textContent =
+            amount > 0 && Number.isFinite(saving) ? fxINR(saving) : "—";
     }
 
-    const best = records[0];
-    const highest = records[records.length - 1];
-    document.getElementById("fxBestRate").textContent = "₹" + fxNumber(best.bank_rate, 4);
-    document.getElementById("fxBestBank").textContent = best.bank;
-    document.getElementById("fxLowestMarkup").textContent = Number.isFinite(Number(best.markup_percent))
-        ? fxNumber(best.markup_percent, 2) + "%"
-        : "—";
+    const bestRate = published.length ? Number(published[0].bank_rate) : NaN;
+    let publishedRank = 0;
 
-    const saving = amount > 0
-        ? amount * (Number(highest.bank_rate) - Number(best.bank_rate))
-        : 0;
-    document.getElementById("fxPotentialSaving").textContent = amount > 0 ? fxINR(saving) : "₹0";
+    // Published banks first, ranked by rate. Missing banks follow, always visible.
+    const rows = [
+        ...published.map(r => ({ bank: r.bank, record: r })),
+        ...FX_BANKS
+            .filter(bank => !byBank.has(bank))
+            .map(bank => ({ bank, record: null }))
+    ];
 
     const body = document.getElementById("fxTableBody");
-    body.innerHTML = records.map((record, index) => {
+    body.innerHTML = rows.map(item => {
+        const record = item.record;
+
+        if (!record) {
+            return `
+                <tr class="unavailable-row">
+                    <td><span class="fx-rank">—</span></td>
+                    <td><span class="fx-bank-name">${item.bank}</span></td>
+                    <td><span class="fx-rate-missing">Not published</span></td>
+                    <td>${Number.isFinite(marketRate) ? '₹' + fxNumber(marketRate, 4) : '—'}</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td><span class="fx-status-missing">Unavailable</span></td>
+                </tr>`;
+        }
+
+        publishedRank += 1;
         const bankRate = Number(record.bank_rate);
         const rowMarket = Number(record.market_rate ?? marketRate);
         const markup = Number(record.markup_percent);
-        const inrCost = amount * bankRate;
-        const marketCost = amount * rowMarket;
-        const extra = Number.isFinite(rowMarket) ? inrCost - marketCost : NaN;
-        const statusClass = record.status === "current" ? "fx-status-current" : "fx-status-stale";
+        const inrCost = amount > 0 ? amount * bankRate : NaN;
+        const marketCost = amount > 0 && Number.isFinite(rowMarket) ? amount * rowMarket : NaN;
+        const extra = Number.isFinite(inrCost) && Number.isFinite(marketCost)
+            ? inrCost - marketCost
+            : NaN;
+        const diffBest = amount > 0 && Number.isFinite(bestRate)
+            ? amount * (bankRate - bestRate)
+            : NaN;
+
+        const statusClass = record.status === "current"
+            ? "fx-status-current"
+            : "fx-status-stale";
         const statusText = record.status === "current" ? "Current" : "Stale";
 
         return `
-            <tr class="${index === 0 ? 'best-row' : ''}">
-                <td><span class="fx-rank">${index + 1}</span></td>
+            <tr class="${publishedRank === 1 ? 'best-row' : ''}">
+                <td><span class="fx-rank">${publishedRank}</span></td>
                 <td><span class="fx-bank-name">${record.bank}</span></td>
                 <td><span class="fx-rate">₹${fxNumber(bankRate, 4)}</span></td>
                 <td>${Number.isFinite(rowMarket) ? '₹' + fxNumber(rowMarket, 4) : '—'}</td>
                 <td class="${markupClass(markup)}">${Number.isFinite(markup) ? fxNumber(markup, 2) + '%' : '—'}</td>
-                <td>${amount > 0 ? fxINR(inrCost) : '₹0'}</td>
-                <td>${amount > 0 && Number.isFinite(extra) ? fxINR(extra) : '—'}</td>
-                <td>${bankSourceUpdated(record)}</td>
+                <td>${Number.isFinite(inrCost) ? fxINR(inrCost) : '—'}</td>
+                <td>${Number.isFinite(extra) ? fxINR(extra) : '—'}</td>
+                <td class="fx-diff-best">${Number.isFinite(diffBest) ? (diffBest === 0 ? 'Best' : '+' + fxINR(diffBest)) : '—'}</td>
+                <td>${formatBankSourceUpdated(record)}</td>
                 <td><span class="${statusClass}">${statusText}</span></td>
             </tr>`;
     }).join("");
@@ -3510,31 +3700,59 @@ function triggerCsvDownload(filename, rows) {
 
 function downloadCurrentFxComparison() {
     if (!fxLatestData) return;
+
     const currency = document.getElementById("fxCurrency").value;
     const amount = getFxAmount();
-    const records = (fxLatestData.rates || [])
-        .filter(r => r.currency === currency)
+    const published = getPublishedFxRecords(currency)
         .sort((a, b) => Number(a.bank_rate) - Number(b.bank_rate));
+    const byBank = new Map(published.map(r => [r.bank, r]));
+    const bestRate = published.length ? Number(published[0].bank_rate) : NaN;
 
     const rows = [[
-        "Rank", "Bank", "Currency", "Foreign Amount", "TT Sell Rate", "Market Rate",
-        "Markup %", "INR Cost", "Extra vs Market", "Source Date", "Source Time", "Status"
+        "Rank", "Bank", "Currency", "Availability", "Foreign Amount",
+        "TT Sell Rate", "Market Rate", "Markup %",
+        "INR Cost", "Extra vs Market", "Difference vs Best",
+        "Source Date", "Source Time", "Status"
     ]];
 
-    records.forEach((r, i) => {
+    let rank = 0;
+    published.forEach(r => {
+        rank += 1;
         const bankRate = Number(r.bank_rate);
-        const marketRate = Number(r.market_rate);
+        const marketRate = Number(
+            r.market_rate ??
+            fxLatestData.market_reference?.rates?.[currency]
+        );
         rows.push([
-            i + 1, r.bank, currency, amount, bankRate,
+            rank,
+            r.bank,
+            currency,
+            "Published",
+            amount || "",
+            bankRate,
             Number.isFinite(marketRate) ? marketRate : "",
             r.markup_percent ?? "",
-            amount * bankRate,
-            Number.isFinite(marketRate) ? amount * (bankRate - marketRate) : "",
-            r.source_date || "", r.source_time || "", r.status || ""
+            amount > 0 ? amount * bankRate : "",
+            amount > 0 && Number.isFinite(marketRate)
+                ? amount * (bankRate - marketRate) : "",
+            amount > 0 && Number.isFinite(bestRate)
+                ? amount * (bankRate - bestRate) : "",
+            r.source_date || "",
+            r.source_time || "",
+            r.status || ""
         ]);
     });
 
-    const date = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+    FX_BANKS.filter(bank => !byBank.has(bank)).forEach(bank => {
+        rows.push([
+            "", bank, currency, "Not published", amount || "",
+            "", "", "", "", "", "", "", "", "unavailable"
+        ]);
+    });
+
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Kolkata"
+    });
     triggerCsvDownload(`FX-Comparison-${currency}-${date}.csv`, rows);
 }
 
