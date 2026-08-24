@@ -19,6 +19,7 @@ if str(ROOT_DIR) not in sys.path:
 
 from agents import sbi
 from agents import axis
+from agents import icici
 
 
 # ==========================================================
@@ -223,8 +224,6 @@ def deduplicate(records):
             unique[key] = record
             continue
 
-        # Prefer current data over stale data
-
         if (
             existing.get("status") != "current"
             and
@@ -364,9 +363,6 @@ def append_history(records):
 
         for record in records:
 
-            # Only current verified records
-            # get written into history
-
             if record.get("status") != "current":
                 continue
 
@@ -492,8 +488,8 @@ def sort_records(records):
     bank_order = {
         "SBI": 1,
         "Axis Bank": 2,
-        "HDFC": 3,
-        "ICICI Bank": 4,
+        "ICICI Bank": 3,
+        "HDFC": 4,
         "Canara Bank": 5,
         "Bank of Baroda": 6,
     }
@@ -563,6 +559,10 @@ def main():
         (
             "Axis Bank",
             axis.collect
+        ),
+        (
+            "ICICI Bank",
+            icici.collect
         ),
     ]
 
