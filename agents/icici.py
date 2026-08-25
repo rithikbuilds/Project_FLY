@@ -28,6 +28,8 @@ CURRENCIES = [
     "GBP",
     "EUR",
     "SGD",
+    "AED",
+    "NZD",
 ]
 
 
@@ -57,6 +59,16 @@ CURRENCY_NAMES = {
 
     "SGD": [
         "Singapore Dollar",
+    ],
+
+    "AED": [
+        "U.A.E Dirham",
+        "UAE Dirham",
+        "U.A.E. Dirham",
+    ],
+
+    "NZD": [
+        "New Zealand Dollar",
     ],
 
 }
@@ -485,6 +497,26 @@ def extract_currency_rate(
         r"Singapore Dollar\s*\(SGD\)",
 
         r"United States Dollar\s*\(USD\)",
+        r"Japanese Yen\s*\(JPY\)",
+        r"U\.A\.E\.?\s*Dirham\s*\(AED\)",
+        r"UAE\s*Dirham\s*\(AED\)",
+        r"Swiss Franc\s*\(CHF\)",
+        r"Saudi Riyal\s*\(SAR\)",
+        r"Qatari Riyal\s*\(QAR\)",
+        r"Swedish Kronor\s*\(SEK\)",
+        r"Danish Kroner\s*\(DKK\)",
+        r"Norwegian Kroner\s*\(NOK\)",
+        r"New Zealand Dollar\s*\(NZD\)",
+        r"Hong Kong Dollar\s*\(HKD\)",
+        r"Kuwaiti Dinar\s*\(KWD\)",
+        r"Thai Baht\s*\(THB\)",
+        r"South African Rand\s*\(ZAR\)",
+        r"Omani Riyal\s*\(OMR\)",
+        r"Korean Won\s*\(KRW\)",
+        r"Chinese Yuan\s*\(CNH\)",
+        r"Poland Zloty\s*\(PLN\)",
+        r"Bahraini Dinar\s*\(BHD\)",
+        r"Malaysian Ringgit\s*\(MYR\)",
 
     ]
 
@@ -792,6 +824,26 @@ def collect():
 
             "ICICI Agent returned no rates."
 
+        )
+
+
+    found = {
+        record["currency"]
+        for record in records
+    }
+
+    missing = (
+        set(CURRENCIES)
+        - found
+    )
+
+    if missing:
+
+        raise RuntimeError(
+            "ICICI Agent missing currencies: "
+            + ", ".join(
+                sorted(missing)
+            )
         )
 
 
