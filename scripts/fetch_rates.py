@@ -428,6 +428,44 @@ def apply_market_rates(
 
 
 # ==========================================================
+# MEANINGFUL BANK-DATA CHANGE DETECTION
+# ==========================================================
+
+def bank_record_signature(record):
+
+    return (
+        record.get("bank"),
+        record.get("currency"),
+        record.get("bank_rate"),
+        record.get("source_url"),
+        record.get("source_date"),
+        record.get("source_time"),
+        record.get("status"),
+    )
+
+
+def bank_data_changed(
+    previous_records,
+    current_records
+):
+
+    previous_signatures = sorted(
+        bank_record_signature(record)
+        for record in previous_records
+    )
+
+    current_signatures = sorted(
+        bank_record_signature(record)
+        for record in current_records
+    )
+
+    return (
+        previous_signatures
+        != current_signatures
+    )
+
+
+# ==========================================================
 # SAVE LATEST
 # ==========================================================
 
@@ -963,18 +1001,55 @@ def main():
 
 
     # ======================================================
-    # SAVE
+    # SAVE ONLY WHEN BANK DATA MEANINGFULLY CHANGED
     # ======================================================
 
-    save_latest(
-        final_records,
-        market_result
-    )
-
-
-    append_history(
+    changed = bank_data_changed(
+        previous_records,
         final_records
     )
+
+
+    if changed:
+
+        print()
+
+        print(
+            "Meaningful bank FX data change detected."
+        )
+
+        print(
+            "Updating latest.json and history.csv."
+        )
+
+
+        save_latest(
+            final_records,
+            market_result
+        )
+
+
+        append_history(
+            final_records
+        )
+
+
+    else:
+
+        print()
+
+        print(
+            "No bank FX data changes detected."
+        )
+
+        print(
+            "latest.json and history.csv left unchanged."
+        )
+
+        print(
+            "Market reference was checked but will not "
+            "create a repository update by itself."
+        )
 
 
     # ======================================================
