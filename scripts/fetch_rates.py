@@ -23,6 +23,9 @@ from agents import icici
 from agents import canara
 from agents import bob
 from agents import hdfc
+from agents import indusind
+from agents import pnb
+from agents import union
 from agents import market
 
 
@@ -812,6 +815,9 @@ def sort_records(records):
         "HDFC Bank": 4,
         "ICICI Bank": 5,
         "Axis Bank": 6,
+        "IndusInd Bank": 7,
+        "Punjab National Bank": 8,
+        "Union Bank of India": 9,
     }
 
 
@@ -929,6 +935,21 @@ def main():
         (
             "HDFC Bank",
             hdfc.collect
+        ),
+
+        (
+            "IndusInd Bank",
+            indusind.collect
+        ),
+
+        (
+            "Punjab National Bank",
+            pnb.collect
+        ),
+
+        (
+            "Union Bank of India",
+            union.collect
         ),
 
     ]
