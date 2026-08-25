@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flywire Internal Tools</title>
+<title>Project FLY — Internal Toolkit</title>
 
 <style>
 
@@ -1132,6 +1132,10 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
     }
 }
 
+
+/* PROJECT FLY PREMIUM UI PASS */
+body{background:#f6f9fd}.sidebar{width:220px;background:linear-gradient(180deg,#075fbd,#064d9d);padding:22px 16px 18px;box-shadow:8px 0 30px rgba(5,64,128,.08)}.main{padding:34px 38px 28px;max-width:1680px}.brand-slot{min-height:68px;margin:0 2px 24px;padding:10px 8px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.13)}.brand-mark{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:11px;border:1px dashed rgba(255,255,255,.38);background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:850}.brand-name{color:#fff;font-size:13px;font-weight:850;letter-spacing:.08em}.brand-tag{margin-top:3px;color:rgba(255,255,255,.55);font-size:8.5px;font-weight:750;letter-spacing:.13em}.tool-title{margin-top:0}.side-nav{min-height:58px;border-radius:13px}.support-meta{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.10);color:rgba(255,255,255,.58);font-size:9.5px;font-weight:700}.header{margin-bottom:22px;align-items:center}.card,.fx-stat-card{border-color:#dbe7f2;box-shadow:0 10px 30px rgba(18,48,79,.07)}.fx-workbench{padding:18px 20px 16px}.fx-control-grid{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(260px,1.15fr) minmax(260px,1.15fr);gap:18px;align-items:start}.fx-control-grid .fx-field{margin:0;min-width:0}.fx-control-grid .fx-field>label{display:block;height:18px;margin:0 0 8px;font-size:11px;line-height:18px;font-weight:800;color:#506a84}.fx-control-grid select,.fx-control-grid .input-wrap,.fx-inr-output{width:100%;height:48px;min-height:48px;margin:0;border:1px solid #cfddea;border-radius:9px;background:#fff}.fx-control-grid select{padding:0 42px 0 14px;font-weight:700}.fx-control-grid .input-wrap{display:flex;align-items:center;overflow:hidden}.fx-control-grid .input-wrap input{height:46px;min-height:46px;border:0!important;border-radius:0;box-shadow:none!important;padding-top:0;padding-bottom:0}.fx-control-grid .input-wrap span{height:100%;min-width:58px;display:flex;align-items:center;justify-content:center;position:static;transform:none;border-left:1px solid #e0e8f0;background:#f7fafd;color:#49637d;font-size:11px;font-weight:850}.fx-inr-output{display:flex;align-items:center;padding:0 15px;background:#f3f7fb;color:var(--navy);font-size:15px;font-weight:850;font-variant-numeric:tabular-nums}.fx-control-bottom{margin-top:14px;padding-top:13px;border-top:1px solid #e7eef5;display:flex;align-items:center;justify-content:space-between;gap:16px}.fx-presets{margin:0;align-items:center}.fx-preset-label{margin-right:3px;color:#71859a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.fx-refresh-meta{text-align:right;color:#71859a;font-size:10px;white-space:nowrap}.fx-refresh-meta strong{display:block;margin-top:2px;color:#3c5873;font-size:11px}.fx-stat-card{border-radius:13px}.fx-table-card,.fx-history-card{border-radius:13px}.fx-table th{font-size:10px;letter-spacing:.025em;text-transform:uppercase}.fx-table td{font-variant-numeric:tabular-nums}.fx-table .best-row{box-shadow:inset 3px 0 0 var(--green)}.fx-footer{color:#8192a4;font-size:10.5px}@media(max-width:1100px){.sidebar{width:205px}.main{padding:28px 24px}.fx-control-grid{grid-template-columns:1fr 1fr}.fx-control-grid .fx-field:last-child{grid-column:1/-1}}@media(max-width:700px){.sidebar{width:76px;padding-left:10px;padding-right:10px}.brand-slot{justify-content:center}.brand-copy,.side-nav .nav-copy,.tool-title,.support{display:none}.side-nav{justify-content:center;padding:8px}.main{padding:22px 14px}.fx-control-grid{grid-template-columns:1fr}.fx-control-grid .fx-field:last-child{grid-column:auto}.fx-control-bottom{align-items:flex-start;flex-direction:column}.fx-refresh-meta{text-align:left}}
+
 </style>
 
 </head>
@@ -1150,13 +1154,10 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
 <aside class="sidebar">
 
 
-<div class="logo">
-
-<img
-    src="flywire-white.png"
-    alt="Flywire"
->
-
+<div class="brand-slot" aria-label="Project FLY brand area">
+    <!-- Reserved logo slot. No image dependency for now. -->
+    <div class="brand-mark">PF</div>
+    <div class="brand-copy"><div class="brand-name">PROJECT FLY</div><div class="brand-tag">INTERNAL TOOLKIT</div></div>
 </div>
 
 
@@ -1185,7 +1186,7 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
 
 <div class="support">
 <strong>Internal Toolkit</strong>
-TCS estimation and outward FX rate intelligence.
+TCS estimation and outward FX rate intelligence.<div class="support-meta">10 banks · 8 currencies</div>
 </div>
 
 
@@ -2055,47 +2056,14 @@ SBI TCS Estimation Tool
     <div class="fx-live-pill" id="fxStatus">● Loading rates...</div>
 </header>
 
-<div class="fx-controls card">
-    <div class="fx-control-grid">
-        <div class="field fx-field">
-            <label>Currency</label>
-            <select id="fxCurrency" onchange="renderFxComparison()">
-                <option value="USD">USD — US Dollar</option>
-                <option value="CAD">CAD — Canadian Dollar</option>
-                <option value="AUD">AUD — Australian Dollar</option>
-                <option value="GBP">GBP — British Pound</option>
-                <option value="EUR">EUR — Euro</option>
-                <option value="SGD">SGD — Singapore Dollar</option>
-                <option value="AED">AED — UAE Dirham</option>
-                <option value="NZD">NZD — New Zealand Dollar</option>
-            </select>
-        </div>
-
-        <div class="field fx-field">
-            <label>Foreign Currency Amount</label>
-            <div class="input-wrap">
-                <input id="fxAmount" type="text" inputmode="numeric" value="5,000" autocomplete="off">
-                <span id="fxAmountCode">USD</span>
-            </div>
-            <div class="hint">Enter the amount to be remitted in the selected foreign currency.</div>
-        </div>
-
-        <div class="field fx-field fx-updated-box">
-            <label>Data Last Refreshed</label>
-            <div class="fx-updated-value" id="fxLastUpdated">—</div>
-            <div class="hint">Each bank row also shows its own source date/time.</div>
-        </div>
-    </div>
-
-    <div class="fx-presets">
-        <button type="button" onclick="setFxAmount(5000)">5,000</button>
-        <button type="button" onclick="setFxAmount(10000)">10,000</button>
-        <button type="button" onclick="setFxAmount(15000)">15,000</button>
-        <button type="button" onclick="setFxAmount(20000)">20,000</button>
-        <button type="button" onclick="setFxAmount(25000)">25,000</button>
-    </div>
+<div class="fx-controls card fx-workbench">
+<div class="fx-control-grid">
+<div class="field fx-field"><label>Currency</label><select id="fxCurrency" onchange="renderFxComparison()"><option value="USD">USD — US Dollar</option><option value="CAD">CAD — Canadian Dollar</option><option value="AUD">AUD — Australian Dollar</option><option value="GBP">GBP — British Pound</option><option value="EUR">EUR — Euro</option><option value="SGD">SGD — Singapore Dollar</option><option value="AED">AED — UAE Dirham</option><option value="NZD">NZD — New Zealand Dollar</option></select></div>
+<div class="field fx-field"><label>Foreign Currency Amount</label><div class="input-wrap fx-amount-wrap"><input id="fxAmount" type="text" inputmode="numeric" value="5,000" autocomplete="off"><span id="fxAmountCode">USD</span></div></div>
+<div class="field fx-field"><label>Indicative Amount in INR</label><div class="fx-inr-output" id="fxIndicativeInr">₹0</div></div>
 </div>
-
+<div class="fx-control-bottom"><div class="fx-presets"><span class="fx-preset-label">Quick amount</span><button type="button" onclick="setFxAmount(5000)">5,000</button><button type="button" onclick="setFxAmount(10000)">10,000</button><button type="button" onclick="setFxAmount(15000)">15,000</button><button type="button" onclick="setFxAmount(20000)">20,000</button><button type="button" onclick="setFxAmount(25000)">25,000</button></div><div class="fx-refresh-meta"><span>Data refreshed</span><strong id="fxLastUpdated">—</strong></div></div>
+</div>
 <div class="fx-stat-grid">
     <div class="fx-stat-card">
         <div class="fx-stat-label">Reference Market Rate</div>
@@ -2215,7 +2183,7 @@ SBI TCS Estimation Tool
 </section>
 
 <footer class="footer">
-    <span>Outward FX Rate Comparison Tool</span>
+    <span>Built by Rithik + AI on weekends. Friends were unavailable. Production was not. 😭</span>
     <span id="fxFooterTime"></span>
 </footer>
 
@@ -3596,6 +3564,8 @@ function renderFxComparison() {
     document.getElementById("fxMarketSource").textContent = marketSource;
 
     if (!records.length) {
+        const indicativeInr = document.getElementById("fxIndicativeInr");
+        if (indicativeInr) indicativeInr.textContent = "—";
         document.getElementById("fxBestRate").textContent = "—";
         document.getElementById("fxBestBank").textContent = "No current bank rate";
         document.getElementById("fxLowestMarkup").textContent = "—";
@@ -3606,6 +3576,8 @@ function renderFxComparison() {
 
     const best = records[0];
     const highest = records[records.length - 1];
+    const indicativeInr = document.getElementById("fxIndicativeInr");
+    if (indicativeInr) indicativeInr.textContent = amount > 0 ? fxINR(amount * Number(best.bank_rate)) : "₹0";
     document.getElementById("fxBestRate").textContent = "₹" + fxNumber(best.bank_rate, 4);
     document.getElementById("fxBestBank").textContent = best.bank;
     document.getElementById("fxLowestMarkup").textContent = Number.isFinite(Number(best.markup_percent))
