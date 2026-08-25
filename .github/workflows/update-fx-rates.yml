@@ -6,34 +6,19 @@ on:
 
   schedule:
 
-    # ======================================================
-    # EVERY 10 MINUTES
-    # 9:00 AM THROUGH 8:50 PM IST
-    # MONDAY THROUGH SUNDAY
-    # ======================================================
+    # 09:00 AM–09:50 AM IST
+    - cron: "30,40,50 3 * * *"
 
-    - cron: "*/10 9-20 * * *"
-      timezone: "Asia/Kolkata"
+    # 10:00 AM–08:50 PM IST
+    - cron: "*/10 4-14 * * *"
 
-    # ======================================================
-    # FINAL RUN AT 9:00 PM IST
-    # ======================================================
+    # 09:00 PM IST
+    - cron: "0,10,20,30 15 * * *"
 
-    - cron: "0 21 * * *"
-      timezone: "Asia/Kolkata"
-
-
-# ==========================================================
-# PERMISSIONS
-# ==========================================================
 
 permissions:
   contents: write
 
-
-# ==========================================================
-# PREVENT OVERLAPPING RUNS
-# ==========================================================
 
 concurrency:
 
@@ -41,10 +26,6 @@ concurrency:
 
   cancel-in-progress: false
 
-
-# ==========================================================
-# JOBS
-# ==========================================================
 
 jobs:
 
@@ -55,19 +36,11 @@ jobs:
 
     steps:
 
-      # ====================================================
-      # CHECKOUT REPOSITORY
-      # ====================================================
-
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-
-      # ====================================================
-      # SET UP PYTHON
-      # ====================================================
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -75,10 +48,6 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-
-      # ====================================================
-      # INSTALL DEPENDENCIES
-      # ====================================================
 
       - name: Install dependencies
         run: |
@@ -88,19 +57,11 @@ jobs:
           pip install -r requirements.txt
 
 
-      # ====================================================
-      # RUN FX AGENT CONTROLLER
-      # ====================================================
-
       - name: Fetch outward FX rates
         run: |
 
           python scripts/fetch_rates.py
 
-
-      # ====================================================
-      # SHOW LATEST RESULTS
-      # ====================================================
 
       - name: Show latest rates
         run: |
@@ -113,10 +74,6 @@ jobs:
 
           cat data/latest.json
 
-
-      # ====================================================
-      # COMMIT ONLY IF FILES ACTUALLY CHANGED
-      # ====================================================
 
       - name: Commit updated rates
         run: |
@@ -143,15 +100,7 @@ jobs:
           git commit -m "Update outward FX rates"
 
 
-          # =================================================
-          # SYNC WITH LATEST REPOSITORY STATE
-          # =================================================
-
           git pull --rebase origin "${GITHUB_REF_NAME}"
 
-
-          # =================================================
-          # PUSH UPDATED RATE DATA
-          # =================================================
 
           git push origin "HEAD:${GITHUB_REF_NAME}"
