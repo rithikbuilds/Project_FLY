@@ -1,106 +1,40 @@
-name: Update FX Rates
+name: Schedule Test
 
 on:
-
   workflow_dispatch:
 
   schedule:
-
-    # 09:00 AM–09:50 AM IST
-    - cron: "30,40,50 3 * * *"
-
-    # 10:00 AM–08:50 PM IST
-    - cron: "*/10 4-14 * * *"
-
-    # 09:00 PM IST
-    - cron: "0,10,20,30 15 * * *"
+    - cron: "*/5 * * * *"
 
 
 permissions:
-  contents: write
-
-
-concurrency:
-
-  group: update-fx-rates
-
-  cancel-in-progress: false
+  contents: read
 
 
 jobs:
 
-  update-rates:
+  schedule-test:
 
     runs-on: ubuntu-latest
 
-
     steps:
 
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-          cache: "pip"
-
-
-      - name: Install dependencies
+      - name: Show trigger information
         run: |
-
-          python -m pip install --upgrade pip
-
-          pip install -r requirements.txt
-
-
-      - name: Fetch outward FX rates
-        run: |
-
-          python scripts/fetch_rates.py
-
-
-      - name: Show latest rates
-        run: |
-
           echo "================================"
-
-          echo "LATEST FX DATA"
-
+          echo "GITHUB SCHEDULE TEST"
           echo "================================"
-
-          cat data/latest.json
-
-
-      - name: Commit updated rates
-        run: |
-
-          git config user.name "FX Rate Bot"
-
-          git config user.email "actions@github.com"
-
-
-          git add data/latest.json data/history.csv
-
-
-          if git diff --cached --quiet; then
-
-            echo "No FX data changes detected."
-
-            echo "Nothing to commit."
-
-            exit 0
-
-          fi
-
-
-          git commit -m "Update outward FX rates"
-
-
-          git pull --rebase origin "${GITHUB_REF_NAME}"
-
-
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo ""
+          echo "Schedule test triggered successfully."
+          echo ""
+          echo "Event name: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo ""
+          echo "UTC time:"
+          date -u
+          echo ""
+          echo "================================"
+          echo "TEST COMPLETE"
+          echo "================================"
