@@ -26,7 +26,7 @@ from agents import hdfc
 from agents import indusind
 from agents import pnb
 from agents import union
-from agents import boi
+from agents import deutsche
 from agents import market
 
 
@@ -819,7 +819,7 @@ def sort_records(records):
         "IndusInd Bank": 7,
         "Punjab National Bank": 8,
         "Union Bank of India": 9,
-        "Bank of India": 10,
+        "Deutsche Bank India": 10,
     }
 
 
@@ -955,8 +955,8 @@ def main():
         ),
 
         (
-            "Bank of India",
-            boi.collect
+            "Deutsche Bank India",
+            deutsche.collect
         ),
 
     ]
