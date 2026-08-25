@@ -2149,7 +2149,7 @@ SBI TCS Estimation Tool
 </section>
 
 <footer class="footer">
-    <span>Built by Rithik + AI </span>
+    <span>Built by Rithik + AI on weekends. Friends were unavailable. Production was not. 😭</span>
     <span id="fxFooterTime"></span>
 </footer>
 
@@ -3506,6 +3506,27 @@ async function loadFxRates() {
 }
 
 function pfLogo(n){const m={"Union Bank of India":["U","ubi"],"Punjab National Bank":["P","pnb"],"Canara Bank":["C","canara"],"Bank of Baroda":["B","bob"],"SBI":["●","sbi"],"ICICI Bank":["i","icici"],"IndusInd Bank":["I","indus"],"Axis Bank":["A","axis"],"HDFC Bank":["H","hdfc"],"Deutsche Bank India":["D","db"]};const x=m[n]||[n[0],"x"];return `<i class="pf-blogo ${x[1]}">${x[0]}</i>`;}
+
+function pfDisplayStatus(record) {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    }).formatToParts(new Date());
+
+    const values = {};
+    parts.forEach(part => values[part.type] = part.value);
+    const today = `${values.year}-${values.month}-${values.day}`;
+
+    const sourceDate = String(record.source_date || record.date || "")
+        .trim()
+        .slice(0, 10);
+
+    if (!sourceDate) return "Unavailable";
+    return sourceDate === today ? "Current" : "Stale";
+}
+
 function renderFxComparison() {
     if (!fxLatestData) return;
 
@@ -3561,8 +3582,8 @@ function renderFxComparison() {
         const inrCost = amount * bankRate;
         const marketCost = amount * rowMarket;
         const extra = Number.isFinite(rowMarket) ? inrCost - marketCost : NaN;
-        const statusClass = record.status === "current" ? "fx-status-current" : "fx-status-stale";
-        const statusText = record.status === "current" ? "Current" : "Stale";
+        const statusClass = pfDisplayStatus(record) === "Current" ? "fx-status-current" : "fx-status-stale";
+        const statusText = pfDisplayStatus(record) === "Current" ? "Current" : "Stale";
 
         return `
             <tr class="${index === 0 ? 'best-row' : ''}">
