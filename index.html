@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Project FLY — Internal Toolkit</title>
+<title>Flywire Internal Tools</title>
 
 <style>
 
@@ -1132,119 +1132,7 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
     }
 }
 
-
-/* PROJECT FLY PREMIUM UI PASS */
-body{background:#f6f9fd}.sidebar{width:220px;background:linear-gradient(180deg,#075fbd,#064d9d);padding:22px 16px 18px;box-shadow:8px 0 30px rgba(5,64,128,.08)}.main{padding:34px 38px 28px;max-width:1680px}.brand-slot{min-height:68px;margin:0 2px 24px;padding:10px 8px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.13)}.brand-mark{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:11px;border:1px dashed rgba(255,255,255,.38);background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:850}.brand-name{color:#fff;font-size:13px;font-weight:850;letter-spacing:.08em}.brand-tag{margin-top:3px;color:rgba(255,255,255,.55);font-size:8.5px;font-weight:750;letter-spacing:.13em}.tool-title{margin-top:0}.side-nav{min-height:58px;border-radius:13px}.support-meta{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.10);color:rgba(255,255,255,.58);font-size:9.5px;font-weight:700}.header{margin-bottom:22px;align-items:center}.card,.fx-stat-card{border-color:#dbe7f2;box-shadow:0 10px 30px rgba(18,48,79,.07)}.fx-workbench{padding:18px 20px 16px}.fx-control-grid{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(260px,1.15fr) minmax(260px,1.15fr);gap:18px;align-items:start}.fx-control-grid .fx-field{margin:0;min-width:0}.fx-control-grid .fx-field>label{display:block;height:18px;margin:0 0 8px;font-size:11px;line-height:18px;font-weight:800;color:#506a84}.fx-control-grid select,.fx-control-grid .input-wrap,.fx-inr-output{width:100%;height:48px;min-height:48px;margin:0;border:1px solid #cfddea;border-radius:9px;background:#fff}.fx-control-grid select{padding:0 42px 0 14px;font-weight:700}.fx-control-grid .input-wrap{display:flex;align-items:center;overflow:hidden}.fx-control-grid .input-wrap input{height:46px;min-height:46px;border:0!important;border-radius:0;box-shadow:none!important;padding-top:0;padding-bottom:0}.fx-control-grid .input-wrap span{height:100%;min-width:58px;display:flex;align-items:center;justify-content:center;position:static;transform:none;border-left:1px solid #e0e8f0;background:#f7fafd;color:#49637d;font-size:11px;font-weight:850}.fx-inr-output{display:flex;align-items:center;padding:0 15px;background:#f3f7fb;color:var(--navy);font-size:15px;font-weight:850;font-variant-numeric:tabular-nums}.fx-control-bottom{margin-top:14px;padding-top:13px;border-top:1px solid #e7eef5;display:flex;align-items:center;justify-content:space-between;gap:16px}.fx-presets{margin:0;align-items:center}.fx-preset-label{margin-right:3px;color:#71859a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.fx-refresh-meta{text-align:right;color:#71859a;font-size:10px;white-space:nowrap}.fx-refresh-meta strong{display:block;margin-top:2px;color:#3c5873;font-size:11px}.fx-stat-card{border-radius:13px}.fx-table-card,.fx-history-card{border-radius:13px}.fx-table th{font-size:10px;letter-spacing:.025em;text-transform:uppercase}.fx-table td{font-variant-numeric:tabular-nums}.fx-table .best-row{box-shadow:inset 3px 0 0 var(--green)}.fx-footer{color:#8192a4;font-size:10.5px}@media(max-width:1100px){.sidebar{width:205px}.main{padding:28px 24px}.fx-control-grid{grid-template-columns:1fr 1fr}.fx-control-grid .fx-field:last-child{grid-column:1/-1}}@media(max-width:700px){.sidebar{width:76px;padding-left:10px;padding-right:10px}.brand-slot{justify-content:center}.brand-copy,.side-nav .nav-copy,.tool-title,.support{display:none}.side-nav{justify-content:center;padding:8px}.main{padding:22px 14px}.fx-control-grid{grid-template-columns:1fr}.fx-control-grid .fx-field:last-child{grid-column:auto}.fx-control-bottom{align-items:flex-start;flex-direction:column}.fx-refresh-meta{text-align:left}}
-
-
-/* ==========================================================
-   PROJECT FLY v2 — REFERENCE-MATCH UI
-   ========================================================== */
-.sidebar{
-    width:230px;
-    min-height:100vh;
-    padding:28px 18px 18px;
-    background:linear-gradient(180deg,#07529d 0%,#063f7c 100%);
-}
-.main{padding:28px 38px 24px;max-width:none}
-.brand-slot{
-    min-height:64px;margin:0 2px 22px;padding:0 8px 18px;
-    border-bottom:1px solid rgba(255,255,255,.14)
-}
-.brand-mark{width:40px;height:40px;flex-basis:40px;border-style:solid;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.07)}
-.brand-name{font-size:14px}.brand-tag{font-size:8px}
-.tool-title{padding-left:5px;margin-bottom:9px}
-.side-nav{
-    min-height:74px;margin-bottom:12px;padding:11px 12px;border-radius:11px;
-    background:rgba(2,34,70,.20);border-color:rgba(255,255,255,.17)
-}
-.side-nav.active{
-    background:linear-gradient(135deg,rgba(25,130,239,.72),rgba(18,104,194,.55));
-    border-color:#8dc9ff;box-shadow:0 7px 20px rgba(0,0,0,.12)
-}
-.side-nav.active::before{width:2px;top:8px;bottom:8px}
-.side-nav .nav-icon{width:38px;height:38px;flex-basis:38px;font-size:18px}
-.side-nav .nav-name{font-size:12px}
-.side-nav .nav-desc{font-size:9px;max-width:105px}
-
-.toolkit-panel{
-    margin-top:24px;padding:15px 14px 12px;border-radius:11px;
-    background:rgba(2,37,75,.42);border:1px solid rgba(255,255,255,.22)
-}
-.toolkit-heading{font-size:9px;font-weight:900;letter-spacing:.08em;color:#fff;margin-bottom:13px}
-.toolkit-row{display:grid;grid-template-columns:14px 1fr;gap:8px;margin:0 0 13px;color:#fff}
-.toolkit-row small{display:block;font-size:8px;color:rgba(255,255,255,.72);font-weight:650;margin-bottom:3px}
-.toolkit-row strong{display:block;font-size:9px;color:#fff;font-weight:750}
-.toolkit-row .status-ok{color:#36d27c}
-.toolkit-symbol{font-size:10px;color:#d9edff;margin-top:2px}
-.status-dot{width:8px;height:8px;border-radius:50%;background:#35d67d;margin-top:3px;box-shadow:0 0 0 3px rgba(53,214,125,.1)}
-.sidebar-version{margin-top:auto;padding:0 6px 3px;color:#fff;display:flex;flex-direction:column;gap:4px;font-size:10px}
-.sidebar-version span{color:rgba(255,255,255,.68)}
-
-.header{margin-bottom:18px}
-.header h1{font-size:30px}
-.fx-header-actions{display:flex;align-items:center;gap:24px}
-.header-refresh{display:flex;align-items:center;gap:8px;color:#516a84}
-.header-refresh .refresh-glyph{font-size:19px;font-weight:800}
-.header-refresh small{display:block;font-size:9px;font-weight:750}
-.header-refresh strong{display:block;margin-top:2px;font-size:10px;color:#395570;white-space:nowrap}
-.fx-hidden-refresh{display:none!important}
-
-.fx-workbench{padding:18px 20px 15px;border-radius:12px}
-.fx-control-grid{grid-template-columns:1fr 1.15fr 1.05fr;gap:22px}
-.fx-control-grid .fx-field>label{color:#122c49;font-size:10px}
-.fx-control-grid select,.fx-control-grid .input-wrap,.fx-inr-output{height:42px;min-height:42px;border-radius:7px}
-.fx-control-grid .input-wrap input{height:40px;min-height:40px}
-.fx-inr-output{font-size:14px;background:#f1f5f9}
-.fx-control-bottom{margin-top:11px;padding-top:11px;justify-content:flex-start}
-.fx-presets{display:flex;gap:7px}
-.fx-preset-label{display:none}
-.fx-presets button{height:28px;padding:0 14px;border-radius:16px;font-size:10px;font-weight:800;background:#fff}
-
-.fx-stat-grid{gap:12px;margin-top:15px}
-.fx-stat-card{
-    min-height:98px;padding:15px 16px;border-radius:10px;display:flex;align-items:center;gap:13px;
-    background:#fff
-}
-.fx-stat-card.best{background:#fff}
-.fx-kpi-icon{
-    width:48px;height:48px;flex:0 0 48px;border-radius:50%;display:grid;place-items:center;
-    font-size:22px;font-weight:900
-}
-.kpi-market{color:#1167d8;background:#e7f1ff}
-.kpi-bank{color:#11884b;background:#e5f7ed}
-.kpi-markup{color:#7b3cc6;background:#f1e8ff}
-.kpi-saving{color:#7b3cc6;background:#f2e8ff}
-.fx-stat-content{min-width:0}
-.fx-stat-label{font-size:9px!important;color:#102b49!important}
-.fx-stat-value{font-size:22px}
-.fx-stat-sub{font-size:9px}
-
-.fx-table-card{margin-top:15px;padding:17px 17px 13px}
-.fx-table-head{margin-bottom:12px}
-.fx-table-head h2{font-size:18px}
-.fx-table{font-size:10px}
-.fx-table th{padding:9px 10px;font-size:8.5px}
-.fx-table td{padding:8px 10px}
-.bank-cell{display:flex;align-items:center;gap:9px;font-weight:750;white-space:nowrap}
-.bank-logo{
-    width:22px;height:22px;flex:0 0 22px;border-radius:5px;display:inline-grid;place-items:center;
-    font-size:8px;font-weight:950;background:#edf3f8;color:#0b4b89;border:1px solid #d8e4ee
-}
-.bank-logo-ubi{color:#0761c9;background:#eef6ff}
-.bank-logo-pnb{color:#8d141d;background:#ffe7a8}
-.bank-logo-canara{color:#ef9d00;background:#fff7dc}
-.bank-logo-bob{color:#f47721;background:#fff0e8}
-.bank-logo-sbi{border-radius:50%;color:#fff;background:#178bd2}
-.bank-logo-icici{border-radius:50%;color:#fff;background:#b82020}
-.bank-logo-indus{border-radius:50%;color:#d82424;background:#fff1f1}
-.bank-logo-axis{color:#a30a3f;background:#ffeaf2}
-.bank-logo-hdfc{color:#0c4aa0;background:#eef4ff}
-.bank-logo-deutsche{color:#123db0;background:#eef1ff}
-
-.fx-footer{margin-top:13px;font-size:9.5px}
-@media(max-width:1100px){.fx-header-actions{gap:10px}.header-refresh{display:none}}
-
+/* Project FLY clean reference layout */.sidebar{width:225px;padding:26px 18px 18px;background:linear-gradient(#0757a8,#064584)}.main{padding:28px 36px;max-width:none}.pf-brand{height:70px;display:flex;align-items:center;gap:11px;padding:0 6px 17px;margin-bottom:18px;border-bottom:1px solid #ffffff2b;color:#fff}.pf-slot{width:40px;height:40px;border:1px solid #ffffff55;border-radius:10px;display:grid;place-items:center;font-weight:800}.pf-brand b{display:block;font-size:14px;letter-spacing:.06em}.pf-brand small{display:block;font-size:8px;letter-spacing:.12em;opacity:.6;margin-top:3px}.side-nav{min-height:72px;margin-bottom:11px;border-radius:11px}.side-nav.active{background:#1680dc88;border-color:#8dccff}.pf-toolkit{margin-top:24px!important;padding:14px!important;background:#032d56aa!important;border:1px solid #ffffff33!important}.pf-toolkit>b{font-size:9px;letter-spacing:.08em}.pf-toolkit>div{display:flex;gap:8px;margin-top:13px;font-size:9px}.pf-toolkit span{color:#ffffffb8}.pf-toolkit strong{color:#fff}.pf-toolkit>div:first-of-type strong{color:#3cdb82}.pf-version{margin-top:auto;color:#fff;font-size:10px;padding:12px 6px 0;display:flex;flex-direction:column;gap:4px}.pf-version span{opacity:.65}.header h1{font-size:30px}.fx-controls{padding:20px}.pf-grid{display:grid;grid-template-columns:1.05fr 1.15fr 1.05fr;gap:22px;align-items:start}.pf-grid .field{margin:0}.pf-grid label{display:block;height:18px;margin-bottom:7px;font-size:10px;font-weight:800;color:#17314d}.pf-grid select,.pf-grid .input-wrap,.pf-inr{width:100%;height:42px;min-height:42px;box-sizing:border-box;border:1px solid #cfddea;border-radius:7px;background:#fff}.pf-grid .input-wrap{display:flex;overflow:hidden}.pf-grid .input-wrap input{height:40px!important;border:0!important;box-shadow:none!important}.pf-grid .input-wrap span{position:static!important;transform:none!important;min-width:58px;height:100%;display:flex;align-items:center;justify-content:center;border-left:1px solid #e1e8ef;background:#f7f9fc;font-size:10px;font-weight:800}.pf-inr{display:flex;align-items:center;padding:0 14px;background:#f1f5f9;font-size:14px;font-weight:800}.pf-grid .hint{font-size:10px;margin-top:7px}.fx-presets{margin-top:11px}.fx-presets button{font-size:10px;padding:6px 13px}.pf-hide{display:none}.fx-stat-grid{gap:12px}.fx-stat-card{min-height:96px}.fx-table-card{padding:17px}.fx-table{font-size:10px}.fx-table th{font-size:8.5px;padding:9px 10px}.fx-table td{padding:8px 10px}.pf-bankcell{display:flex;align-items:center;gap:8px}.pf-blogo{width:22px;height:22px;border-radius:5px;display:grid;place-items:center;font-style:normal;font-size:8px;font-weight:900;border:1px solid #d9e4ef;background:#eef4f9}.pnb{background:#ffe7a8;color:#8d141d}.canara{background:#fff7dc;color:#e99a00}.bob{background:#fff0e8;color:#f47721}.sbi{border-radius:50%;background:#178bd2;color:#fff}.icici{border-radius:50%;background:#b82020;color:#fff}.axis{background:#ffeaf2;color:#a30a3f}.hdfc,.db{background:#eef1ff;color:#123db0}@media(max-width:1100px){.pf-grid{grid-template-columns:1fr 1fr}.pf-grid .field:last-child{grid-column:1/-1}}@media(max-width:700px){.pf-grid{grid-template-columns:1fr}.pf-grid .field:last-child{grid-column:auto}}
 </style>
 
 </head>
@@ -1263,11 +1151,7 @@ body{background:#f6f9fd}.sidebar{width:220px;background:linear-gradient(180deg,#
 <aside class="sidebar">
 
 
-<div class="brand-slot" aria-label="Project FLY brand area">
-    <!-- Reserved logo slot. No image dependency for now. -->
-    <div class="brand-mark">PF</div>
-    <div class="brand-copy"><div class="brand-name">PROJECT FLY</div><div class="brand-tag">INTERNAL TOOLKIT</div></div>
-</div>
+<div class="pf-brand"><div class="pf-slot">PF</div><div><b>PROJECT FLY</b><small>INTERNAL TOOLKIT</small></div></div>
 
 
 <div class="tool-title">
@@ -1276,51 +1160,9 @@ body{background:#f6f9fd}.sidebar{width:220px;background:linear-gradient(180deg,#
 
 </div>
 
-<button class="side-nav" id="navFx" onclick="showTool('fx')">
-    <span class="nav-icon">⇄</span>
-    <span class="nav-copy">
-        <span class="nav-name">FX Rate Comparison</span>
-        <span class="nav-desc">Compare outward TT selling rates</span>
-    </span>
-</button>
-
-<button class="side-nav active" id="navTcs" onclick="showTool('tcs')">
-    <span class="nav-icon">₹</span>
-    <span class="nav-copy">
-        <span class="nav-name">TCS Calculator</span>
-        <span class="nav-desc">Education remittance TCS estimate</span>
-    </span>
-</button>
+<button class="side-nav" id="navFx" onclick="showTool('fx')"><span class="nav-icon">⇄</span><span class="nav-copy"><span class="nav-name">FX Rate Comparison</span><span class="nav-desc">Compare outward TT selling rates</span></span></button><button class="side-nav active" id="navTcs" onclick="showTool('tcs')"><span class="nav-icon">₹</span><span class="nav-copy"><span class="nav-name">TCS Calculator</span><span class="nav-desc">Education remittance TCS estimate</span></span></button><div class="support pf-toolkit"><b>INTERNAL TOOLKIT</b><div>🟢 <span>System Status<br><strong>All systems operational</strong></span></div><div>↻ <span>Last Data Update<br><strong id="pfUpdated">—</strong></span></div><div>▣ <span>Total Banks<br><strong>10</strong></span></div><div>¤ <span>Total Currencies<br><strong>8</strong></span></div></div><div class="pf-version"><b>Project FLY</b><span>v2.0.0</span></div>
 
 
-<div class="support toolkit-panel">
-    <div class="toolkit-heading">INTERNAL TOOLKIT</div>
-
-    <div class="toolkit-row">
-        <span class="toolkit-symbol status-dot"></span>
-        <span><small>System Status</small><strong class="status-ok">All systems operational</strong></span>
-    </div>
-
-    <div class="toolkit-row">
-        <span class="toolkit-symbol">↻</span>
-        <span><small>Last Data Update</small><strong id="sidebarLastUpdated">—</strong></span>
-    </div>
-
-    <div class="toolkit-row">
-        <span class="toolkit-symbol">▣</span>
-        <span><small>Total Banks</small><strong>10</strong></span>
-    </div>
-
-    <div class="toolkit-row">
-        <span class="toolkit-symbol">¤</span>
-        <span><small>Total Currencies</small><strong>8</strong></span>
-    </div>
-</div>
-
-<div class="sidebar-version">
-    <strong>Project FLY</strong>
-    <span>v2.0.0</span>
-</div>
 </aside>
 
 
@@ -2187,35 +2029,28 @@ SBI TCS Estimation Tool
     <div class="fx-live-pill" id="fxStatus">● Loading rates...</div>
 </header>
 
-<div class="fx-controls card fx-workbench">
-<div class="fx-control-grid">
-<div class="field fx-field"><label>Currency</label><select id="fxCurrency" onchange="renderFxComparison()"><option value="USD">USD — US Dollar</option><option value="CAD">CAD — Canadian Dollar</option><option value="AUD">AUD — Australian Dollar</option><option value="GBP">GBP — British Pound</option><option value="EUR">EUR — Euro</option><option value="SGD">SGD — Singapore Dollar</option><option value="AED">AED — UAE Dirham</option><option value="NZD">NZD — New Zealand Dollar</option></select></div>
-<div class="field fx-field"><label>Foreign Currency Amount</label><div class="input-wrap fx-amount-wrap"><input id="fxAmount" type="text" inputmode="numeric" value="0" autocomplete="off"><span id="fxAmountCode">USD</span></div></div>
-<div class="field fx-field"><label>Indicative Amount in INR</label><div class="fx-inr-output" id="fxIndicativeInr">₹0</div></div>
-</div>
-<div class="fx-control-bottom"><div class="fx-presets"><span class="fx-preset-label">Quick amount</span><button type="button" onclick="setFxAmount(5000)">5,000</button><button type="button" onclick="setFxAmount(10000)">10,000</button><button type="button" onclick="setFxAmount(15000)">15,000</button><button type="button" onclick="setFxAmount(20000)">20,000</button><button type="button" onclick="setFxAmount(25000)">25,000</button></div><strong id="fxLastUpdated" class="fx-hidden-refresh">—</strong></div>
-</div>
+<div class="fx-controls card"><div class="pf-grid"><div class="field"><label>Currency</label><select id="fxCurrency" onchange="renderFxComparison()"><option value="USD">🇺🇸 USD — US Dollar</option><option value="CAD">🇨🇦 CAD — Canadian Dollar</option><option value="AUD">🇦🇺 AUD — Australian Dollar</option><option value="GBP">🇬🇧 GBP — British Pound</option><option value="EUR">🇪🇺 EUR — Euro</option><option value="SGD">🇸🇬 SGD — Singapore Dollar</option><option value="AED">🇦🇪 AED — UAE Dirham</option><option value="NZD">🇳🇿 NZD — New Zealand Dollar</option></select><div class="fx-presets"><button onclick="setFxAmount(5000)">5,000</button><button onclick="setFxAmount(10000)">10,000</button><button onclick="setFxAmount(15000)">15,000</button><button onclick="setFxAmount(20000)">20,000</button><button onclick="setFxAmount(25000)">25,000</button></div></div><div class="field"><label>Foreign Currency Amount</label><div class="input-wrap"><input id="fxAmount" type="text" inputmode="numeric" value="0" autocomplete="off"><span id="fxAmountCode">USD</span></div><div class="hint">Enter the amount to be remitted in the selected foreign currency.</div></div><div class="field"><label>Amount in INR (Indicative)</label><div class="pf-inr" id="pfInr">₹0.00</div><div class="hint">Indicative INR amount based on best bank rate.</div></div></div><div id="fxLastUpdated" class="pf-hide">—</div></div>
 <div class="fx-stat-grid">
     <div class="fx-stat-card">
-        <div class="fx-kpi-icon kpi-market">◎</div><div class="fx-stat-content"><div class="fx-stat-label">REFERENCE MARKET RATE</div>
+        <div class="fx-stat-label">Reference Market Rate</div>
         <div class="fx-stat-value" id="fxMarketRate">—</div>
         <div class="fx-stat-note" id="fxMarketSource">Reference feed</div>
     </div>
 
     <div class="fx-stat-card best-card">
-        <div class="fx-kpi-icon kpi-bank">▥</div><div class="fx-stat-content"><div class="fx-stat-label">BEST BANK RATE</div>
+        <div class="fx-stat-label">Best Bank Rate</div>
         <div class="fx-stat-value" id="fxBestRate">—</div>
         <div class="fx-stat-note" id="fxBestBank">—</div>
     </div>
 
     <div class="fx-stat-card">
-        <div class="fx-kpi-icon kpi-markup">↗</div><div class="fx-stat-content"><div class="fx-stat-label">LOWEST MARKUP</div>
+        <div class="fx-stat-label">Lowest Markup</div>
         <div class="fx-stat-value" id="fxLowestMarkup">—</div>
         <div class="fx-stat-note">vs market reference</div>
     </div>
 
     <div class="fx-stat-card">
-        <div class="fx-kpi-icon kpi-saving">₹</div><div class="fx-stat-content"><div class="fx-stat-label">POTENTIAL SAVING</div>
+        <div class="fx-stat-label">Potential Saving</div>
         <div class="fx-stat-value" id="fxPotentialSaving">—</div>
         <div class="fx-stat-note">best bank vs highest current bank cost</div>
     </div>
@@ -2314,7 +2149,7 @@ SBI TCS Estimation Tool
 </section>
 
 <footer class="footer">
-    <span>Built by Rithik + AI on weekends. Friends were unavailable. Production was not. 😭</span>
+    <span>Built by Rithik + AI </span>
     <span id="fxFooterTime"></span>
 </footer>
 
@@ -3670,24 +3505,7 @@ async function loadFxRates() {
     }
 }
 
-
-function fxBankLogo(bankName) {
-    const logos = {
-        "Union Bank of India": ["U", "ubi"],
-        "Punjab National Bank": ["PNB", "pnb"],
-        "Canara Bank": ["C", "canara"],
-        "Bank of Baroda": ["B", "bob"],
-        "SBI": ["S", "sbi"],
-        "ICICI Bank": ["i", "icici"],
-        "IndusInd Bank": ["I", "indus"],
-        "Axis Bank": ["A", "axis"],
-        "HDFC Bank": ["H", "hdfc"],
-        "Deutsche Bank India": ["D", "deutsche"]
-    };
-    const item = logos[bankName] || [(bankName || "?").slice(0, 1), "default"];
-    return `<span class="bank-logo bank-logo-${item[1]}" aria-hidden="true">${item[0]}</span>`;
-}
-
+function pfLogo(n){const m={"Union Bank of India":["U","ubi"],"Punjab National Bank":["P","pnb"],"Canara Bank":["C","canara"],"Bank of Baroda":["B","bob"],"SBI":["●","sbi"],"ICICI Bank":["i","icici"],"IndusInd Bank":["I","indus"],"Axis Bank":["A","axis"],"HDFC Bank":["H","hdfc"],"Deutsche Bank India":["D","db"]};const x=m[n]||[n[0],"x"];return `<i class="pf-blogo ${x[1]}">${x[0]}</i>`;}
 function renderFxComparison() {
     if (!fxLatestData) return;
 
@@ -3713,8 +3531,6 @@ function renderFxComparison() {
     document.getElementById("fxMarketSource").textContent = marketSource;
 
     if (!records.length) {
-        const indicativeInr = document.getElementById("fxIndicativeInr");
-        if (indicativeInr) indicativeInr.textContent = "—";
         document.getElementById("fxBestRate").textContent = "—";
         document.getElementById("fxBestBank").textContent = "No current bank rate";
         document.getElementById("fxLowestMarkup").textContent = "—";
@@ -3725,8 +3541,7 @@ function renderFxComparison() {
 
     const best = records[0];
     const highest = records[records.length - 1];
-    const indicativeInr = document.getElementById("fxIndicativeInr");
-    if (indicativeInr) indicativeInr.textContent = amount > 0 ? fxINR(amount * Number(best.bank_rate)) : "₹0";
+    const pinr=document.getElementById("pfInr"); if(pinr) pinr.textContent=amount>0?fxINR(amount*Number(best.bank_rate)):"₹0.00";
     document.getElementById("fxBestRate").textContent = "₹" + fxNumber(best.bank_rate, 4);
     document.getElementById("fxBestBank").textContent = best.bank;
     document.getElementById("fxLowestMarkup").textContent = Number.isFinite(Number(best.markup_percent))
@@ -3752,7 +3567,7 @@ function renderFxComparison() {
         return `
             <tr class="${index === 0 ? 'best-row' : ''}">
                 <td><span class="fx-rank">${index + 1}</span></td>
-                <td><span class="fx-bank-name">${record.bank}</span></td>
+                <td><div class="pf-bankcell">${pfLogo(record.bank)}<span class="fx-bank-name">${record.bank}</span></div></td>
                 <td><span class="fx-rate">₹${fxNumber(bankRate, 4)}</span></td>
                 <td>${Number.isFinite(rowMarket) ? '₹' + fxNumber(rowMarket, 4) : '—'}</td>
                 <td class="${markupClass(markup)}">${Number.isFinite(markup) ? fxNumber(markup, 2) + '%' : '—'}</td>
@@ -3984,34 +3799,7 @@ window.addEventListener("hashchange", function () {
     if (hash === "#tcs") showTool("tcs", { skipHash: true });
 });
 
-
-function syncProjectFlyRefreshMeta() {
-    const source = document.getElementById("fxLastUpdated");
-    if (!source) return;
-    const value = source.textContent || "—";
-    const header = document.getElementById("headerLastUpdated");
-    const sidebar = document.getElementById("sidebarLastUpdated");
-    if (header) header.textContent = value;
-    if (sidebar) sidebar.textContent = value;
-}
-
-const projectFlyRefreshObserver = new MutationObserver(syncProjectFlyRefreshMeta);
-window.addEventListener("DOMContentLoaded", function () {
-    const source = document.getElementById("fxLastUpdated");
-    if (source) projectFlyRefreshObserver.observe(source, { childList: true, subtree: true, characterData: true });
-    syncProjectFlyRefreshMeta();
-
-    // Always start amount at zero on every fresh page load/refresh.
-    const amount = document.getElementById("fxAmount");
-    if (amount) {
-        amount.value = "0";
-        setTimeout(() => {
-            amount.value = "0";
-            if (typeof renderFxComparison === "function") renderFxComparison();
-        }, 0);
-    }
-});
-
+window.addEventListener("DOMContentLoaded",()=>{const a=document.getElementById("fxAmount");if(a)a.value="0";const s=document.getElementById("fxLastUpdated"),t=document.getElementById("pfUpdated");if(s&&t){const f=()=>t.textContent=s.textContent||"—";new MutationObserver(f).observe(s,{childList:true,subtree:true});f();}});
 </script>
 
 
