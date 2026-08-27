@@ -1311,6 +1311,7 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
 
 .fvm-table {
     width: 100%;
+    min-width: 1580px;
     border-collapse: collapse;
     table-layout: fixed;
     font-size: 10px;
@@ -2625,15 +2626,20 @@ SBI TCS Estimation Tool
                         <th class="amount-col">Amount</th>
                         <th class="market-col">Live Market<br>Rate</th>
                         <th class="rate-col">Flywire<br>Rate / Markup</th>
-                        <th class="rate-col">HDFC<br>Rate / Markup</th>
-                        <th class="rate-col">SBI<br>Rate / Markup</th>
-                        <th class="rate-col">Canara<br>Rate / Markup</th>
+                        <th class="rate-col">Punjab National Bank<br>Rate / Markup</th>
+                        <th class="rate-col">Union Bank of India<br>Rate / Markup</th>
+                        <th class="rate-col">Canara Bank<br>Rate / Markup</th>
                         <th class="rate-col">Bank of Baroda<br>Rate / Markup</th>
+                        <th class="rate-col">SBI<br>Rate / Markup</th>
+                        <th class="rate-col">ICICI Bank<br>Rate / Markup</th>
+                        <th class="rate-col">IndusInd Bank<br>Rate / Markup</th>
+                        <th class="rate-col">Deutsche Bank India<br>Rate / Markup</th>
                         <th class="rate-col">Axis Bank<br>Rate / Markup</th>
+                        <th class="rate-col">HDFC Bank<br>Rate / Markup</th>
                     </tr>
                 </thead>
                 <tbody id="fvmTableBody">
-                    <tr><td colspan="9" class="fvm-empty">Open Flywire vs Market to load comparison data.</td></tr>
+                    <tr><td colspan="14" class="fvm-empty">Open Flywire vs Market to load comparison data.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -4344,11 +4350,16 @@ const FVM_FLAGS = {
 };
 
 const FVM_BANKS = [
-    { key: "HDFC Bank", label: "HDFC" },
-    { key: "SBI", label: "SBI" },
-    { key: "Canara Bank", label: "Canara" },
+    { key: "Punjab National Bank", label: "Punjab National Bank" },
+    { key: "Union Bank of India", label: "Union Bank of India" },
+    { key: "Canara Bank", label: "Canara Bank" },
     { key: "Bank of Baroda", label: "Bank of Baroda" },
-    { key: "Axis Bank", label: "Axis Bank" }
+    { key: "SBI", label: "SBI" },
+    { key: "ICICI Bank", label: "ICICI Bank" },
+    { key: "IndusInd Bank", label: "IndusInd Bank" },
+    { key: "Deutsche Bank India", label: "Deutsche Bank India" },
+    { key: "Axis Bank", label: "Axis Bank" },
+    { key: "HDFC Bank", label: "HDFC Bank" }
 ];
 
 function fvmFormatRate(value) {
@@ -4510,7 +4521,7 @@ async function loadFvmData(force = false) {
         }
 
         document.getElementById("fvmTableBody").innerHTML =
-            '<tr><td colspan="9" class="fvm-empty">Could not load data/latest.json and data/flywire_latest.json. Confirm both workflow data files exist and refresh.</td></tr>';
+            '<tr><td colspan="14" class="fvm-empty">Could not load data/latest.json and data/flywire_latest.json. Confirm both workflow data files exist and refresh.</td></tr>';
 
         document.getElementById("fvmRowsMeta").textContent = "No comparison data available.";
     }
@@ -4587,7 +4598,7 @@ function renderFvmTable() {
     document.getElementById("fvmTableBody").innerHTML =
         rows.length
             ? rows.join("")
-            : '<tr><td colspan="9" class="fvm-empty">No rows match the selected filters.</td></tr>';
+            : '<tr><td colspan="14" class="fvm-empty">No rows match the selected filters.</td></tr>';
 
     document.getElementById("fvmRowsMeta").textContent =
         `Showing ${rows.length} comparison row${rows.length === 1 ? "" : "s"} · ` +
@@ -4611,53 +4622,47 @@ function downloadFvmComparison() {
             ? FVM_AMOUNTS
             : [Number(selectedAmount)];
 
-    const rows = [[
+    const header = [
         "Currency",
         "Amount",
         "Market Rate",
         "Flywire Rate",
-        "Flywire Markup %",
-        "HDFC Rate",
-        "HDFC Markup %",
-        "SBI Rate",
-        "SBI Markup %",
-        "Canara Rate",
-        "Canara Markup %",
-        "Bank of Baroda Rate",
-        "Bank of Baroda Markup %",
-        "Axis Bank Rate",
-        "Axis Bank Markup %"
-    ]];
+        "Flywire Markup %"
+    ];
+
+    FVM_BANKS.forEach(bank => {
+        header.push(`${bank.label} Rate`);
+        header.push(`${bank.label} Markup %`);
+    });
+
+    const rows = [header];
 
     currencies.forEach(currency => {
         const market = fvmMarketRate(currency);
 
         amounts.forEach(amount => {
             const flywire = fvmFlywireRate(currency, amount);
-            const rates = FVM_BANKS.map(bank => fvmBankRate(bank.key, currency));
 
             const markupValue = rate => {
                 const m = fvmMarkup(rate, market);
                 return Number.isFinite(m) ? m.toFixed(4) : "";
             };
 
-            rows.push([
+            const row = [
                 currency,
                 amount,
                 Number.isFinite(market) ? market : "",
                 Number.isFinite(flywire) ? flywire : "",
-                markupValue(flywire),
-                Number.isFinite(rates[0]) ? rates[0] : "",
-                markupValue(rates[0]),
-                Number.isFinite(rates[1]) ? rates[1] : "",
-                markupValue(rates[1]),
-                Number.isFinite(rates[2]) ? rates[2] : "",
-                markupValue(rates[2]),
-                Number.isFinite(rates[3]) ? rates[3] : "",
-                markupValue(rates[3]),
-                Number.isFinite(rates[4]) ? rates[4] : "",
-                markupValue(rates[4])
-            ]);
+                markupValue(flywire)
+            ];
+
+            FVM_BANKS.forEach(bank => {
+                const rate = fvmBankRate(bank.key, currency);
+                row.push(Number.isFinite(rate) ? rate : "");
+                row.push(markupValue(rate));
+            });
+
+            rows.push(row);
         });
     });
 
@@ -4670,7 +4675,6 @@ function downloadFvmComparison() {
         rows
     );
 }
-
 
 function getInitialTool() {
     const hash = String(window.location.hash || "").toLowerCase();
