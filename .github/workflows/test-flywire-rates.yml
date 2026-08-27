@@ -1,27 +1,17 @@
 name: Update Flywire Rates
 
 on:
-  # Manual run whenever you want
   workflow_dispatch:
 
-  # GitHub cron runs in UTC.
-  #
-  # 03:30 UTC = 09:00 IST
-  # 04:30 UTC = 10:00 IST
-  # ...
-  # 15:30 UTC = 21:00 IST
-  #
-  # Therefore this runs every hour from
-  # 9:00 AM through 9:00 PM IST.
   schedule:
-    - cron: "30 3-15 * * *"
+    - cron: "17 9-21 * * *"
+      timezone: "Asia/Kolkata"
+
 
 permissions:
   contents: write
 
 
-# Prevent two Flywire collection runs from overlapping.
-# Useful if GitHub delays one scheduled execution.
 concurrency:
   group: project-fly-flywire-rates
   cancel-in-progress: false
@@ -33,8 +23,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # Current full 42-quote run takes ~15 minutes.
-    # Stop a genuinely stuck browser run after 35 minutes.
     timeout-minutes: 35
 
 
@@ -81,7 +69,7 @@ jobs:
 
 
       # ============================================================
-      # RUN 42-QUOTE FLYWIRE AGENT
+      # RUN FLYWIRE AGENT
       # ============================================================
 
       - name: Capture Flywire rates
@@ -96,7 +84,7 @@ jobs:
 
 
       # ============================================================
-      # VALIDATE LATEST JSON
+      # VALIDATE DATA
       # ============================================================
 
       - name: Validate Flywire data
@@ -132,10 +120,6 @@ jobs:
           ]
 
 
-          # Very broad sanity ranges.
-          # These are NOT pricing rules.
-          # They only prevent obviously broken scraper values
-          # such as 0, 1, 9999, wrong currencies, etc.
           RATE_RANGES = {
               "USD": (50, 150),
               "GBP": (80, 200),
@@ -156,7 +140,9 @@ jobs:
 
 
           if not latest_file.exists():
-              fail("data/flywire_latest.json does not exist.")
+              fail(
+                  "data/flywire_latest.json does not exist."
+              )
 
 
           try:
@@ -165,6 +151,7 @@ jobs:
                       encoding="utf-8"
                   )
               )
+
           except Exception as exc:
               fail(
                   f"Could not parse flywire_latest.json: {exc}"
@@ -176,7 +163,8 @@ jobs:
 
           if not isinstance(quotes, dict):
               fail(
-                  'flywire_latest.json does not contain a valid "quotes" object.'
+                  'flywire_latest.json does not contain '
+                  'a valid "quotes" object.'
               )
 
 
@@ -207,7 +195,8 @@ jobs:
 
                   if amount not in currency_quotes:
                       fail(
-                          f"Missing quote: {currency} {amount}"
+                          f"Missing quote: "
+                          f"{currency} {amount}"
                       )
 
 
@@ -219,11 +208,13 @@ jobs:
                       dict
                   ):
                       fail(
-                          f"Invalid record: {currency} {amount}"
+                          f"Invalid record: "
+                          f"{currency} {amount}"
                       )
 
 
                   try:
+
                       rate = float(
                           record["effective_rate"]
                       )
@@ -233,6 +224,7 @@ jobs:
                       )
 
                   except Exception:
+
                       fail(
                           f"Invalid numeric data: "
                           f"{currency} {amount}"
@@ -245,7 +237,8 @@ jobs:
                   ):
                       fail(
                           f"Invalid effective rate: "
-                          f"{currency} {amount} = {rate}"
+                          f"{currency} {amount} "
+                          f"= {rate}"
                       )
 
 
@@ -255,7 +248,8 @@ jobs:
                   ):
                       fail(
                           f"Invalid INR quote: "
-                          f"{currency} {amount} = {inr_quote}"
+                          f"{currency} {amount} "
+                          f"= {inr_quote}"
                       )
 
 
@@ -277,9 +271,7 @@ jobs:
                       )
 
 
-                  expected_amount = int(
-                      amount
-                  )
+                  expected_amount = int(amount)
 
 
                   record_amount = int(
@@ -335,19 +327,23 @@ jobs:
           print("================================")
           print("FLYWIRE VALIDATION PASSED")
           print("================================")
+
           print(
               f"Validated {total}/42 quotes."
           )
+
           print(
               "Currencies:",
               ", ".join(
                   EXPECTED_CURRENCIES
               ),
           )
+
           print(
               "All rates and INR quotes passed "
               "basic sanity checks."
           )
+
           PY
 
 
@@ -392,7 +388,7 @@ jobs:
 
 
       # ============================================================
-      # COMMIT ONLY VALID DATA
+      # COMMIT VALID DATA
       # ============================================================
 
       - name: Commit Flywire rate data
