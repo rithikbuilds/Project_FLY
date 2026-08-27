@@ -33,8 +33,9 @@ CURRENCY_ROUTES = {
     "GBP": {"institution_country": "United Kingdom", "institution": "Imperial College"},
     "CAD": {"institution_country": "Canada", "institution": "Algoma University"},
     "EUR": {"institution_country": "Germany", "institution": "Constructor University Bremen gGmbH"},
-    "AUD": {"institution_country": "Australia", "institution": "Georgia Southern University"},
+    "AUD": {"institution_country": "Australia", "institution": "Melbourne Business School"},
     "NZD": {"institution_country": "New Zealand", "institution": "University of Waikato"},
+    "SGD": {"institution_country": "Singapore", "institution": "Curtin Singapore"},
 }
 
 USD_AMOUNTS = QUOTE_AMOUNTS
