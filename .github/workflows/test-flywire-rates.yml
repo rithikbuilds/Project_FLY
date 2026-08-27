@@ -1,0 +1,57 @@
+name: Test Flywire Rates
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test-flywire:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: |
+          python -m playwright install --with-deps chromium
+
+      - name: Run Flywire USD 5000 test
+        run: |
+          python scripts/fetch_flywire_rates.py
+
+      - name: Show latest Flywire quote
+        if: always()
+        run: |
+          cat data/flywire_latest.json || true
+
+      - name: Show Flywire history
+        if: always()
+        run: |
+          cat data/flywire_history.csv || true
+
+      - name: Commit Flywire quote data
+        if: success()
+        run: |
+          git config user.name "Project FLY Bot"
+          git config user.email "actions@github.com"
+
+          git add data/flywire_latest.json data/flywire_history.csv
+
+          git diff --cached --quiet || git commit -m "Test Flywire quote capture"
+
+          git pull --rebase origin main
+          git push origin main
