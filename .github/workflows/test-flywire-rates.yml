@@ -7,7 +7,9 @@ permissions:
   contents: write
 
 jobs:
+
   test-flywire:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -33,14 +35,24 @@ jobs:
         run: |
           python scripts/fetch_flywire_rates.py
 
+      - name: Upload Flywire debug files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flywire-debug
+          path: data/flywire_debug/
+          if-no-files-found: ignore
+
       - name: Show latest Flywire quote
         if: always()
         run: |
+          echo "===== flywire_latest.json ====="
           cat data/flywire_latest.json || true
 
       - name: Show Flywire history
         if: always()
         run: |
+          echo "===== flywire_history.csv ====="
           cat data/flywire_history.csv || true
 
       - name: Commit Flywire quote data
