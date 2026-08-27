@@ -1,17 +1,11 @@
 name: Update FX Rates
 
 on:
-
-  # Manual refresh
   workflow_dispatch:
 
-  # Every hour from 9:00 AM to 9:00 PM IST
-  #
-  # GitHub Actions cron uses UTC:
-  # 03:30 UTC = 09:00 IST
-  # 15:30 UTC = 21:00 IST
   schedule:
-    - cron: "30 3-15 * * *"
+    - cron: "17 9-21 * * *"
+      timezone: "Asia/Kolkata"
 
 
 permissions:
@@ -19,9 +13,7 @@ permissions:
 
 
 concurrency:
-
   group: update-fx-rates
-
   cancel-in-progress: false
 
 
@@ -30,7 +22,6 @@ jobs:
   update-rates:
 
     runs-on: ubuntu-latest
-
 
     steps:
 
@@ -49,25 +40,19 @@ jobs:
 
       - name: Install dependencies
         run: |
-
           python -m pip install --upgrade pip
-
           pip install -r requirements.txt
 
 
       - name: Fetch outward FX rates
         run: |
-
           python scripts/fetch_rates.py
 
 
       - name: Show latest rates
         run: |
-
           echo "================================"
-
           echo "LATEST FX DATA"
-
           echo "================================"
 
           cat data/latest.json
@@ -75,30 +60,19 @@ jobs:
 
       - name: Commit updated rates
         run: |
-
           git config user.name "FX Rate Bot"
-
           git config user.email "actions@github.com"
-
 
           git add data/latest.json data/history.csv
 
-
           if git diff --cached --quiet; then
-
             echo "No FX data changes detected."
-
             echo "Nothing to commit."
-
             exit 0
-
           fi
-
 
           git commit -m "Update outward FX rates"
 
-
           git pull --rebase origin "${GITHUB_REF_NAME}"
-
 
           git push origin "HEAD:${GITHUB_REF_NAME}"
