@@ -1494,52 +1494,37 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
 }
 
 
-/* ===== Project FLY Theme + Context Sidebar ===== */
-body.pf-night{
-  --background:#07131f;--border:#17344f;--navy:#eef6ff;--text:#eef6ff;--muted:#91a9bf;
-  --blue:#1d8cff;--blue-dark:#1475d2;--green:#2ee66b;--red:#ff5a57;
-  background:#07131f;color:#eef6ff
-}
-body.pf-night .main{background:#07131f}
-body.pf-night .card,body.pf-night .fx-stat-card,body.pf-night .fvm-stat,body.pf-night .fvm-table-card,body.pf-night .fvm-controls{background:#0b1a29;border-color:#17344f}
-body.pf-night .fvm-table-wrap,body.pf-night .fx-table-wrap{background:#0b1a29;border-color:#17344f}
-body.pf-night .fvm-table th,body.pf-night .fx-table th{background:#0c1e2f;color:#aec1d4;border-color:#17344f}
-body.pf-night .fvm-table td,body.pf-night .fx-table td{border-color:#153149}
-body.pf-night .fvm-market-cell{background:#17152c}
-body.pf-night .fvm-flywire-cell{background:#0b2034}
-body.pf-night .fvm-best-cell{background:#0b2b1d!important;box-shadow:inset 0 0 0 1px #155a36}
-body.pf-night select,body.pf-night input,body.pf-night .pf-inr,body.pf-night .fx-updated-value{background:#081723;color:#eef6ff;border-color:#21425f}
-body.pf-night .secondary-button{background:#0a1a28;color:#dcecff;border-color:#294b68}
-body.pf-night .fvm-reference,body.pf-night .logic,body.pf-night .disclaimer{background:#091a28;border-color:#1f415c;color:#9fb6ca}
-body.pf-night .footer{border-color:#17344f}
-
-.pf-theme-toggle{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--border);border-radius:999px;background:#fff}
-body.pf-night .pf-theme-toggle{background:#071521;border-color:#21405c}
-.pf-theme-option{height:31px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:var(--muted);cursor:pointer;font-size:11px;font-weight:800}
-.pf-theme-option.active{background:#eaf4ff;color:#15314d}
-body.pf-night .pf-theme-option.active{background:#0d3f77;color:#fff}
-
-.pf-toolkit{transition:.2s ease}
-.pf-toolkit.pf-context-fvm{background:linear-gradient(#052b21,#03231b)!important;border-color:#28d66d66!important;box-shadow:0 0 22px #28d66d1c}
-.pf-toolkit.pf-context-fx{background:linear-gradient(#06355f,#052b4e)!important;border-color:#49a8ff55!important}
-.pf-toolkit.pf-context-tcs{background:linear-gradient(#49340a,#332407)!important;border-color:#ffd36d44!important}
-.pf-toolkit-title{display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:900;letter-spacing:.08em}
-.pf-context-fvm .pf-toolkit-title{color:#52f183}.pf-context-fx .pf-toolkit-title{color:#79c4ff}.pf-context-tcs .pf-toolkit-title{color:#ffd36d}
-.pf-live-orb{width:8px;height:8px;border-radius:50%;background:#39eb75;display:inline-block;animation:pfPulse 1.6s infinite}
-.pf-live-orb.blue{background:#64bcff}.pf-live-orb.amber{background:#ffd36d}
-@keyframes pfPulse{0%{box-shadow:0 0 0 0 #39eb7577}70%{box-shadow:0 0 0 7px #39eb7500}100%{box-shadow:0 0 0 0 #39eb7500}}
-.pf-toolkit-metric{display:grid!important;grid-template-columns:22px 1fr auto;gap:8px!important;align-items:center;margin-top:10px!important;padding-top:10px;border-top:1px solid #ffffff16}
-.pf-toolkit-metric:first-of-type{border-top:0;padding-top:0}
-.pf-metric-icon{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:#ffffff10;border:1px solid #ffffff17;font-size:10px}
-.pf-metric-label{color:#ffffff8f;font-size:8px;font-weight:800;text-transform:uppercase}
-.pf-metric-value{color:#fff;font-size:10px;font-weight:850;line-height:1.25;margin-top:2px}
-.pf-metric-sub{color:#ffffff73;font-size:8px;line-height:1.3;margin-top:2px}
-.pf-mini-progress{grid-column:2/4;width:100%;height:3px;border-radius:999px;background:#ffffff17;overflow:hidden;margin-top:3px}
-.pf-mini-progress i{display:block;height:100%;background:#39eb75}
-.pf-auto-row{display:flex;align-items:center;gap:6px;margin-top:11px;padding-top:9px;border-top:1px solid #ffffff16;color:#ffffff82;font-size:8px}
-.pf-auto-spinner{width:12px;height:12px;border:2px solid #39eb7530;border-top-color:#39eb75;border-radius:50%;animation:pfSpin 1s linear infinite;margin-left:auto}
-@keyframes pfSpin{to{transform:rotate(360deg)}}
-#fvmUpdated{display:none!important}
+/* ==========================================================
+   PROJECT FLY — CONTEXT STATS + DAY/NIGHT MODE
+   ========================================================== */
+.theme-toggle{display:inline-flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--border);border-radius:999px;background:#fff;box-shadow:0 2px 10px rgba(20,60,100,.05)}
+.theme-toggle button{border:0;background:transparent;color:var(--muted);height:32px;padding:0 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800}
+.theme-toggle button.active{background:#eef6ff;color:var(--blue)}
+.pf-context-panel{margin-top:22px;padding:14px 13px 12px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(2,32,66,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.pf-context-title{color:#74f7a7;font-size:9px;font-weight:900;letter-spacing:.08em;margin-bottom:12px}
+.pf-metric{display:grid;grid-template-columns:18px 1fr;gap:9px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.09)}
+.pf-metric:last-of-type{border-bottom:0}.pf-metric-icon{width:18px;height:18px;display:grid;place-items:center;color:#54e98f;font-size:11px}
+.pf-metric-label{color:#65e895;font-size:8.5px;font-weight:850;margin-bottom:3px;letter-spacing:.02em}
+.pf-metric-value{color:#fff;font-size:12px;font-weight:800;line-height:1.25}.pf-metric-sub{margin-top:2px;color:rgba(255,255,255,.58);font-size:8px;line-height:1.3}
+.pf-live-row{display:flex;align-items:center;gap:7px}.pf-live-dot{width:9px;height:9px;border-radius:50%;background:#32e875;box-shadow:0 0 0 4px rgba(50,232,117,.10),0 0 13px rgba(50,232,117,.9);animation:pfPulse 1.5s ease-in-out infinite;flex:0 0 9px}
+.pf-live-dot.warn{background:#ffb020;box-shadow:0 0 0 4px rgba(255,176,32,.10),0 0 13px rgba(255,176,32,.8)}
+.pf-live-dot.bad{background:#ef5350;box-shadow:0 0 0 4px rgba(239,83,80,.10),0 0 13px rgba(239,83,80,.8)}
+.pf-mini-bar{height:3px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden;margin-top:7px}.pf-mini-bar>span{display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#22d66f,#54f195);box-shadow:0 0 8px rgba(60,235,130,.8)}
+.pf-auto{margin-top:9px;color:rgba(255,255,255,.55);font-size:8px;display:flex;align-items:center;gap:6px}.pf-spinner{width:11px;height:11px;border-radius:50%;border:2px dotted #3be27a;animation:pfSpin 3s linear infinite}
+@keyframes pfPulse{0%,100%{transform:scale(.92);opacity:.65}50%{transform:scale(1.12);opacity:1}}@keyframes pfSpin{to{transform:rotate(360deg)}}
+body.theme-dark{--background:#061625;--text:#e9f2fb;--muted:#9cb0c4;--border:#173653;--navy:#f3f8fd;background:#061625;color:#e9f2fb}
+body.theme-dark .main{background:radial-gradient(circle at top right,rgba(8,117,209,.08),transparent 32%),#061625}
+body.theme-dark .card,body.theme-dark .fx-stat-card,body.theme-dark .fvm-stat,body.theme-dark .fvm-table-card,body.theme-dark .fx-table-card,body.theme-dark .fx-history-card{background:#0a1e31;border-color:#173653;box-shadow:0 4px 18px rgba(0,0,0,.16)}
+body.theme-dark .header h1,body.theme-dark .section-title,body.theme-dark .fx-section-title,body.theme-dark .fvm-title,body.theme-dark .fx-stat-value,body.theme-dark .fvm-stat-value,body.theme-dark .fx-bank-name,body.theme-dark .fvm-currency,body.theme-dark .fvm-rate-main{color:#f4f8fc}
+body.theme-dark select,body.theme-dark input,body.theme-dark .fx-updated-value,body.theme-dark .pf-inr{background:#0b2238;border-color:#23435f;color:#e9f2fb}
+body.theme-dark .fvm-table,body.theme-dark .fx-table{color:#e9f2fb}
+body.theme-dark .fvm-table th,body.theme-dark .fx-table th{background:#0c2740;color:#a8bdd1;border-color:#183d5d}
+body.theme-dark .fvm-table td,body.theme-dark .fx-table td{border-color:#15344f}
+body.theme-dark .fvm-table tbody tr:hover td,body.theme-dark .fx-table tbody tr:hover{background:#0d2740}
+body.theme-dark .fvm-market-cell{background:#171a33}body.theme-dark .fvm-flywire-cell{background:#0a2945}
+body.theme-dark .fvm-best-cell{background:#0a3227!important;box-shadow:inset 0 0 0 1px #1f6548}
+body.theme-dark .fvm-reference,body.theme-dark .disclaimer,body.theme-dark .logic,body.theme-dark .result-box{background:#0b2238;border-color:#23435f;color:#b8c9d9}
+body.theme-dark .theme-toggle{background:#0a1e31;border-color:#24425c}body.theme-dark .theme-toggle button.active{background:#103557;color:#7bc2ff}
 
 </style>
 
@@ -1568,14 +1553,14 @@ body.pf-night .pf-theme-option.active{background:#0d3f77;color:#fff}
 
 </div>
 
-<button class="side-nav" id="navFx" onclick="showTool('fx')"><span class="nav-icon">⇄</span><span class="nav-copy"><span class="nav-name">FX Rate Comparison</span><span class="nav-desc">Compare outward TT selling rates</span></span></button><button class="side-nav" id="navFvm" onclick="showTool('fvm')"><span class="nav-icon">VS</span><span class="nav-copy"><span class="nav-name">Flywire vs Market</span><span class="nav-desc">Flywire rates vs market & banks</span></span></button><button class="side-nav active" id="navTcs" onclick="showTool('tcs')"><span class="nav-icon">₹</span><span class="nav-copy"><span class="nav-name">TCS Calculator</span><span class="nav-desc">Education remittance TCS estimate</span></span></button><div class="support pf-toolkit pf-context-tcs" id="pfToolkit">
-<div class="pf-toolkit-title"><span id="pfToolkitTitle">TCS CALCULATOR</span><i class="pf-live-orb amber" id="pfToolkitOrb"></i></div>
-<div class="pf-toolkit-metric"><span class="pf-metric-icon">●</span><span><div class="pf-metric-label" id="pfMetric1Label">Tool Status</div><div class="pf-metric-value" id="pfMetric1Value">Ready</div><div class="pf-metric-sub" id="pfMetric1Sub">Calculator available</div></span><i class="pf-live-orb amber"></i></div>
-<div class="pf-toolkit-metric"><span class="pf-metric-icon">↻</span><span><div class="pf-metric-label" id="pfMetric2Label">Last Updated</div><div class="pf-metric-value" id="pfMetric2Value">—</div><div class="pf-metric-sub" id="pfMetric2Sub">—</div></span><span></span></div>
-<div class="pf-toolkit-metric"><span class="pf-metric-icon">▣</span><span><div class="pf-metric-label" id="pfMetric3Label">Metric</div><div class="pf-metric-value" id="pfMetric3Value">—</div><div class="pf-metric-sub" id="pfMetric3Sub">—</div></span><span></span><div class="pf-mini-progress" id="pfMetric3Progress" style="display:none"><i></i></div></div>
-<div class="pf-toolkit-metric"><span class="pf-metric-icon">¤</span><span><div class="pf-metric-label" id="pfMetric4Label">Metric</div><div class="pf-metric-value" id="pfMetric4Value">—</div><div class="pf-metric-sub" id="pfMetric4Sub">—</div></span><span></span></div>
-<div class="pf-toolkit-metric" id="pfMetric5Row"><span class="pf-metric-icon">▤</span><span><div class="pf-metric-label" id="pfMetric5Label">Metric</div><div class="pf-metric-value" id="pfMetric5Value">—</div><div class="pf-metric-sub" id="pfMetric5Sub">—</div></span><span></span></div>
-<div class="pf-auto-row"><i class="pf-live-orb"></i><span id="pfAutoText">Auto-updating</span><i class="pf-auto-spinner"></i></div>
+<button class="side-nav" id="navFx" onclick="showTool('fx')"><span class="nav-icon">⇄</span><span class="nav-copy"><span class="nav-name">FX Rate Comparison</span><span class="nav-desc">Compare outward TT selling rates</span></span></button><button class="side-nav" id="navFvm" onclick="showTool('fvm')"><span class="nav-icon">VS</span><span class="nav-copy"><span class="nav-name">Flywire vs Market</span><span class="nav-desc">Flywire rates vs market & banks</span></span></button><button class="side-nav active" id="navTcs" onclick="showTool('tcs')"><span class="nav-icon">₹</span><span class="nav-copy"><span class="nav-name">TCS Calculator</span><span class="nav-desc">Education remittance TCS estimate</span></span></button><div class="pf-context-panel" id="pfContextPanel">
+<div class="pf-context-title" id="pfContextTitle">INTERNAL TOOLKIT</div>
+<div class="pf-metric"><div class="pf-metric-icon">●</div><div><div class="pf-metric-label" id="pfStatusLabel">SYSTEM STATUS</div><div class="pf-live-row"><span class="pf-live-dot" id="pfStatusDot"></span><span class="pf-metric-value" id="pfStatusValue">All systems operational</span></div></div></div>
+<div class="pf-metric"><div class="pf-metric-icon">↻</div><div><div class="pf-metric-label" id="pfUpdateLabel">LAST DATA UPDATE</div><div class="pf-metric-value" id="pfUpdated">—</div><div class="pf-metric-sub" id="pfUpdateSub"></div></div></div>
+<div class="pf-metric"><div class="pf-metric-icon">▣</div><div><div class="pf-metric-label" id="pfMetric3Label">TOTAL BANKS</div><div class="pf-metric-value" id="pfMetric3Value">10</div><div class="pf-metric-sub" id="pfMetric3Sub"></div><div class="pf-mini-bar" id="pfMetric3Bar" style="display:none"><span></span></div></div></div>
+<div class="pf-metric"><div class="pf-metric-icon">¤</div><div><div class="pf-metric-label" id="pfMetric4Label">TOTAL CURRENCIES</div><div class="pf-metric-value" id="pfMetric4Value">8</div><div class="pf-metric-sub" id="pfMetric4Sub"></div></div></div>
+<div class="pf-metric" id="pfMetric5" style="display:none"><div class="pf-metric-icon">▤</div><div><div class="pf-metric-label" id="pfMetric5Label">DENOMINATIONS</div><div class="pf-metric-value" id="pfMetric5Value">6</div><div class="pf-metric-sub" id="pfMetric5Sub"></div></div></div>
+<div class="pf-auto"><span class="pf-live-dot" style="width:6px;height:6px;flex-basis:6px"></span><span id="pfAutoText">Auto-updating</span><span class="pf-spinner"></span></div>
 </div><div class="pf-version"><b>Project FLY</b><span>v2.0.0</span></div>
 
 
@@ -2442,7 +2427,7 @@ SBI TCS Estimation Tool
             Compare current outward remittance / TT selling rates across banks against the market reference rate.
         </div>
     </div>
-    <div class="fx-live-pill" id="fxStatus">● Loading rates...</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end"><div class="theme-toggle"><button type="button" id="themeDayFx" onclick="setTheme('light')">☀ Day</button><button type="button" id="themeNightFx" onclick="setTheme('dark')">☾ Night</button></div><div class="fx-live-pill" id="fxStatus">● Loading rates...</div></div>
 </header>
 
 <div class="fx-controls card"><div class="pf-grid"><div class="field"><label>Currency</label><select id="fxCurrency" onchange="renderFxComparison()"><option value="USD">🇺🇸 USD — US Dollar</option><option value="CAD">🇨🇦 CAD — Canadian Dollar</option><option value="AUD">🇦🇺 AUD — Australian Dollar</option><option value="GBP">🇬🇧 GBP — British Pound</option><option value="EUR">🇪🇺 EUR — Euro</option><option value="SGD">🇸🇬 SGD — Singapore Dollar</option><option value="AED">🇦🇪 AED — UAE Dirham</option><option value="NZD">🇳🇿 NZD — New Zealand Dollar</option></select><div class="fx-presets"><button onclick="setFxAmount(5000)">5,000</button><button onclick="setFxAmount(10000)">10,000</button><button onclick="setFxAmount(15000)">15,000</button><button onclick="setFxAmount(20000)">20,000</button><button onclick="setFxAmount(25000)">25,000</button></div></div><div class="field"><label>Foreign Currency Amount</label><div class="input-wrap"><input id="fxAmount" type="text" inputmode="numeric" value="0" autocomplete="off"><span id="fxAmountCode">USD</span></div><div class="hint">Enter the amount to be remitted in the selected foreign currency.</div></div><div class="field"><label>Amount in INR (Indicative)</label><div class="pf-inr" id="pfInr">₹0.00</div><div class="hint">Indicative INR amount based on best bank rate.</div></div></div><div id="fxLastUpdated" class="pf-hide">—</div></div>
@@ -2585,15 +2570,7 @@ SBI TCS Estimation Tool
             </div>
         </div>
 
-        <div class="fvm-header-right">
-            <div class="pf-theme-toggle">
-                <button class="pf-theme-option active" id="pfThemeDay" onclick="setPfTheme('day')">☀ Day</button>
-                <button class="pf-theme-option" id="pfThemeNight" onclick="setPfTheme('night')">☾ Night</button>
-            </div>
-            <div class="fvm-live-pill" id="fvmStatus">● Loading data...</div>
-            <div class="fvm-updated" id="fvmUpdated">Last updated: —</div>
-        </div>
-    </header>
+        <div class="fvm-header-right"><div class="theme-toggle"><button type="button" id="themeDayFvm" onclick="setTheme('light')">☀ Day</button><button type="button" id="themeNightFvm" onclick="setTheme('dark')">☾ Night</button></div></div></header>
 
     <section class="card fvm-controls">
         <div class="fvm-control-grid">
@@ -3951,6 +3928,49 @@ let fxLatestData = null;
 let fxHistoryData = [];
 let fxHistoryLoaded = false;
 
+
+function setTheme(theme){
+ const dark=theme==="dark";
+ document.body.classList.toggle("theme-dark",dark);
+ try{localStorage.setItem("projectFlyTheme",dark?"dark":"light")}catch(e){}
+ [["themeDayFx",!dark],["themeNightFx",dark],["themeDayFvm",!dark],["themeNightFvm",dark]].forEach(([id,on])=>{const el=document.getElementById(id);if(el)el.classList.toggle("active",on)})
+}
+function loadSavedTheme(){let t="light";try{t=localStorage.getItem("projectFlyTheme")||"light"}catch(e){}setTheme(t)}
+function pfSetStatus(text,state="good"){
+ const v=document.getElementById("pfStatusValue"),d=document.getElementById("pfStatusDot");
+ if(v)v.textContent=text;
+ if(d){d.classList.remove("warn","bad");if(state==="warn")d.classList.add("warn");if(state==="bad")d.classList.add("bad")}
+}
+function updateContextSidebar(tool){
+ const title=document.getElementById("pfContextTitle"),sl=document.getElementById("pfStatusLabel"),ul=document.getElementById("pfUpdateLabel"),uv=document.getElementById("pfUpdated"),us=document.getElementById("pfUpdateSub");
+ const m3l=document.getElementById("pfMetric3Label"),m3v=document.getElementById("pfMetric3Value"),m3s=document.getElementById("pfMetric3Sub"),m3b=document.getElementById("pfMetric3Bar");
+ const m4l=document.getElementById("pfMetric4Label"),m4v=document.getElementById("pfMetric4Value"),m4s=document.getElementById("pfMetric4Sub");
+ const m5=document.getElementById("pfMetric5"),m5l=document.getElementById("pfMetric5Label"),m5v=document.getElementById("pfMetric5Value"),m5s=document.getElementById("pfMetric5Sub");
+ const auto=document.getElementById("pfAutoText");
+
+ if(tool==="fvm"){
+  const count=FVM_CURRENCIES.reduce((t,c)=>t+Object.keys(fvmFlywireData?.quotes?.[c]||{}).length,0);
+  title.textContent="FLYWIRE VS MARKET STATS";sl.textContent="AGENT STATUS";
+  if(!fvmFlywireData)pfSetStatus("Loading agent data...","warn");else if(count===42)pfSetStatus("All systems operational");else if(count>0)pfSetStatus("Partial capture","warn");else pfSetStatus("Agent data unavailable","bad");
+  ul.textContent="LATEST FLYWIRE UPDATE";uv.textContent=formatFxDateTime(fvmFlywireData?.updated_at||null);us.textContent="Automated rate capture";
+  m3l.textContent="FLYWIRE QUOTES";m3v.textContent=`${count} / 42`;m3s.textContent=count===42?"100% captured":`${count} quotes loaded`;m3b.style.display="block";m3b.firstElementChild.style.width=`${Math.min(100,(count/42)*100)}%`;
+  m4l.textContent="CURRENCIES";m4v.textContent="7";m4s.textContent="USD, GBP, CAD, EUR, AUD, NZD, SGD";
+  m5.style.display="grid";m5l.textContent="DENOMINATIONS";m5v.textContent="6";m5s.textContent="5K, 10K, 15K, 20K, 25K, 30K";auto.textContent="Auto-updating";return;
+ }
+ if(tool==="fx"){
+  const bc=new Set((fxLatestData?.rates||[]).map(r=>r.bank).filter(Boolean)).size;
+  const cc=new Set((fxLatestData?.rates||[]).map(r=>r.currency).filter(Boolean)).size;
+  title.textContent="FX RATE COMPARISON STATS";sl.textContent="DATA STATUS";pfSetStatus(fxLatestData?"All systems operational":"Loading bank data...",fxLatestData?"good":"warn");
+  ul.textContent="LATEST BANK UPDATE";uv.textContent=formatFxDateTime(fxLatestData?.updated_at||null);us.textContent="Official outward TT feeds";
+  m3l.textContent="BANKS TRACKED";m3v.textContent=String(bc||10);m3s.textContent="Current Project FLY sources";m3b.style.display="none";
+  m4l.textContent="CURRENCIES";m4v.textContent=String(cc||8);m4s.textContent="Available bank-rate currencies";m5.style.display="none";auto.textContent="Auto-updating";return;
+ }
+ title.textContent="TCS CALCULATOR";sl.textContent="TOOL STATUS";pfSetStatus("Calculator ready");
+ ul.textContent="FINANCIAL YEAR";uv.textContent="FY 2026–27";us.textContent="Education remittance estimate";
+ m3l.textContent="TCS RATE";m3v.textContent="2%";m3s.textContent="Current configured rate";m3b.style.display="none";
+ m4l.textContent="TCS-FREE THRESHOLD";m4v.textContent="₹10,00,000";m4s.textContent="Configured threshold";m5.style.display="none";auto.textContent="Ready";
+}
+
 function showTool(tool, options = {}) {
     const tcsPage = document.getElementById("tcsPage");
     const fxPage = document.getElementById("fxPage");
@@ -3995,7 +4015,7 @@ function showTool(tool, options = {}) {
         navTcs.classList.add("active");
     }
 
-    updatePfToolkit(selectedTool);
+    updateContextSidebar(selectedTool);
 
     try {
         localStorage.setItem("projectFlyActiveTool", selectedTool);
@@ -4091,7 +4111,7 @@ async function loadFxRates() {
         status.style.color = "var(--green)";
         document.getElementById("fxLastUpdated").textContent = formatFxDateTime(fxLatestData.updated_at);
         renderFxComparison();
-        if(document.getElementById("fxPage")?.classList.contains("active")) updatePfToolkit("fx");
+        updateContextSidebar("fx");
     } catch (error) {
         console.error(error);
         status.textContent = "● Rate data unavailable";
@@ -4573,7 +4593,7 @@ async function loadFvmData(force = false) {
         }
 
         renderFvmTable();
-        if(document.getElementById("fvmPage")?.classList.contains("active")) updatePfToolkit("fvm");
+        updateContextSidebar("fvm");
     }
 
     catch (error) {
@@ -4740,67 +4760,6 @@ function downloadFvmComparison() {
     );
 }
 
-
-function setPfTheme(theme){
-  const night=theme==="night";
-  document.body.classList.toggle("pf-night",night);
-  document.getElementById("pfThemeDay")?.classList.toggle("active",!night);
-  document.getElementById("pfThemeNight")?.classList.toggle("active",night);
-  try{localStorage.setItem("projectFlyTheme",night?"night":"day")}catch(e){}
-}
-function getPfTheme(){try{return localStorage.getItem("projectFlyTheme")||"day"}catch(e){return"day"}}
-
-function pfFmt(v){
-  if(!v)return"—";
-  try{
-    const d=new Date(v);
-    if(isNaN(d.getTime()))return formatFxDateTime(v);
-    return d.toLocaleString("en-IN",{timeZone:"Asia/Kolkata",day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true})+" IST";
-  }catch(e){return String(v)}
-}
-function pfSet(i,l,v,s=""){
-  document.getElementById(`pfMetric${i}Label`).textContent=l;
-  document.getElementById(`pfMetric${i}Value`).textContent=v;
-  document.getElementById(`pfMetric${i}Sub`).textContent=s;
-}
-function updatePfToolkit(tool){
-  const box=document.getElementById("pfToolkit"),title=document.getElementById("pfToolkitTitle"),orb=document.getElementById("pfToolkitOrb"),prog=document.getElementById("pfMetric3Progress");
-  if(!box)return;
-  box.classList.remove("pf-context-fvm","pf-context-fx","pf-context-tcs");
-  orb.className="pf-live-orb";
-  if(tool==="fvm"){
-    box.classList.add("pf-context-fvm");title.textContent="FLYWIRE VS MARKET STATS";
-    pfSet(1,"Agent Status","All systems operational","Autonomous quote collector");
-    const latest=fvmFlywireData?.updated_at||null;
-    pfSet(2,"Last Updated",pfFmt(latest),latest?"Latest successful Flywire capture":"Waiting for Flywire data");
-    const q=FVM_CURRENCIES.reduce((t,c)=>t+Object.keys(fvmFlywireData?.quotes?.[c]||{}).length,0);
-    pfSet(3,"Flywire Quotes",`${q} / 42`,q===42?"100% captured":`${q} quotes available`);
-    pfSet(4,"Currencies","7","USD, GBP, CAD, EUR, AUD, NZD, SGD");
-    pfSet(5,"Denominations","6","5K, 10K, 15K, 20K, 25K, 30K");
-    prog.style.display="block";prog.querySelector("i").style.width=`${Math.min(100,q/42*100)}%`;
-    document.getElementById("pfAutoText").textContent="Auto-updating";
-  }else if(tool==="fx"){
-    box.classList.add("pf-context-fx");title.textContent="FX RATE COMPARISON STATS";orb.classList.add("blue");
-    pfSet(1,"Data Status","All systems operational","Bank-rate collector");
-    const latest=fxLatestData?.updated_at||fxLatestData?.controller_run_time||fxLatestData?.generated_at||null;
-    pfSet(2,"Last Updated",pfFmt(latest),latest?"Latest bank-rate capture":"Waiting for bank data");
-    const banks=new Set((fxLatestData?.rates||[]).map(r=>r.bank).filter(Boolean));
-    const curr=new Set((fxLatestData?.rates||[]).map(r=>r.currency).filter(Boolean));
-    pfSet(3,"Banks Tracked",String(banks.size||10),"Published outward TT selling rates");
-    pfSet(4,"Currencies",String(curr.size||8),"USD, CAD, AUD, GBP, EUR, SGD, AED, NZD");
-    pfSet(5,"Reference Feed","Market",fxLatestData?.market_reference?.source||"Reference feed");
-    prog.style.display="none";document.getElementById("pfAutoText").textContent="Auto-updating";
-  }else{
-    box.classList.add("pf-context-tcs");title.textContent="TCS CALCULATOR";orb.classList.add("amber");
-    pfSet(1,"Tool Status","Ready","Local calculator");
-    pfSet(2,"Financial Year","FY 2026–27","Current configured year");
-    pfSet(3,"TCS-Free Threshold","₹10,00,000","Education remittance threshold");
-    pfSet(4,"Applicable Rate","2%","Configured TCS rate");
-    pfSet(5,"Calculation","Proportional","Loan + own-funds allocation logic");
-    prog.style.display="none";document.getElementById("pfAutoText").textContent="Calculator ready";
-  }
-}
-
 function getInitialTool() {
     const hash = String(window.location.hash || "").toLowerCase();
 
@@ -4817,7 +4776,7 @@ function getInitialTool() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-    setPfTheme(getPfTheme());
+    loadSavedTheme();
     showTool(getInitialTool(), { skipHash: false });
 
     const fvmFooter = document.getElementById("fvmFooterTime");
