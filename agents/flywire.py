@@ -64,34 +64,25 @@ def save_debug(page, prefix="flywire_failure"):
 
 def dismiss_privacy_popup(page):
     """
-    Dismiss Flywire's privacy popup if it appears.
+    Close Flywire/CookieYes privacy UI without opening the Opt Out dialog.
     """
-    possible_texts = [
-        "Opt Out",
-        "Accept",
-        "Accept All",
-        "Close",
-    ]
+    try:
+        modal_close = page.locator(".cky-modal.cky-modal-open .cky-btn-close")
+        if modal_close.count() and modal_close.first.is_visible():
+            modal_close.first.click(timeout=3000)
+            page.wait_for_timeout(400)
+            print("Privacy preferences modal closed.")
+    except Exception:
+        pass
 
-    for text in possible_texts:
-        try:
-            locator = page.get_by_text(
-                text,
-                exact=True,
-            )
-
-            for i in range(locator.count()):
-                item = locator.nth(i)
-
-                if item.is_visible():
-                    item.click(timeout=3000)
-                    page.wait_for_timeout(500)
-                    print("Privacy popup handled.")
-                    return
-        except Exception:
-            pass
-
-
+    try:
+        banner_close = page.locator(".cky-consent-container .cky-banner-btn-close")
+        if banner_close.count() and banner_close.first.is_visible():
+            banner_close.first.click(timeout=3000)
+            page.wait_for_timeout(400)
+            print("Privacy banner closed.")
+    except Exception:
+        pass
 def click_visible_exact_text(page, text, timeout=10000):
     """
     Click a visible exact text match.
@@ -149,65 +140,104 @@ def click_visible_exact_text(page, text, timeout=10000):
 
 def choose_country(page, country):
     """
-    Flywire uses Select2 over a real hidden <select id="countryDropdown">.
-    Select the real option directly, then wait for the institution selector.
+    Use Flywire's visible Select2 country widget so its real selection event
+    fires and the institution selector gets enabled.
     """
     print("Selecting institution country:", country)
-
-    country_codes = {
-        "United States": "US",
-        "United Kingdom": "GB",
-        "Canada": "CA",
-        "Germany": "DE",
-        "Australia": "AU",
-        "New Zealand": "NZ",
-    }
-
-    code = country_codes.get(country)
-
-    if not code:
-        raise RuntimeError(
-            f'No country code configured for "{country}".'
-        )
 
     country_select = page.locator("#countryDropdown")
     country_select.wait_for(state="attached", timeout=20000)
 
-    country_select.select_option(value=code)
-
-    # Trigger change for Select2/site listeners.
-    page.evaluate(
-        """
-        () => {
-            const el = document.querySelector('#countryDropdown');
-            if (!el) return;
-            el.dispatchEvent(new Event('change', { bubbles: true }));
-            if (window.jQuery) {
-                window.jQuery(el).trigger('change');
-            }
-        }
-        """
+    visible_control = page.locator(
+        "#countryDropdown + .select2 .select2-selection"
     )
+
+    if visible_control.count() == 0:
+        visible_control = page.locator(
+            "[aria-labelledby='select2-countryDropdown-container']"
+        )
+
+    visible_control.first.wait_for(state="visible", timeout=15000)
+    visible_control.first.click()
+
+    search = page.locator(
+        ".select2-container--open input.select2-search__field"
+    )
+    search.wait_for(state="visible", timeout=10000)
+    search.fill(country)
+
+    print("Country search entered:", country)
+
+    page.wait_for_timeout(700)
+
+    results = page.locator(
+        ".select2-container--open .select2-results__option"
+    )
+    results.first.wait_for(state="visible", timeout=15000)
+
+    matching = results.filter(has_text=country)
+
+    if matching.count() == 0:
+        available = []
+        for i in range(min(results.count(), 10)):
+            try:
+                text = results.nth(i).inner_text().strip()
+                if text:
+                    available.append(text)
+            except Exception:
+                pass
+
+        raise RuntimeError(
+            f'Country result "{country}" was not found. '
+            f'Visible Select2 results: {available}'
+        )
+
+    chosen = matching.first
+
+    print("Country result found:", chosen.inner_text().strip())
+    chosen.click(timeout=10000)
+
+    page.wait_for_timeout(1000)
+
+    selected_country = page.locator(
+        "#select2-countryDropdown-container"
+    ).inner_text().strip()
 
     selected_value = country_select.input_value()
 
-    if selected_value != code:
+    print(
+        "Institution country selected:",
+        selected_country,
+        f"({selected_value})",
+    )
+
+    if country.lower() not in selected_country.lower():
         raise RuntimeError(
-            f'Country selection verification failed. Expected "{code}", '
-            f'got "{selected_value}".'
+            f'Country selection verification failed. '
+            f'Expected "{country}", got "{selected_country}".'
         )
 
-    print(f"Institution country selected: {country} ({code})")
+    try:
+        page.wait_for_function(
+            """
+            () => {
+                const el = document.querySelector('#institutionDropdown');
+                return el && !el.disabled;
+            }
+            """,
+            timeout=20000,
+        )
+    except Exception:
+        disabled = page.locator("#institutionDropdown").is_disabled()
+        section_class = page.locator(
+            "[data-testid='institution-section-dropdown']"
+        ).get_attribute("class")
 
-    page.wait_for_function(
-        """
-        () => {
-            const el = document.querySelector('#institutionDropdown');
-            return el && !el.disabled;
-        }
-        """,
-        timeout=20000,
-    )
+        raise RuntimeError(
+            "Country was visibly selected, but Flywire did not enable "
+            f"the institution selector. disabled={disabled}; "
+            f"section_class={section_class}"
+        )
 
     print("Institution selector enabled.")
 def choose_institution(page, institution):
