@@ -36,18 +36,6 @@ def now_ist():
     return datetime.now(IST)
 
 
-def parse_inr(text: str) -> float:
-    match = re.search(r"₹\s*([\d,]+(?:\.\d{1,2})?)", text)
-    if not match:
-        raise RuntimeError(
-            "Could not find an INR amount in the payment-method text."
-        )
-
-    return float(
-        match.group(1).replace(",", "")
-    )
-
-
 def save_debug(page, prefix="flywire_failure"):
     stamp = now_ist().strftime("%Y%m%d_%H%M%S")
 
@@ -74,565 +62,454 @@ def save_debug(page, prefix="flywire_failure"):
     print("Debug HTML:", html_file)
 
 
-def click_first_visible(locator, timeout=15000):
-    count = locator.count()
-
-    for index in range(count):
-        item = locator.nth(index)
-
-        try:
-            if item.is_visible():
-                item.click(timeout=timeout)
-                return True
-        except Exception:
-            continue
-
-    return False
-
-
-def choose_from_open_dropdown(page, value: str):
+def dismiss_privacy_popup(page):
     """
-    Choose a visible option after a Flywire dropdown has been opened.
-
-    Flywire uses JavaScript dropdown widgets, so the option may be rendered
-    outside the field itself (for example in a portal/listbox).
+    The privacy popup is not always shown, but dismiss it when possible
+    so it cannot interfere with later controls.
     """
 
-    exact = page.get_by_text(
-        re.compile(
-            rf"^\s*{re.escape(value)}\s*$",
-            re.I,
-        )
-    )
-
-    if click_first_visible(exact, timeout=10000):
-        return
-
-    # Try accessible option role.
-    option = page.get_by_role(
-        "option",
-        name=re.compile(
-            rf"^\s*{re.escape(value)}\s*$",
-            re.I,
-        ),
-    )
-
-    if click_first_visible(option, timeout=10000):
-        return
-
-    raise RuntimeError(
-        f'Dropdown opened, but option "{value}" was not found.'
-    )
-
-
-def flywire_comboboxes(page):
-    """
-    Return the currently visible Flywire dropdown/combobox elements.
-
-    The landing page visually contains:
-      0 = institution country/region
-      1 = institution
-    """
-
-    selectors = [
-        "[role='combobox']",
-        "select",
-        "button[aria-haspopup='listbox']",
-        "input[aria-autocomplete]",
+    possible_buttons = [
+        "Opt Out",
+        "Accept",
+        "Accept All",
+        "Close",
     ]
 
-    items = []
-
-    for selector in selectors:
-        locator = page.locator(selector)
-
-        for index in range(locator.count()):
-            item = locator.nth(index)
-
-            try:
-                if not item.is_visible():
-                    continue
-
-                handle = item.element_handle()
-
-                if handle is None:
-                    continue
-
-                # Avoid duplicates when different selectors refer to same node.
-                if any(
-                    existing.evaluate(
-                        "(el, other) => el === other",
-                        handle,
-                    )
-                    for existing in items
-                ):
-                    continue
-
-                items.append(item)
-
-            except Exception:
-                continue
-
-    return items
-
-
-def select_landing_dropdown(
-    page,
-    index: int,
-    value: str,
-    description: str,
-):
-    """
-    Select one of the two dropdowns on pay.flywire.com's opening form.
-
-    This intentionally targets the dropdown POSITION rather than relying on
-    the generic label matcher that failed on the institution field.
-    """
-
-    page.wait_for_timeout(500)
-
-    # First preference: actual accessible comboboxes.
-    combos = page.get_by_role("combobox")
-
-    visible_combos = []
-
-    for i in range(combos.count()):
-        combo = combos.nth(i)
-
+    for text in possible_buttons:
         try:
-            if combo.is_visible():
-                visible_combos.append(combo)
-        except Exception:
-            pass
-
-    # Some versions expose the widgets as buttons instead.
-    if len(visible_combos) <= index:
-        buttons = page.locator(
-            "button[aria-haspopup='listbox'], "
-            "[role='button'][aria-haspopup='listbox']"
-        )
-
-        for i in range(buttons.count()):
-            button = buttons.nth(i)
-
-            try:
-                if button.is_visible():
-                    visible_combos.append(button)
-            except Exception:
-                pass
-
-    if len(visible_combos) <= index:
-        raise RuntimeError(
-            f"Could not locate Flywire {description} dropdown. "
-            f"Visible dropdown count: {len(visible_combos)}"
-        )
-
-    field = visible_combos[index]
-
-    print(
-        f"Selecting {description}:",
-        value,
-    )
-
-    # Native select.
-    try:
-        tag = field.evaluate(
-            "el => el.tagName.toLowerCase()"
-        )
-
-        if tag == "select":
-            try:
-                field.select_option(
-                    label=value,
-                    timeout=15000,
-                )
-            except Exception:
-                field.select_option(
-                    value=value,
-                    timeout=15000,
-                )
-
-            print(
-                f"{description} selected:",
-                value,
+            locator = page.get_by_text(
+                text,
+                exact=True,
             )
-            return
-    except Exception:
-        pass
 
-    # Custom dropdown.
-    field.click(timeout=15000)
+            if locator.count() > 0:
+                for i in range(locator.count()):
+                    item = locator.nth(i)
 
-    page.wait_for_timeout(500)
-
-    # Many React-style selects expose an input after opening.
-    active = page.locator(":focus")
-
-    try:
-        active_tag = active.evaluate(
-            "el => el.tagName.toLowerCase()"
-        )
-
-        if active_tag == "input":
-            try:
-                active.fill(value)
-                page.wait_for_timeout(700)
-            except Exception:
-                pass
-    except Exception:
-        pass
-
-    # If clicking the container exposes an inner input, type there.
-    try:
-        nearby_input = field.locator(
-            "input"
-        )
-
-        if nearby_input.count():
-            nearby_input.first.fill(value)
-            page.wait_for_timeout(700)
-    except Exception:
-        pass
-
-    # Keyboard search is a useful fallback for searchable dropdown widgets.
-    try:
-        page.keyboard.type(
-            value,
-            delay=35,
-        )
-        page.wait_for_timeout(700)
-    except Exception:
-        pass
-
-    try:
-        choose_from_open_dropdown(
-            page,
-            value,
-        )
-    except Exception:
-        # React Select commonly accepts the highlighted result with Enter.
-        try:
-            page.keyboard.press("Enter")
-            page.wait_for_timeout(600)
-        except Exception:
-            raise
-
-    # Verify selection appears visibly on the page.
-    visible_value = page.get_by_text(
-        re.compile(
-            rf"^\s*{re.escape(value)}\s*$",
-            re.I,
-        )
-    )
-
-    found = False
-
-    for i in range(visible_value.count()):
-        try:
-            if visible_value.nth(i).is_visible():
-                found = True
-                break
+                    if item.is_visible():
+                        item.click(timeout=3000)
+                        print("Privacy popup handled.")
+                        page.wait_for_timeout(500)
+                        return
         except Exception:
             pass
 
-    if not found:
-        raise RuntimeError(
-            f'Attempted to select "{value}", but could not verify '
-            f'the {description} selection.'
-        )
 
-    print(
-        f"{description} selected:",
-        value,
-    )
+def get_visible_inputs(page):
+    visible = []
 
-
-def click_text(page, text: str, timeout=15000):
-    patterns = [
-        page.get_by_role(
-            "button",
-            name=re.compile(
-                rf"^\s*{re.escape(text)}\s*$",
-                re.I,
-            ),
-        ),
-        page.get_by_text(
-            re.compile(
-                rf"^\s*{re.escape(text)}\s*$",
-                re.I,
-            )
-        ),
-    ]
-
-    for locator in patterns:
-        if click_first_visible(
-            locator,
-            timeout=timeout,
-        ):
-            return
-
-    raise RuntimeError(
-        f'Could not click "{text}".'
-    )
-
-
-def fill_amount(page, amount: int):
-    print("Entering destination amount:", amount)
-
-    # Prefer field associated with Amount.
-    labelled = page.get_by_label(
-        re.compile(r"amount", re.I)
-    )
-
-    for i in range(labelled.count()):
-        item = labelled.nth(i)
-
-        try:
-            if item.is_visible():
-                tag = item.evaluate(
-                    "el => el.tagName.toLowerCase()"
-                )
-
-                if tag == "input":
-                    item.fill(str(amount))
-                    return
-        except Exception:
-            pass
-
-    # Find visible numeric/text inputs and use the most likely amount field.
-    inputs = page.locator(
-        "input[type='number'], "
-        "input[inputmode='decimal'], "
-        "input[inputmode='numeric'], "
-        "input[type='text']"
-    )
+    inputs = page.locator("input")
 
     for i in range(inputs.count()):
         field = inputs.nth(i)
 
         try:
-            if not field.is_visible():
+            if field.is_visible():
+                visible.append(field)
+        except Exception:
+            pass
+
+    return visible
+
+
+def choose_country(page, country):
+    print("Selecting institution country:", country)
+
+    page.wait_for_timeout(1000)
+
+    inputs = get_visible_inputs(page)
+
+    if not inputs:
+        raise RuntimeError(
+            "No visible input was found for institution country."
+        )
+
+    # On Flywire's opening screen the first visible input is
+    # the institution-country search field.
+    country_input = inputs[0]
+
+    country_input.click()
+    country_input.fill(country)
+
+    print("Country search entered:", country)
+
+    page.wait_for_timeout(1200)
+
+    # IMPORTANT:
+    # Do not type again.
+    # The previous version typed the country twice.
+    exact_results = page.get_by_text(
+        re.compile(
+            rf"^\s*{re.escape(country)}\s*$",
+            re.I,
+        )
+    )
+
+    clicked = False
+
+    for i in range(exact_results.count()):
+        result = exact_results.nth(i)
+
+        try:
+            if not result.is_visible():
                 continue
 
-            placeholder = (
-                field.get_attribute("placeholder")
-                or ""
-            )
-            name = (
-                field.get_attribute("name")
-                or ""
-            )
-            aria = (
-                field.get_attribute("aria-label")
-                or ""
+            # Don't click the text inside the input itself.
+            tag = result.evaluate(
+                "el => el.tagName.toLowerCase()"
             )
 
+            if tag == "input":
+                continue
+
+            result.click(timeout=10000)
+            clicked = True
+            break
+
+        except Exception:
+            continue
+
+    if not clicked:
+        # The first dropdown result can also be exposed as an option.
+        options = page.get_by_role(
+            "option",
+            name=re.compile(
+                rf"^\s*{re.escape(country)}\s*$",
+                re.I,
+            ),
+        )
+
+        for i in range(options.count()):
+            option = options.nth(i)
+
+            try:
+                if option.is_visible():
+                    option.click(timeout=10000)
+                    clicked = True
+                    break
+            except Exception:
+                continue
+
+    if not clicked:
+        raise RuntimeError(
+            f'Country result "{country}" appeared to be unavailable.'
+        )
+
+    print("Institution country selected:", country)
+
+    # Flywire loads/enables the institution field after this.
+    page.wait_for_timeout(1800)
+
+
+def choose_institution(page, institution):
+    print("Selecting institution:", institution)
+
+    page.wait_for_timeout(1000)
+
+    inputs = get_visible_inputs(page)
+
+    if len(inputs) < 2:
+        raise RuntimeError(
+            "Institution input did not become available "
+            "after selecting the country."
+        )
+
+    # The second visible input on the opening form is institution search.
+    institution_input = inputs[1]
+
+    try:
+        if institution_input.is_disabled():
+            raise RuntimeError(
+                "Institution input is still disabled."
+            )
+    except Exception as exc:
+        if "still disabled" in str(exc):
+            raise
+
+    institution_input.click()
+    institution_input.fill(institution)
+
+    print("Institution search entered:", institution)
+
+    page.wait_for_timeout(1500)
+
+    # Again: fill ONCE and click the returned result.
+    exact_results = page.get_by_text(
+        re.compile(
+            rf"^\s*{re.escape(institution)}\s*$",
+            re.I,
+        )
+    )
+
+    clicked = False
+
+    for i in range(exact_results.count()):
+        result = exact_results.nth(i)
+
+        try:
+            if not result.is_visible():
+                continue
+
+            tag = result.evaluate(
+                "el => el.tagName.toLowerCase()"
+            )
+
+            if tag == "input":
+                continue
+
+            result.click(timeout=10000)
+            clicked = True
+            break
+
+        except Exception:
+            continue
+
+    if not clicked:
+        options = page.get_by_role(
+            "option",
+            name=re.compile(
+                rf"^\s*{re.escape(institution)}\s*$",
+                re.I,
+            ),
+        )
+
+        for i in range(options.count()):
+            option = options.nth(i)
+
+            try:
+                if option.is_visible():
+                    option.click(timeout=10000)
+                    clicked = True
+                    break
+            except Exception:
+                continue
+
+    if not clicked:
+        raise RuntimeError(
+            f'Institution result "{institution}" could not be selected.'
+        )
+
+    print("Institution selected:", institution)
+
+    page.wait_for_timeout(800)
+
+
+def click_button(page, name):
+    button = page.get_by_role(
+        "button",
+        name=re.compile(
+            rf"^\s*{re.escape(name)}\s*$",
+            re.I,
+        ),
+    )
+
+    for i in range(button.count()):
+        candidate = button.nth(i)
+
+        try:
+            if candidate.is_visible():
+                candidate.click(timeout=15000)
+                return
+        except Exception:
+            pass
+
+    # Fallback for clickable cards/text.
+    text = page.get_by_text(
+        re.compile(
+            rf"^\s*{re.escape(name)}\s*$",
+            re.I,
+        )
+    )
+
+    for i in range(text.count()):
+        candidate = text.nth(i)
+
+        try:
+            if candidate.is_visible():
+                candidate.click(timeout=15000)
+                return
+        except Exception:
+            pass
+
+    raise RuntimeError(
+        f'Could not click "{name}".'
+    )
+
+
+def fill_destination_amount(page, amount):
+    print("Entering destination amount:", amount)
+
+    # First try labelled Amount input.
+    amount_fields = page.get_by_label(
+        re.compile(r"Amount", re.I)
+    )
+
+    for i in range(amount_fields.count()):
+        field = amount_fields.nth(i)
+
+        try:
+            if field.is_visible():
+                field.fill(str(amount))
+                print("Destination amount entered.")
+                return
+        except Exception:
+            pass
+
+    # Fallback based on nearby "receives" section.
+    inputs = get_visible_inputs(page)
+
+    for field in inputs:
+        try:
             metadata = " ".join(
                 [
-                    placeholder,
-                    name,
-                    aria,
+                    field.get_attribute("name") or "",
+                    field.get_attribute("placeholder") or "",
+                    field.get_attribute("aria-label") or "",
                 ]
             )
 
             if re.search(
-                r"amount|receiv",
+                r"amount",
                 metadata,
                 re.I,
             ):
-                field.fill(
-                    str(amount)
-                )
+                field.fill(str(amount))
+                print("Destination amount entered.")
                 return
         except Exception:
-            continue
-
-    # Last fallback: visible input nearest the word "receives".
-    receives = page.get_by_text(
-        re.compile(
-            r"receives",
-            re.I,
-        )
-    )
-
-    for i in range(receives.count()):
-        label = receives.nth(i)
-
-        try:
-            if not label.is_visible():
-                continue
-
-            container = label.locator("xpath=..")
-
-            for _ in range(6):
-                inputs = container.locator("input")
-
-                for j in range(inputs.count()):
-                    candidate = inputs.nth(j)
-
-                    if candidate.is_visible():
-                        candidate.fill(
-                            str(amount)
-                        )
-                        return
-
-                container = container.locator(
-                    "xpath=.."
-                )
-        except Exception:
-            continue
+            pass
 
     raise RuntimeError(
-        "Could not locate the destination amount field."
+        "Could not locate destination amount field."
     )
 
 
-def select_payment_country(page, country: str):
-    print(
-        "Selecting payment country:",
-        country,
-    )
+def choose_payment_country(page, country):
+    print("Selecting payment origin:", country)
 
-    # Try a labelled field first.
-    labelled = page.get_by_label(
-        re.compile(
-            r"country|region|payment.*from",
-            re.I,
-        )
-    )
+    inputs = get_visible_inputs(page)
 
-    for i in range(labelled.count()):
-        field = labelled.nth(i)
+    candidate = None
 
+    for field in inputs:
         try:
-            if not field.is_visible():
-                continue
-
-            tag = field.evaluate(
-                "el => el.tagName.toLowerCase()"
+            metadata = " ".join(
+                [
+                    field.get_attribute("placeholder") or "",
+                    field.get_attribute("aria-label") or "",
+                    field.get_attribute("name") or "",
+                ]
             )
 
-            if tag == "select":
-                try:
-                    field.select_option(
-                        label=country,
-                    )
-                except Exception:
-                    field.select_option(
-                        value=country,
-                    )
-
-                return
+            if re.search(
+                r"country|region",
+                metadata,
+                re.I,
+            ):
+                candidate = field
         except Exception:
-            continue
+            pass
 
-    # Search visible comboboxes for a country control.
-    combos = page.get_by_role(
-        "combobox"
+    if candidate is None:
+        # At this stage the country selector is normally one of
+        # the last visible searchable inputs.
+        if not inputs:
+            raise RuntimeError(
+                "Could not find payment-country input."
+            )
+
+        candidate = inputs[-1]
+
+    candidate.click()
+    candidate.fill(country)
+
+    page.wait_for_timeout(1000)
+
+    results = page.get_by_text(
+        re.compile(
+            rf"^\s*{re.escape(country)}\s*$",
+            re.I,
+        )
     )
 
-    for i in range(combos.count()):
-        field = combos.nth(i)
+    for i in range(results.count()):
+        result = results.nth(i)
 
         try:
-            if not field.is_visible():
-                continue
+            if result.is_visible():
+                result.click(timeout=10000)
 
-            field.click()
-            page.wait_for_timeout(400)
-
-            # Try typing into focused/inner input.
-            try:
-                active = page.locator(":focus")
-                if active.evaluate(
-                    "el => el.tagName.toLowerCase()"
-                ) == "input":
-                    active.fill(country)
-            except Exception:
-                pass
-
-            page.wait_for_timeout(500)
-
-            try:
-                choose_from_open_dropdown(
-                    page,
+                print(
+                    "Payment origin selected:",
                     country,
                 )
+
                 return
-            except Exception:
-                page.keyboard.press(
-                    "Escape"
-                )
         except Exception:
-            continue
+            pass
 
     raise RuntimeError(
-        f'Could not select payment country "{country}".'
+        f'Could not select payment origin "{country}".'
     )
 
 
-def extract_offline_bank_transfer_quote(page) -> float:
-    label = page.get_by_text(
+def parse_inr(text):
+    match = re.search(
+        r"₹\s*([\d,]+(?:\.\d{1,2})?)",
+        text,
+    )
+
+    if not match:
+        raise RuntimeError(
+            "Could not find INR quote."
+        )
+
+    return float(
+        match.group(1).replace(",", "")
+    )
+
+
+def extract_offline_quote(page):
+    print("Looking for Offline bank transfer quote...")
+
+    labels = page.get_by_text(
         re.compile(
             r"Offline bank transfer",
             re.I,
         )
     )
 
-    visible_label = None
+    payment_label = None
 
-    for i in range(label.count()):
-        candidate = label.nth(i)
+    for i in range(labels.count()):
+        candidate = labels.nth(i)
 
         try:
             if candidate.is_visible():
-                visible_label = candidate
+                payment_label = candidate
                 break
         except Exception:
             pass
 
-    if visible_label is None:
+    if payment_label is None:
         raise RuntimeError(
             "Offline bank transfer payment method was not found."
         )
 
-    node = visible_label
+    node = payment_label
 
+    # Walk upward through the payment-method card until
+    # we find its displayed INR amount.
     for _ in range(10):
         try:
-            text = node.inner_text(
-                timeout=5000,
-            )
+            text = node.inner_text()
 
             if "₹" in text:
-                return parse_inr(
-                    text
-                )
+                return parse_inr(text)
         except Exception:
             pass
 
-        node = node.locator(
-            "xpath=.."
-        )
-
-    body = page.locator(
-        "body"
-    ).inner_text()
-
-    position = body.lower().find(
-        "offline bank transfer"
-    )
-
-    if position >= 0:
-        nearby = body[
-            position:
-            position + 1500
-        ]
-
-        if "₹" in nearby:
-            return parse_inr(
-                nearby
-            )
+        node = node.locator("xpath=..")
 
     raise RuntimeError(
         "Offline bank transfer was found, "
@@ -641,27 +518,14 @@ def extract_offline_bank_transfer_quote(page) -> float:
 
 
 def collect_quote(
-    config: QuoteConfig = USD_5000,
+    config=USD_5000,
     headless=True,
 ):
-    """
-    Phase V3.1.
-
-    Reads the displayed quote only.
-    It does NOT submit/create a payment and does NOT enter personal details.
-    """
 
     print()
-    print(
-        "================================"
-    )
-    print(
-        "FLYWIRE QUOTE AGENT"
-    )
-    print(
-        "================================"
-    )
-
+    print("================================")
+    print("FLYWIRE QUOTE AGENT")
+    print("================================")
     print(
         "Institution country:",
         config.institution_country,
@@ -687,9 +551,10 @@ def collect_quote(
         "Bank -> SBI -> Offline bank transfer"
     )
 
-    fetched_at = now_ist()
+    timestamp = now_ist()
 
     with sync_playwright() as p:
+
         browser = p.chromium.launch(
             headless=headless,
             args=[
@@ -709,15 +574,11 @@ def collect_quote(
 
         page = context.new_page()
 
-        page.set_default_timeout(
-            15000
-        )
+        page.set_default_timeout(15000)
 
         try:
-            print(
-                "Opening:",
-                PAY_URL,
-            )
+
+            print("Opening:", PAY_URL)
 
             page.goto(
                 PAY_URL,
@@ -725,14 +586,11 @@ def collect_quote(
                 timeout=90000,
             )
 
-            # The payment form is JS-rendered.
-            page.wait_for_timeout(
-                3000
-            )
+            page.wait_for_timeout(3000)
 
             page.get_by_text(
                 re.compile(
-                    r"Make a Payment",
+                    r"MAKE A PAYMENT",
                     re.I,
                 )
             ).first.wait_for(
@@ -740,164 +598,140 @@ def collect_quote(
                 timeout=30000,
             )
 
-            # --------------------------------------------------
-            # STEP 1: institution country
-            # --------------------------------------------------
-            select_landing_dropdown(
+            dismiss_privacy_popup(page)
+
+            # ==========================================
+            # PAGE 1
+            # ==========================================
+
+            choose_country(
                 page,
-                index=0,
-                value=config.institution_country,
-                description="institution country",
+                config.institution_country,
             )
 
-            page.wait_for_timeout(
-                1000
-            )
-
-            # Institution list can reload after country selection.
-            page.wait_for_timeout(
-                1000
-            )
-
-            # --------------------------------------------------
-            # STEP 2: institution
-            # --------------------------------------------------
-            select_landing_dropdown(
+            choose_institution(
                 page,
-                index=1,
-                value=config.institution,
-                description="institution",
+                config.institution,
             )
 
-            page.wait_for_timeout(
-                700
+            # Debug checkpoint
+            page.screenshot(
+                path=str(
+                    DEBUG_DIR /
+                    "checkpoint_harvard_selected.png"
+                ),
+                full_page=True,
             )
 
-            # Save a checkpoint screenshot before continuing.
-            try:
-                page.screenshot(
-                    path=str(
-                        DEBUG_DIR
-                        / "flywire_checkpoint_institution.png"
-                    ),
-                    full_page=True,
-                )
-            except Exception:
-                pass
+            print(
+                "Country + institution completed successfully."
+            )
 
-            # --------------------------------------------------
-            # STEP 3: Continue
-            # --------------------------------------------------
-            click_text(
+            click_button(
                 page,
                 "Continue",
             )
 
-            page.wait_for_timeout(
-                2200
-            )
+            page.wait_for_timeout(2500)
 
-            # --------------------------------------------------
-            # STEP 4: destination amount
-            # --------------------------------------------------
-            fill_amount(
+            # ==========================================
+            # PAGE 2
+            # ==========================================
+
+            fill_destination_amount(
                 page,
                 config.amount,
             )
 
-            # --------------------------------------------------
-            # STEP 5: payer/payment country = India
-            # --------------------------------------------------
-            select_payment_country(
+            choose_payment_country(
                 page,
                 config.payment_country,
             )
 
-            page.wait_for_timeout(
-                700
-            )
-
             try:
-                click_text(
+                click_button(
                     page,
                     "Next",
                 )
             except Exception:
-                click_text(
+                click_button(
                     page,
                     "Continue",
                 )
 
-            page.wait_for_timeout(
-                2200
+            page.wait_for_timeout(2500)
+
+            # ==========================================
+            # SOURCE OF FUNDS
+            # ==========================================
+
+            print(
+                "Selecting Full Loan Financing..."
             )
 
-            # --------------------------------------------------
-            # STEP 6: Full Loan Financing
-            # --------------------------------------------------
-            click_text(
+            click_button(
                 page,
                 "Full Loan Financing",
             )
 
-            page.wait_for_timeout(
-                1000
+            page.wait_for_timeout(1200)
+
+            # ==========================================
+            # LOAN PROVIDER TYPE
+            # ==========================================
+
+            print(
+                "Selecting Bank..."
             )
 
-            # --------------------------------------------------
-            # STEP 7: Bank
-            # --------------------------------------------------
-            click_text(
+            click_button(
                 page,
                 "Bank",
             )
 
-            page.wait_for_timeout(
-                1000
+            page.wait_for_timeout(1200)
+
+            # ==========================================
+            # SBI
+            # ==========================================
+
+            print(
+                "Selecting SBI loan..."
             )
 
-            # --------------------------------------------------
-            # STEP 8: SBI loan
-            # --------------------------------------------------
-            click_text(
+            click_button(
                 page,
                 "I have taken a loan from SBI",
             )
 
-            page.wait_for_timeout(
-                700
-            )
+            page.wait_for_timeout(700)
 
             try:
-                click_text(
+                click_button(
                     page,
                     "Continue",
                 )
             except Exception:
                 pass
 
-            page.wait_for_timeout(
-                2200
-            )
+            page.wait_for_timeout(2500)
 
-            # --------------------------------------------------
-            # STEP 9: read quote only
-            # --------------------------------------------------
-            inr_quote = (
-                extract_offline_bank_transfer_quote(
-                    page
-                )
+            # ==========================================
+            # QUOTE
+            # ==========================================
+
+            inr_quote = extract_offline_quote(
+                page
             )
 
             effective_rate = round(
-                inr_quote
-                / config.amount,
+                inr_quote / config.amount,
                 4,
             )
 
             record = {
                 "timestamp":
-                    fetched_at.isoformat(),
+                    timestamp.isoformat(),
 
                 "currency":
                     config.currency,
@@ -940,9 +774,9 @@ def collect_quote(
             }
 
             print()
-            print(
-                "FLYWIRE QUOTE CAPTURED"
-            )
+            print("================================")
+            print("FLYWIRE QUOTE CAPTURED")
+            print("================================")
             print(
                 "INR Quote:",
                 inr_quote,
@@ -953,27 +787,23 @@ def collect_quote(
             )
             print(
                 "Timestamp:",
-                fetched_at.isoformat(),
+                timestamp.isoformat(),
             )
 
             return record
 
         except Exception as exc:
-            print()
-            print(
-                "FLYWIRE AGENT FAILED:"
-            )
-            print(
-                str(exc)
-            )
 
-            save_debug(
-                page
-            )
+            print()
+            print("FLYWIRE AGENT FAILED:")
+            print(str(exc))
+
+            save_debug(page)
 
             raise
 
         finally:
+
             context.close()
             browser.close()
 
