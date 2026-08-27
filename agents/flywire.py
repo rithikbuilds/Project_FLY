@@ -925,26 +925,26 @@ def collect_quote(
                 "Selecting Bank..."
             )
 
-            bank_text = page.get_by_text(
-                "Bank",
-                exact=True,
-            ).first
+            # The Bank option is itself the clickable element.
+            # Debug HTML shows:
+            #   role="button"
+            #   aria-label="Bank"
+            #   data-testid="loanProviderCategory-banks"
+            # There is NO nested Select button on this screen.
+            bank_card = page.locator(
+                '[data-testid="loanProviderCategory-banks"]'
+            )
 
-            bank_text.wait_for(
+            bank_card.wait_for(
                 state="visible",
                 timeout=15000,
             )
 
-            bank_card = bank_text.locator(
-                "xpath=ancestor::*[.//button[normalize-space()='Select']][1]"
+            bank_card.click(
+                timeout=10000,
             )
 
-            bank_card.get_by_role(
-                "button",
-                name="Select",
-                exact=True,
-            ).click()
-
+            # Wait until the SBI/non-SBI screen has actually loaded.
             page.get_by_text(
                 "I have taken a loan from SBI",
                 exact=False,
