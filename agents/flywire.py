@@ -24,26 +24,36 @@ class QuoteConfig:
     payment_country: str = "India"
 
 
-USD_AMOUNTS = [
-    5000,
-    10000,
-    15000,
-    20000,
-    25000,
-    30000,
+QUOTE_AMOUNTS = [
+    5000, 10000, 15000, 20000, 25000, 30000,
 ]
 
+CURRENCY_ROUTES = {
+    "USD": {"institution_country": "United States", "institution": "Harvard University"},
+    "GBP": {"institution_country": "United Kingdom", "institution": "Imperial College"},
+    "CAD": {"institution_country": "Canada", "institution": "Algoma University"},
+    "EUR": {"institution_country": "Germany", "institution": "Constructor University Bremen gGmbH"},
+    "AUD": {"institution_country": "Australia", "institution": "Georgia Southern University"},
+    "NZD": {"institution_country": "New Zealand", "institution": "University of Waikato"},
+}
 
-def usd_quote_config(amount):
+USD_AMOUNTS = QUOTE_AMOUNTS
+
+
+def quote_config(currency, amount):
+    route = CURRENCY_ROUTES[currency]
     return QuoteConfig(
-        currency="USD",
-        institution_country="United States",
-        institution="Harvard University",
+        currency=currency,
+        institution_country=route["institution_country"],
+        institution=route["institution"],
         amount=amount,
     )
 
 
-# Keep this name for backward compatibility with the working V10 flow.
+def usd_quote_config(amount):
+    return quote_config("USD", amount)
+
+
 USD_5000 = usd_quote_config(5000)
 
 
@@ -1156,48 +1166,41 @@ def collect_usd_5000(
     )
 
 
-def collect_usd_denominations(
-    headless=True,
-    amounts=None,
-):
-    """
-    Capture Harvard / USD quotes for all configured denominations.
-
-    Each denomination intentionally starts a fresh Flywire browser session.
-    That is slower than reusing one session, but it preserves the proven V10
-    navigation path and keeps one failed quote from contaminating the next.
-    """
+def collect_usd_denominations(headless=True, amounts=None):
     if amounts is None:
-        amounts = USD_AMOUNTS
+        amounts = QUOTE_AMOUNTS
+    return collect_currency_denominations("USD", headless=headless, amounts=amounts)
+
+
+def collect_currency_denominations(currency, headless=True, amounts=None):
+    if amounts is None:
+        amounts = QUOTE_AMOUNTS
 
     records = []
+    route = CURRENCY_ROUTES[currency]
 
     print()
     print("================================")
-    print("FLYWIRE USD MULTI-DENOMINATION RUN")
+    print(f"FLYWIRE {currency} MULTI-DENOMINATION RUN")
     print("================================")
-    print("Amounts:", ", ".join(f"USD {amount:,}" for amount in amounts))
+    print("Institution country:", route["institution_country"])
+    print("Institution:", route["institution"])
+    print("Amounts:", ", ".join(f"{currency} {a:,}" for a in amounts))
 
     for index, amount in enumerate(amounts, start=1):
         print()
         print("################################")
-        print(
-            f"USD QUOTE {index}/{len(amounts)}: "
-            f"USD {amount:,}"
-        )
+        print(f"{currency} QUOTE {index}/{len(amounts)}: {currency} {amount:,}")
         print("################################")
 
-        config = usd_quote_config(amount)
-
         record = collect_quote(
-            config,
+            quote_config(currency, amount),
             headless=headless,
         )
-
         records.append(record)
 
         print(
-            f"Captured USD {amount:,} -> "
+            f"Captured {currency} {amount:,} -> "
             f"INR {record['inr_quote']:,.2f} -> "
             f"Rate {record['effective_rate']}"
         )
@@ -1205,5 +1208,23 @@ def collect_usd_denominations(
     return records
 
 
+def collect_all_quotes(headless=True, currencies=None, amounts=None):
+    if currencies is None:
+        currencies = list(CURRENCY_ROUTES.keys())
+    if amounts is None:
+        amounts = QUOTE_AMOUNTS
+
+    records = []
+    for currency in currencies:
+        records.extend(
+            collect_currency_denominations(
+                currency,
+                headless=headless,
+                amounts=amounts,
+            )
+        )
+    return records
+
+
 if __name__ == "__main__":
-    collect_usd_denominations()
+    collect_all_quotes()
