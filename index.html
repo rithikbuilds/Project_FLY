@@ -1493,6 +1493,316 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
     }
 }
 
+
+/* ==========================================================
+   PROJECT FLY — SAFE LAYOUT REFINEMENT
+   Layout/spacing only. Existing data logic is untouched.
+   ========================================================== */
+
+:root{
+  --pf-sidebar-w: 238px;
+  --pf-page-gap: 16px;
+  --pf-card-radius: 12px;
+}
+
+/* Stable app geometry */
+.app{
+  min-height:100vh;
+  align-items:stretch;
+}
+
+.sidebar{
+  width:var(--pf-sidebar-w) !important;
+  min-width:var(--pf-sidebar-w) !important;
+  flex:0 0 var(--pf-sidebar-w) !important;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.main{
+  min-width:0;
+  width:calc(100% - var(--pf-sidebar-w));
+}
+
+/* Consistent page rhythm */
+.tool-page{
+  width:100%;
+  max-width:none;
+  box-sizing:border-box;
+}
+
+.header{
+  min-height:74px;
+  padding:18px 22px !important;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  box-sizing:border-box;
+}
+
+.header > div:first-child{
+  min-width:0;
+}
+
+.header h1{
+  margin:0 0 5px !important;
+  line-height:1.08;
+}
+
+.header .subtitle{
+  max-width:920px;
+  line-height:1.45;
+}
+
+/* Main content: compact enough to fit desktop screen */
+#fxPage > section,
+#fvmPage > section,
+#tcsPage > section{
+  margin-left:18px;
+  margin-right:18px;
+}
+
+.card{
+  border-radius:var(--pf-card-radius) !important;
+}
+
+/* Flywire vs Market */
+.fvm-page{
+  padding-bottom:12px;
+}
+
+.fvm-header{
+  margin-bottom:0 !important;
+}
+
+.fvm-controls{
+  margin-top:14px !important;
+  margin-bottom:12px !important;
+  padding:13px 15px !important;
+}
+
+.fvm-control-grid{
+  display:grid !important;
+  grid-template-columns:minmax(170px,1.1fr) minmax(170px,1fr) minmax(170px,1fr) auto !important;
+  align-items:end !important;
+  gap:12px !important;
+}
+
+.fvm-control-grid .field{
+  margin:0 !important;
+  min-width:0;
+}
+
+.fvm-control-grid select,
+.fvm-control-grid input{
+  width:100%;
+  box-sizing:border-box;
+}
+
+.fvm-summary-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:10px !important;
+  margin-top:0 !important;
+  margin-bottom:12px !important;
+}
+
+.fvm-stat{
+  min-height:78px !important;
+  padding:12px 14px !important;
+  border-radius:11px !important;
+}
+
+.fvm-stat-label{
+  margin-bottom:5px !important;
+}
+
+.fvm-stat-value{
+  line-height:1.05 !important;
+}
+
+.fvm-table-card{
+  margin-top:0 !important;
+  padding:0 !important;
+  overflow:hidden;
+  border-radius:12px !important;
+}
+
+.fvm-table-toolbar{
+  padding:12px 14px !important;
+  gap:12px !important;
+  align-items:center !important;
+}
+
+.fvm-table-wrap{
+  width:100%;
+  overflow-x:auto !important;
+  overflow-y:visible;
+  scrollbar-gutter:stable;
+}
+
+.fvm-table{
+  width:100% !important;
+  min-width:1360px !important;
+  border-collapse:separate;
+  border-spacing:0;
+  table-layout:fixed;
+}
+
+.fvm-table th,
+.fvm-table td{
+  padding:8px 7px !important;
+  vertical-align:middle !important;
+  line-height:1.22 !important;
+}
+
+.fvm-table th{
+  position:sticky;
+  top:0;
+  z-index:2;
+  white-space:normal !important;
+}
+
+.fvm-table .currency-col{width:78px !important}
+.fvm-table .amount-col{width:88px !important}
+.fvm-table .market-col{width:98px !important}
+.fvm-table .rate-col{width:100px !important}
+
+.fvm-footer-row{
+  padding:9px 14px !important;
+  gap:16px !important;
+  flex-wrap:wrap;
+}
+
+.fvm-reference{
+  margin:10px 18px 0 !important;
+  padding:10px 12px !important;
+  line-height:1.45 !important;
+}
+
+/* FX Rate Comparison */
+.fx-controls{
+  margin-top:14px !important;
+  margin-bottom:12px !important;
+  padding:13px 15px !important;
+}
+
+.fx-stats-grid{
+  gap:10px !important;
+  margin-bottom:12px !important;
+}
+
+.fx-stat-card{
+  padding:12px 14px !important;
+  min-height:78px !important;
+}
+
+.fx-table-card,
+.fx-history-card{
+  margin-top:12px !important;
+  border-radius:12px !important;
+  overflow:hidden;
+}
+
+.fx-table-wrap{
+  overflow-x:auto !important;
+  scrollbar-gutter:stable;
+}
+
+.fx-table th,
+.fx-table td{
+  padding:8px 9px !important;
+  vertical-align:middle;
+}
+
+/* TCS Calculator */
+#tcsPage .card{
+  margin-top:14px;
+}
+
+.form-grid{
+  gap:12px !important;
+}
+
+/* Footer should not create a large dead zone */
+.footer{
+  margin-top:12px !important;
+  padding:10px 18px !important;
+}
+
+/* Laptop / smaller desktop */
+@media (max-width:1280px){
+  :root{--pf-sidebar-w:220px}
+
+  .header{
+    padding:16px 18px !important;
+  }
+
+  #fxPage > section,
+  #fvmPage > section,
+  #tcsPage > section{
+    margin-left:14px;
+    margin-right:14px;
+  }
+
+  .fvm-summary-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+
+  .fvm-table{
+    min-width:1280px !important;
+  }
+}
+
+/* Tablet / narrow browser */
+@media (max-width:980px){
+  :root{--pf-sidebar-w:190px}
+
+  .fvm-control-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+
+  .fvm-summary-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+
+  .header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+
+/* Mobile fallback */
+@media (max-width:720px){
+  .app{
+    display:block !important;
+  }
+
+  .sidebar{
+    width:100% !important;
+    min-width:0 !important;
+    position:relative !important;
+    height:auto !important;
+  }
+
+  .main{
+    width:100% !important;
+  }
+
+  .fvm-control-grid,
+  .fvm-summary-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  #fxPage > section,
+  #fvmPage > section,
+  #tcsPage > section{
+    margin-left:10px;
+    margin-right:10px;
+  }
+}
+
 </style>
 
 </head>
@@ -2626,9 +2936,6 @@ SBI TCS Estimation Tool
                         <th class="amount-col">Amount</th>
                         <th class="market-col">Live Market<br>Rate</th>
                         <th class="rate-col">Flywire<br>Rate / Markup</th>
-                        <th class="rate-col">HDFC<br>Rate / Markup</th>
-                        <th class="rate-col">SBI<br>Rate / Markup</th>
-                        <th class="rate-col">Canara<br>Rate / Markup</th>
                         <th class="rate-col">Punjab National Bank<br>Rate / Markup</th>
                         <th class="rate-col">Union Bank of India<br>Rate / Markup</th>
                         <th class="rate-col">Canara Bank<br>Rate / Markup</th>
@@ -2642,7 +2949,6 @@ SBI TCS Estimation Tool
                     </tr>
                 </thead>
                 <tbody id="fvmTableBody">
-                    <tr><td colspan="9" class="fvm-empty">Open Flywire vs Market to load comparison data.</td></tr>
                     <tr><td colspan="14" class="fvm-empty">Open Flywire vs Market to load comparison data.</td></tr>
                 </tbody>
             </table>
@@ -4354,14 +4660,10 @@ const FVM_FLAGS = {
 };
 
 const FVM_BANKS = [
-    { key: "HDFC Bank", label: "HDFC" },
-    { key: "SBI", label: "SBI" },
-    { key: "Canara Bank", label: "Canara" },
     { key: "Punjab National Bank", label: "Punjab National Bank" },
     { key: "Union Bank of India", label: "Union Bank of India" },
     { key: "Canara Bank", label: "Canara Bank" },
     { key: "Bank of Baroda", label: "Bank of Baroda" },
-    { key: "Axis Bank", label: "Axis Bank" }
     { key: "SBI", label: "SBI" },
     { key: "ICICI Bank", label: "ICICI Bank" },
     { key: "IndusInd Bank", label: "IndusInd Bank" },
@@ -4529,7 +4831,6 @@ async function loadFvmData(force = false) {
         }
 
         document.getElementById("fvmTableBody").innerHTML =
-            '<tr><td colspan="9" class="fvm-empty">Could not load data/latest.json and data/flywire_latest.json. Confirm both workflow data files exist and refresh.</td></tr>';
             '<tr><td colspan="14" class="fvm-empty">Could not load data/latest.json and data/flywire_latest.json. Confirm both workflow data files exist and refresh.</td></tr>';
 
         document.getElementById("fvmRowsMeta").textContent = "No comparison data available.";
@@ -4607,7 +4908,6 @@ function renderFvmTable() {
     document.getElementById("fvmTableBody").innerHTML =
         rows.length
             ? rows.join("")
-            : '<tr><td colspan="9" class="fvm-empty">No rows match the selected filters.</td></tr>';
             : '<tr><td colspan="14" class="fvm-empty">No rows match the selected filters.</td></tr>';
 
     document.getElementById("fvmRowsMeta").textContent =
@@ -4632,24 +4932,11 @@ function downloadFvmComparison() {
             ? FVM_AMOUNTS
             : [Number(selectedAmount)];
 
-    const rows = [[
     const header = [
         "Currency",
         "Amount",
         "Market Rate",
         "Flywire Rate",
-        "Flywire Markup %",
-        "HDFC Rate",
-        "HDFC Markup %",
-        "SBI Rate",
-        "SBI Markup %",
-        "Canara Rate",
-        "Canara Markup %",
-        "Bank of Baroda Rate",
-        "Bank of Baroda Markup %",
-        "Axis Bank Rate",
-        "Axis Bank Markup %"
-    ]];
         "Flywire Markup %"
     ];
 
@@ -4665,31 +4952,17 @@ function downloadFvmComparison() {
 
         amounts.forEach(amount => {
             const flywire = fvmFlywireRate(currency, amount);
-            const rates = FVM_BANKS.map(bank => fvmBankRate(bank.key, currency));
 
             const markupValue = rate => {
                 const m = fvmMarkup(rate, market);
                 return Number.isFinite(m) ? m.toFixed(4) : "";
             };
 
-            rows.push([
             const row = [
                 currency,
                 amount,
                 Number.isFinite(market) ? market : "",
                 Number.isFinite(flywire) ? flywire : "",
-                markupValue(flywire),
-                Number.isFinite(rates[0]) ? rates[0] : "",
-                markupValue(rates[0]),
-                Number.isFinite(rates[1]) ? rates[1] : "",
-                markupValue(rates[1]),
-                Number.isFinite(rates[2]) ? rates[2] : "",
-                markupValue(rates[2]),
-                Number.isFinite(rates[3]) ? rates[3] : "",
-                markupValue(rates[3]),
-                Number.isFinite(rates[4]) ? rates[4] : "",
-                markupValue(rates[4])
-            ]);
                 markupValue(flywire)
             ];
 
@@ -4712,7 +4985,6 @@ function downloadFvmComparison() {
         rows
     );
 }
-
 
 function getInitialTool() {
     const hash = String(window.location.hash || "").toLowerCase();
