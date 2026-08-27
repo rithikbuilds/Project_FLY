@@ -815,59 +815,55 @@ def collect_quote(
                 config.payment_country,
             )
 
-            # Flywire's payment-information page uses a button with
-            # data-testid="next" and visible text "Next". The page can keep
-            # duplicate/fallback DOM copies, so do not search by generic text.
+            # Flywire re-renders the Next button after India is selected.
+            # Do not keep an ElementHandle across that re-render; locate the
+            # live button immediately before every click attempt.
             print("Clicking payment Next...")
 
-            next_buttons = page.locator(
-                'button[data-testid="next"]'
-            )
-
             clicked_next = False
+            last_next_error = None
 
-            for i in range(next_buttons.count()):
-                btn = next_buttons.nth(i)
-
+            for attempt in range(1, 5):
                 try:
-                    if not btn.is_visible():
-                        continue
+                    # Give Flywire's origin-country request a moment to settle.
+                    page.wait_for_timeout(1000)
 
-                    # After India is chosen Flywire may briefly show loading
-                    # dots and disable the button. Wait for this exact visible
-                    # button to become enabled instead of falling back to
-                    # a nonexistent "Continue" button.
+                    btn = page.locator(
+                        'button[data-testid="next"]:visible'
+                    ).first
+
                     btn.wait_for(
                         state="visible",
-                        timeout=10000,
+                        timeout=15000,
                     )
 
-                    page.wait_for_function(
-                        """
-                        (el) => el && !el.disabled
-                        """,
-                        arg=btn.element_handle(),
+                    # Playwright's locator click automatically waits for the
+                    # current live element to be enabled/actionable. Because
+                    # this is a Locator (not a saved ElementHandle), React may
+                    # replace the DOM node without breaking the retry.
+                    btn.click(
                         timeout=30000,
                     )
 
-                    btn.click(
-                        timeout=10000,
-                    )
-
                     clicked_next = True
-                    print("Payment Next clicked.")
+                    print(
+                        f"Payment Next clicked (attempt {attempt})."
+                    )
                     break
 
-                except Exception:
-                    continue
+                except Exception as exc:
+                    last_next_error = exc
+                    print(
+                        f"Payment Next attempt {attempt} did not complete; retrying..."
+                    )
 
             if not clicked_next:
                 raise RuntimeError(
-                    'Could not click the enabled Flywire '
-                    'button[data-testid="next"].'
+                    "Could not click Flywire payment Next after 4 attempts. "
+                    f"Last error: {last_next_error}"
                 )
 
-            # Wait for the actual next screen rather than sleeping blindly.
+            # Confirm navigation by waiting for the next page itself.
             page.get_by_text(
                 "What is the source of funds for this payment?",
                 exact=False,
