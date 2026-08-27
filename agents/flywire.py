@@ -149,288 +149,164 @@ def click_visible_exact_text(page, text, timeout=10000):
 
 def choose_country(page, country):
     """
-    Select the institution country using the visible Flywire form section
-    instead of relying on a hard-coded placeholder.
+    Flywire uses Select2 over a real hidden <select id="countryDropdown">.
+    Select the real option directly, then wait for the institution selector.
     """
     print("Selecting institution country:", country)
 
-    label = page.get_by_text(
-        re.compile(
-            r"Select the country/region.*institution.*want to pay",
-            re.I,
-        )
-    )
+    country_codes = {
+        "United States": "US",
+        "United Kingdom": "GB",
+        "Canada": "CA",
+        "Germany": "DE",
+        "Australia": "AU",
+        "New Zealand": "NZ",
+    }
 
-    if label.count() == 0:
-        label = page.get_by_text(
-            re.compile(
-                r"country/region.*institution",
-                re.I,
-            )
-        )
+    code = country_codes.get(country)
 
-    target_input = None
-
-    for i in range(label.count()):
-        item = label.nth(i)
-
-        try:
-            if not item.is_visible():
-                continue
-
-            container = item.locator("xpath=..")
-
-            for _ in range(6):
-                inputs = container.locator(
-                    "input:not([type='checkbox'])"
-                    ":not([type='radio'])"
-                    ":not([type='hidden'])"
-                    ":not([disabled])"
-                )
-
-                for j in range(inputs.count()):
-                    field = inputs.nth(j)
-
-                    try:
-                        if field.is_visible() and field.is_enabled():
-                            target_input = field
-                            break
-                    except Exception:
-                        pass
-
-                if target_input is not None:
-                    break
-
-                container = container.locator("xpath=..")
-
-            if target_input is not None:
-                break
-
-        except Exception:
-            continue
-
-    if target_input is None:
-        candidates = page.locator(
-            "input:not([type='checkbox'])"
-            ":not([type='radio'])"
-            ":not([type='hidden'])"
-            ":not([type='submit'])"
-            ":not([type='button'])"
-            ":not([disabled])"
-        )
-
-        visible = []
-
-        for i in range(candidates.count()):
-            field = candidates.nth(i)
-
-            try:
-                if field.is_visible() and field.is_enabled():
-                    visible.append(field)
-            except Exception:
-                pass
-
-        print("Visible editable inputs found:", len(visible))
-
-        for idx, field in enumerate(visible):
-            try:
-                print(
-                    f"Input {idx}:",
-                    {
-                        "placeholder": field.get_attribute("placeholder"),
-                        "aria-label": field.get_attribute("aria-label"),
-                        "name": field.get_attribute("name"),
-                        "id": field.get_attribute("id"),
-                    },
-                )
-            except Exception:
-                pass
-
-        if visible:
-            target_input = visible[0]
-
-    if target_input is None:
+    if not code:
         raise RuntimeError(
-            "Could not locate the institution-country input."
+            f'No country code configured for "{country}".'
         )
 
-    target_input.click()
-    target_input.fill(country)
+    country_select = page.locator("#countryDropdown")
+    country_select.wait_for(state="attached", timeout=20000)
 
-    print("Country search entered:", country)
+    country_select.select_option(value=code)
 
-    page.wait_for_timeout(1200)
-
-    option = page.get_by_role(
-        "option",
-        name=re.compile(
-            rf"^\\s*{re.escape(country)}\\s*$",
-            re.I,
-        ),
+    # Trigger change for Select2/site listeners.
+    page.evaluate(
+        """
+        () => {
+            const el = document.querySelector('#countryDropdown');
+            if (!el) return;
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            if (window.jQuery) {
+                window.jQuery(el).trigger('change');
+            }
+        }
+        """
     )
 
-    for i in range(option.count()):
-        item = option.nth(i)
-        try:
-            if item.is_visible():
-                item.click(timeout=10000)
-                print("Institution country selected:", country)
-                page.wait_for_timeout(1500)
-                return
-        except Exception:
-            pass
+    selected_value = country_select.input_value()
 
-    if click_visible_exact_text(page, country):
-        print("Institution country selected:", country)
-        page.wait_for_timeout(1500)
-        return
+    if selected_value != code:
+        raise RuntimeError(
+            f'Country selection verification failed. Expected "{code}", '
+            f'got "{selected_value}".'
+        )
 
-    raise RuntimeError(
-        f'Country result "{country}" could not be selected.'
+    print(f"Institution country selected: {country} ({code})")
+
+    page.wait_for_function(
+        """
+        () => {
+            const el = document.querySelector('#institutionDropdown');
+            return el && !el.disabled;
+        }
+        """,
+        timeout=20000,
     )
+
+    print("Institution selector enabled.")
 def choose_institution(page, institution):
     """
-    Select the institution using the visible Flywire form section
-    rather than a hard-coded placeholder.
+    The institution selector is Select2 with remotely loaded results.
+    Open its visible Select2 control, type into the temporary search input,
+    then select the matching institution.
     """
     print("Selecting institution:", institution)
 
-    label = page.get_by_text(
-        re.compile(
-            r"Select the institution.*want to pay",
-            re.I,
-        )
+    institution_select = page.locator("#institutionDropdown")
+    institution_select.wait_for(state="attached", timeout=20000)
+
+    page.wait_for_function(
+        """
+        () => {
+            const el = document.querySelector('#institutionDropdown');
+            return el && !el.disabled;
+        }
+        """,
+        timeout=20000,
     )
 
-    if label.count() == 0:
-        label = page.get_by_text(
-            re.compile(
-                r"institution.*want to pay",
-                re.I,
-            )
+    # Select2 creates a visible selection element next to the hidden select.
+    visible_control = page.locator(
+        "#institutionDropdown + .select2 .select2-selection"
+    )
+
+    if visible_control.count() == 0:
+        visible_control = page.locator(
+            "[aria-labelledby='select2-institutionDropdown-container']"
         )
 
-    target_input = None
+    visible_control.first.wait_for(state="visible", timeout=15000)
+    visible_control.first.click()
 
-    for i in range(label.count()):
-        item = label.nth(i)
+    search = page.locator(
+        ".select2-container--open input.select2-search__field"
+    )
 
-        try:
-            if not item.is_visible():
-                continue
-
-            container = item.locator("xpath=..")
-
-            for _ in range(6):
-                inputs = container.locator(
-                    "input:not([type='checkbox'])"
-                    ":not([type='radio'])"
-                    ":not([type='hidden'])"
-                    ":not([disabled])"
-                )
-
-                for j in range(inputs.count()):
-                    field = inputs.nth(j)
-
-                    try:
-                        if field.is_visible() and field.is_enabled():
-                            target_input = field
-                            break
-                    except Exception:
-                        pass
-
-                if target_input is not None:
-                    break
-
-                container = container.locator("xpath=..")
-
-            if target_input is not None:
-                break
-
-        except Exception:
-            continue
-
-    if target_input is None:
-        candidates = page.locator(
-            "input:not([type='checkbox'])"
-            ":not([type='radio'])"
-            ":not([type='hidden'])"
-            ":not([type='submit'])"
-            ":not([type='button'])"
-            ":not([disabled])"
-        )
-
-        visible = []
-
-        for i in range(candidates.count()):
-            field = candidates.nth(i)
-
-            try:
-                if field.is_visible() and field.is_enabled():
-                    visible.append(field)
-            except Exception:
-                pass
-
-        print("Visible editable inputs after country:", len(visible))
-
-        for idx, field in enumerate(visible):
-            try:
-                print(
-                    f"Input {idx}:",
-                    {
-                        "placeholder": field.get_attribute("placeholder"),
-                        "aria-label": field.get_attribute("aria-label"),
-                        "name": field.get_attribute("name"),
-                        "id": field.get_attribute("id"),
-                    },
-                )
-            except Exception:
-                pass
-
-        if len(visible) >= 2:
-            target_input = visible[1]
-        elif len(visible) == 1:
-            target_input = visible[0]
-
-    if target_input is None:
-        raise RuntimeError(
-            "Could not locate the institution search input."
-        )
-
-    target_input.click()
-    target_input.fill(institution)
+    search.wait_for(state="visible", timeout=15000)
+    search.fill(institution)
 
     print("Institution search entered:", institution)
 
-    page.wait_for_timeout(1400)
+    # Give the remote institution lookup time to return.
+    page.wait_for_timeout(1500)
 
-    option = page.get_by_role(
-        "option",
-        name=re.compile(
-            rf"^\\s*{re.escape(institution)}\\s*$",
-            re.I,
-        ),
+    results = page.locator(
+        ".select2-container--open .select2-results__option"
     )
 
-    for i in range(option.count()):
-        item = option.nth(i)
-        try:
-            if item.is_visible():
-                item.click(timeout=10000)
-                print("Institution selected:", institution)
-                page.wait_for_timeout(800)
-                return
-        except Exception:
-            pass
+    results.first.wait_for(state="visible", timeout=20000)
 
-    if click_visible_exact_text(page, institution):
-        print("Institution selected:", institution)
-        page.wait_for_timeout(800)
-        return
-
-    raise RuntimeError(
-        f'Institution result "{institution}" could not be selected.'
+    matching = results.filter(
+        has_text=institution
     )
+
+    if matching.count() == 0:
+        available = []
+        for i in range(min(results.count(), 10)):
+            try:
+                text = results.nth(i).inner_text().strip()
+                if text:
+                    available.append(text)
+            except Exception:
+                pass
+
+        raise RuntimeError(
+            f'Institution result "{institution}" was not found. '
+            f'Visible Select2 results: {available}'
+        )
+
+    chosen = matching.first
+    chosen_text = chosen.inner_text().strip()
+
+    print("Institution result found:", chosen_text)
+
+    chosen.click(timeout=15000)
+    page.wait_for_timeout(1000)
+
+    selected_text = ""
+
+    try:
+        selected_text = page.locator(
+            "#select2-institutionDropdown-container"
+        ).inner_text().strip()
+    except Exception:
+        pass
+
+    selected_value = institution_select.input_value()
+
+    print("Institution selected:", selected_text or selected_value)
+
+    if not selected_value:
+        raise RuntimeError(
+            f'Flywire did not retain the institution selection for '
+            f'"{institution}".'
+        )
 def click_action(page, text, timeout=15000):
     """
     Click a normal Flywire button/card by visible label.
