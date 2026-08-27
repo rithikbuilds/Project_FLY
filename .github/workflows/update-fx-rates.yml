@@ -2,18 +2,16 @@ name: Update FX Rates
 
 on:
 
+  # Manual refresh
   workflow_dispatch:
 
+  # Every hour from 9:00 AM to 9:00 PM IST
+  #
+  # GitHub Actions cron uses UTC:
+  # 03:30 UTC = 09:00 IST
+  # 15:30 UTC = 21:00 IST
   schedule:
-
-    # 09:00 AM–09:50 AM IST
-    - cron: "30,40,50 3 * * *"
-
-    # 10:00 AM–08:50 PM IST
-    - cron: "*/10 4-14 * * *"
-
-    # 09:00 PM IST
-    - cron: "0,10,20,30 15 * * *"
+    - cron: "30 3-15 * * *"
 
 
 permissions:
