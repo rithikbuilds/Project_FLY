@@ -1,6 +1,25 @@
 {
-  "updated_at": null,
+  "updated_at": "2026-08-27T12:18:04.940434+05:30",
   "source": "pay.flywire.com",
   "payment_route": "India -> Full Loan Financing -> Bank -> SBI -> Offline bank transfer",
-  "quotes": {}
+  "quotes": {
+    "USD": {
+      "5000": {
+        "timestamp": "2026-08-27T12:18:04.940434+05:30",
+        "currency": "USD",
+        "amount": 5000,
+        "inr_quote": 487335.0,
+        "effective_rate": 97.467,
+        "institution_country": "United States",
+        "institution": "Harvard University",
+        "payment_country": "India",
+        "funding_type": "Full Loan Financing",
+        "loan_provider_type": "Bank",
+        "loan_provider": "SBI",
+        "payment_method": "Offline bank transfer",
+        "source_url": "https://pay.flywire.com/",
+        "status": "current"
+      }
+    }
+  }
 }
