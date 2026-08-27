@@ -89,7 +89,7 @@ def main():
     print("================================")
     print("PROJECT FLY - FLYWIRE CONTROLLER")
     print("================================")
-    print("Phase V3.3: Multi-currency quote capture")
+    print("Phase V3.4: Multi-currency quote capture")
     print("Currencies:", ", ".join(currencies))
     print("Denominations:", ", ".join(f"{a:,}" for a in QUOTE_AMOUNTS))
     print("Total planned quotes:", total)
@@ -117,7 +117,7 @@ def main():
 
     print()
     print("================================")
-    print("FLYWIRE V3.3 COMPLETE")
+    print("FLYWIRE V3.4 COMPLETE")
     print("================================")
     print(f"{completed} quotes captured successfully.")
     print("flywire_latest.json updated.")
