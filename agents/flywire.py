@@ -815,20 +815,68 @@ def collect_quote(
                 config.payment_country,
             )
 
-            try:
-                click_action(
-                    page,
-                    "Next",
-                )
-            except Exception:
-                click_action(
-                    page,
-                    "Continue",
+            # Flywire's payment-information page uses a button with
+            # data-testid="next" and visible text "Next". The page can keep
+            # duplicate/fallback DOM copies, so do not search by generic text.
+            print("Clicking payment Next...")
+
+            next_buttons = page.locator(
+                'button[data-testid="next"]'
+            )
+
+            clicked_next = False
+
+            for i in range(next_buttons.count()):
+                btn = next_buttons.nth(i)
+
+                try:
+                    if not btn.is_visible():
+                        continue
+
+                    # After India is chosen Flywire may briefly show loading
+                    # dots and disable the button. Wait for this exact visible
+                    # button to become enabled instead of falling back to
+                    # a nonexistent "Continue" button.
+                    btn.wait_for(
+                        state="visible",
+                        timeout=10000,
+                    )
+
+                    page.wait_for_function(
+                        """
+                        (el) => el && !el.disabled
+                        """,
+                        arg=btn.element_handle(),
+                        timeout=30000,
+                    )
+
+                    btn.click(
+                        timeout=10000,
+                    )
+
+                    clicked_next = True
+                    print("Payment Next clicked.")
+                    break
+
+                except Exception:
+                    continue
+
+            if not clicked_next:
+                raise RuntimeError(
+                    'Could not click the enabled Flywire '
+                    'button[data-testid="next"].'
                 )
 
-            page.wait_for_timeout(
-                2500
+            # Wait for the actual next screen rather than sleeping blindly.
+            page.get_by_text(
+                "What is the source of funds for this payment?",
+                exact=False,
+            ).first.wait_for(
+                state="visible",
+                timeout=30000,
             )
+
+            print("Source of funds page loaded.")
 
             # ==================================================
             # SOURCE OF FUNDS
