@@ -1133,6 +1133,365 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
 }
 
 /* Project FLY clean reference layout */.sidebar{width:225px;padding:26px 18px 18px;background:linear-gradient(#0757a8,#064584)}.main{padding:28px 36px;max-width:none}.pf-brand{height:70px;display:flex;align-items:center;gap:11px;padding:0 6px 17px;margin-bottom:18px;border-bottom:1px solid #ffffff2b;color:#fff}.pf-slot{width:40px;height:40px;border:1px solid #ffffff55;border-radius:10px;display:grid;place-items:center;font-weight:800}.pf-brand b{display:block;font-size:14px;letter-spacing:.06em}.pf-brand small{display:block;font-size:8px;letter-spacing:.12em;opacity:.6;margin-top:3px}.side-nav{min-height:72px;margin-bottom:11px;border-radius:11px}.side-nav.active{background:#1680dc88;border-color:#8dccff}.pf-toolkit{margin-top:24px!important;padding:14px!important;background:#032d56aa!important;border:1px solid #ffffff33!important}.pf-toolkit>b{font-size:9px;letter-spacing:.08em}.pf-toolkit>div{display:flex;gap:8px;margin-top:13px;font-size:9px}.pf-toolkit span{color:#ffffffb8}.pf-toolkit strong{color:#fff}.pf-toolkit>div:first-of-type strong{color:#3cdb82}.pf-version{margin-top:auto;color:#fff;font-size:10px;padding:12px 6px 0;display:flex;flex-direction:column;gap:4px}.pf-version span{opacity:.65}.header h1{font-size:30px}.fx-controls{padding:20px}.pf-grid{display:grid;grid-template-columns:1.05fr 1.15fr 1.05fr;gap:22px;align-items:start}.pf-grid .field{margin:0}.pf-grid label{display:block;height:18px;margin-bottom:7px;font-size:10px;font-weight:800;color:#17314d}.pf-grid select,.pf-grid .input-wrap,.pf-inr{width:100%;height:42px;min-height:42px;box-sizing:border-box;border:1px solid #cfddea;border-radius:7px;background:#fff}.pf-grid .input-wrap{display:flex;overflow:hidden}.pf-grid .input-wrap input{height:40px!important;border:0!important;box-shadow:none!important}.pf-grid .input-wrap span{position:static!important;transform:none!important;min-width:58px;height:100%;display:flex;align-items:center;justify-content:center;border-left:1px solid #e1e8ef;background:#f7f9fc;font-size:10px;font-weight:800}.pf-inr{display:flex;align-items:center;padding:0 14px;background:#f1f5f9;font-size:14px;font-weight:800}.pf-grid .hint{font-size:10px;margin-top:7px}.fx-presets{margin-top:11px}.fx-presets button{font-size:10px;padding:6px 13px}.pf-hide{display:none}.fx-stat-grid{gap:12px}.fx-stat-card{min-height:96px}.fx-table-card{padding:17px}.fx-table{font-size:10px}.fx-table th{font-size:8.5px;padding:9px 10px}.fx-table td{padding:8px 10px}.pf-bankcell{display:flex;align-items:center;gap:8px}.pf-blogo{width:22px;height:22px;border-radius:5px;display:grid;place-items:center;font-style:normal;font-size:8px;font-weight:900;border:1px solid #d9e4ef;background:#eef4f9}.pnb{background:#ffe7a8;color:#8d141d}.canara{background:#fff7dc;color:#e99a00}.bob{background:#fff0e8;color:#f47721}.sbi{border-radius:50%;background:#178bd2;color:#fff}.icici{border-radius:50%;background:#b82020;color:#fff}.axis{background:#ffeaf2;color:#a30a3f}.hdfc,.db{background:#eef1ff;color:#123db0}@media(max-width:1100px){.pf-grid{grid-template-columns:1fr 1fr}.pf-grid .field:last-child{grid-column:1/-1}}@media(max-width:700px){.pf-grid{grid-template-columns:1fr}.pf-grid .field:last-child{grid-column:auto}}
+
+/* ==========================================================
+   FLYWIRE VS MARKET — COMPACT DESKTOP DASHBOARD
+   ========================================================== */
+
+.fvm-page {
+    min-width: 0;
+}
+
+.fvm-header {
+    margin-bottom: 16px;
+}
+
+.fvm-header h1 {
+    font-size: 30px;
+}
+
+.fvm-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.fvm-live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 11px;
+    border: 1px solid #ccebd9;
+    border-radius: 999px;
+    background: #edf9f3;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.fvm-updated {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.fvm-controls {
+    padding: 16px 18px;
+    margin-bottom: 14px;
+}
+
+.fvm-control-grid {
+    display: grid;
+    grid-template-columns: minmax(180px,.9fr) minmax(210px,1fr) minmax(190px,.95fr) auto auto;
+    gap: 12px;
+    align-items: end;
+}
+
+.fvm-control-grid .field {
+    margin: 0;
+}
+
+.fvm-control-grid label {
+    font-size: 10px;
+    color: #17314d;
+    margin-bottom: 6px;
+}
+
+.fvm-control-grid select {
+    height: 39px;
+    font-size: 12px;
+}
+
+.fvm-action {
+    height: 39px;
+    padding: 0 15px;
+    border-radius: 7px;
+    white-space: nowrap;
+}
+
+.fvm-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 11px;
+    margin-bottom: 14px;
+}
+
+.fvm-stat {
+    min-height: 78px;
+    padding: 13px 15px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(20,60,100,.035);
+}
+
+.fvm-stat-label {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-size: 9px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.fvm-stat-value {
+    color: var(--navy);
+    font-size: 21px;
+    line-height: 1.1;
+    font-weight: 850;
+}
+
+.fvm-stat-value.green {
+    color: var(--green);
+}
+
+.fvm-stat-note {
+    color: var(--muted);
+    font-size: 9.5px;
+    margin-top: 5px;
+}
+
+.fvm-table-card {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.fvm-table-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 11px;
+}
+
+.fvm-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+.fvm-subtitle {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.fvm-legend {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 9px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.fvm-dot {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.fvm-dot.flywire { background: #0875d1; }
+.fvm-dot.best { background: #0b874b; }
+.fvm-dot.market { background: #7c56c5; }
+
+.fvm-table-wrap {
+    width: 100%;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: white;
+}
+
+.fvm-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 10px;
+    color: var(--text);
+}
+
+.fvm-table th {
+    background: #f3f7fb;
+    color: #526b86;
+    padding: 8px 5px;
+    border-right: 1px solid #e1e9f1;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    font-size: 8.5px;
+    line-height: 1.2;
+    font-weight: 800;
+    white-space: normal;
+}
+
+.fvm-table th:last-child,
+.fvm-table td:last-child {
+    border-right: 0;
+}
+
+.fvm-table td {
+    height: 45px;
+    padding: 5px 5px;
+    border-right: 1px solid #edf1f5;
+    border-bottom: 1px solid #edf1f5;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.fvm-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.fvm-table tbody tr:hover td {
+    background-color: #fafcff;
+}
+
+.fvm-table .currency-col { width: 92px; }
+.fvm-table .amount-col { width: 82px; }
+.fvm-table .market-col { width: 92px; }
+.fvm-table .rate-col { width: 110px; }
+
+.fvm-currency {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 850;
+    color: var(--navy);
+}
+
+.fvm-flag {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.fvm-amount {
+    font-weight: 800;
+    color: #314d68;
+}
+
+.fvm-market-cell {
+    background: #fbf9ff;
+}
+
+.fvm-market-rate {
+    color: #5f46a8;
+    font-weight: 850;
+    font-size: 11px;
+}
+
+.fvm-flywire-cell {
+    background: #f2f8ff;
+}
+
+.fvm-rate-main {
+    display: block;
+    color: var(--navy);
+    font-size: 10.5px;
+    line-height: 1.1;
+    font-weight: 850;
+}
+
+.fvm-flywire-cell .fvm-rate-main {
+    color: var(--blue);
+}
+
+.fvm-markup {
+    display: block;
+    margin-top: 3px;
+    font-size: 8.5px;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.fvm-markup.good { color: var(--green); }
+.fvm-markup.mid { color: #a06c00; }
+.fvm-markup.high { color: var(--red); }
+
+.fvm-best-cell {
+    background: #effaf4 !important;
+    box-shadow: inset 0 0 0 1px #cbe9d8;
+}
+
+.fvm-best-cell .fvm-rate-main {
+    color: var(--green);
+}
+
+.fvm-best-tag {
+    display: inline-block;
+    margin-top: 3px;
+    padding: 2px 5px;
+    border-radius: 999px;
+    background: #dff4e8;
+    color: var(--green);
+    font-size: 7.5px;
+    font-weight: 850;
+}
+
+.fvm-empty {
+    padding: 30px !important;
+    color: var(--muted);
+    text-align: center !important;
+}
+
+.fvm-footer-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.fvm-reference {
+    padding: 10px 12px;
+    background: #f7faff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #526b86;
+    font-size: 9.5px;
+    line-height: 1.45;
+}
+
+@media (max-width: 1180px) {
+    .fvm-control-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fvm-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fvm-table {
+        min-width: 1050px;
+    }
+}
+
+@media (max-width: 700px) {
+    .fvm-control-grid,
+    .fvm-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .fvm-header-right,
+    .fvm-table-head,
+    .fvm-footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .fvm-action {
+        width: 100%;
+    }
+}
+
 </style>
 
 </head>
@@ -1160,7 +1519,7 @@ select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(8,117,209,.
 
 </div>
 
-<button class="side-nav" id="navFx" onclick="showTool('fx')"><span class="nav-icon">⇄</span><span class="nav-copy"><span class="nav-name">FX Rate Comparison</span><span class="nav-desc">Compare outward TT selling rates</span></span></button><button class="side-nav active" id="navTcs" onclick="showTool('tcs')"><span class="nav-icon">₹</span><span class="nav-copy"><span class="nav-name">TCS Calculator</span><span class="nav-desc">Education remittance TCS estimate</span></span></button><div class="support pf-toolkit"><b>INTERNAL TOOLKIT</b><div>🟢 <span>System Status<br><strong>All systems operational</strong></span></div><div>↻ <span>Last Data Update<br><strong id="pfUpdated">—</strong></span></div><div>▣ <span>Total Banks<br><strong>10</strong></span></div><div>¤ <span>Total Currencies<br><strong>8</strong></span></div></div><div class="pf-version"><b>Project FLY</b><span>v2.0.0</span></div>
+<button class="side-nav" id="navFx" onclick="showTool('fx')"><span class="nav-icon">⇄</span><span class="nav-copy"><span class="nav-name">FX Rate Comparison</span><span class="nav-desc">Compare outward TT selling rates</span></span></button><button class="side-nav" id="navFvm" onclick="showTool('fvm')"><span class="nav-icon">VS</span><span class="nav-copy"><span class="nav-name">Flywire vs Market</span><span class="nav-desc">Flywire rates vs market & banks</span></span></button><button class="side-nav active" id="navTcs" onclick="showTool('tcs')"><span class="nav-icon">₹</span><span class="nav-copy"><span class="nav-name">TCS Calculator</span><span class="nav-desc">Education remittance TCS estimate</span></span></button><div class="support pf-toolkit"><b>INTERNAL TOOLKIT</b><div>🟢 <span>System Status<br><strong>All systems operational</strong></span></div><div>↻ <span>Last Data Update<br><strong id="pfUpdated">—</strong></span></div><div>▣ <span>Total Banks<br><strong>10</strong></span></div><div>¤ <span>Total Currencies<br><strong>8</strong></span></div></div><div class="pf-version"><b>Project FLY</b><span>v2.0.0</span></div>
 
 
 </aside>
@@ -2152,6 +2511,151 @@ SBI TCS Estimation Tool
     <span>Built by Rithik + AI</span>
     <span id="fxFooterTime"></span>
 </footer>
+
+</section>
+
+
+<!-- ==============================
+     FLYWIRE VS MARKET PAGE
+============================== -->
+<section id="fvmPage" class="tool-page fvm-page">
+
+    <header class="header fvm-header">
+        <div>
+            <h1>Flywire vs Market</h1>
+            <div class="subtitle">
+                Compare Flywire effective rates with the live market reference and selected bank TT selling rates.
+            </div>
+        </div>
+
+        <div class="fvm-header-right">
+            <div class="fvm-updated" id="fvmUpdated">Last updated: —</div>
+            <div class="fvm-live-pill" id="fvmStatus">● Loading data...</div>
+        </div>
+    </header>
+
+    <section class="card fvm-controls">
+        <div class="fvm-control-grid">
+            <div class="field">
+                <label>Currency</label>
+                <select id="fvmCurrency" onchange="renderFvmTable()">
+                    <option value="ALL">All 7 currencies</option>
+                    <option value="USD">🇺🇸 USD — US Dollar</option>
+                    <option value="GBP">🇬🇧 GBP — British Pound</option>
+                    <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+                    <option value="EUR">🇪🇺 EUR — Euro</option>
+                    <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+                    <option value="NZD">🇳🇿 NZD — New Zealand Dollar</option>
+                    <option value="SGD">🇸🇬 SGD — Singapore Dollar</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Denomination</label>
+                <select id="fvmAmount" onchange="renderFvmTable()">
+                    <option value="20000">20,000 — compact dashboard view</option>
+                    <option value="5000">5,000</option>
+                    <option value="10000">10,000</option>
+                    <option value="15000">15,000</option>
+                    <option value="25000">25,000</option>
+                    <option value="30000">30,000</option>
+                    <option value="ALL">All denominations</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Payment From</label>
+                <select disabled>
+                    <option>India</option>
+                </select>
+            </div>
+
+            <button class="primary-button fvm-action" onclick="loadFvmData(true)">↻ Refresh</button>
+            <button class="secondary-button fvm-action" onclick="downloadFvmComparison()">⇩ Export</button>
+        </div>
+    </section>
+
+    <div class="fvm-stats">
+        <div class="fvm-stat">
+            <div class="fvm-stat-label">Currencies Tracked</div>
+            <div class="fvm-stat-value">7</div>
+            <div class="fvm-stat-note">USD, GBP, CAD, EUR, AUD, NZD, SGD</div>
+        </div>
+
+        <div class="fvm-stat">
+            <div class="fvm-stat-label">Denominations</div>
+            <div class="fvm-stat-value">6</div>
+            <div class="fvm-stat-note">5K, 10K, 15K, 20K, 25K, 30K</div>
+        </div>
+
+        <div class="fvm-stat">
+            <div class="fvm-stat-label">Flywire Quotes Loaded</div>
+            <div class="fvm-stat-value green" id="fvmQuoteCount">—</div>
+            <div class="fvm-stat-note" id="fvmQuoteNote">Waiting for data</div>
+        </div>
+
+        <div class="fvm-stat">
+            <div class="fvm-stat-label">Latest Flywire Capture</div>
+            <div class="fvm-stat-value" id="fvmLastRun" style="font-size:15px">—</div>
+            <div class="fvm-stat-note">Automated rate capture</div>
+        </div>
+    </div>
+
+    <section class="card fvm-table-card">
+        <div class="fvm-table-head">
+            <div>
+                <div class="fvm-title">Flywire Rates vs Market & Bank Rates</div>
+                <div class="fvm-subtitle">
+                    Rate cells show INR per foreign-currency unit. Markup is calculated against the market reference rate.
+                </div>
+            </div>
+
+            <div class="fvm-legend">
+                <span><i class="fvm-dot flywire"></i>Flywire</span>
+                <span><i class="fvm-dot market"></i>Market reference</span>
+                <span><i class="fvm-dot best"></i>Lowest rate</span>
+            </div>
+        </div>
+
+        <div class="fvm-table-wrap">
+            <table class="fvm-table">
+                <thead>
+                    <tr>
+                        <th class="currency-col">Currency</th>
+                        <th class="amount-col">Amount</th>
+                        <th class="market-col">Live Market<br>Rate</th>
+                        <th class="rate-col">Flywire<br>Rate / Markup</th>
+                        <th class="rate-col">HDFC<br>Rate / Markup</th>
+                        <th class="rate-col">SBI<br>Rate / Markup</th>
+                        <th class="rate-col">Canara<br>Rate / Markup</th>
+                        <th class="rate-col">Bank of Baroda<br>Rate / Markup</th>
+                        <th class="rate-col">Axis Bank<br>Rate / Markup</th>
+                    </tr>
+                </thead>
+                <tbody id="fvmTableBody">
+                    <tr><td colspan="9" class="fvm-empty">Open Flywire vs Market to load comparison data.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="fvm-footer-row">
+            <span id="fvmRowsMeta">—</span>
+            <span>Lower rate = lower indicative INR cost for the same foreign-currency amount.</span>
+        </div>
+
+        <div class="fvm-reference" style="margin-top:10px">
+            <strong>Reference:</strong>
+            Flywire shows the effective rate calculated from the captured INR quote for the selected denomination.
+            Bank rates are outward remittance / TT selling rates from the existing Project FLY bank-rate feed.
+            Market rate is a reference rate and is not an executable customer rate. Final transaction pricing,
+            taxes and charges may differ.
+        </div>
+    </section>
+
+    <footer class="footer">
+        <span>Project FLY — Flywire vs Market</span>
+        <span id="fvmFooterTime"></span>
+    </footer>
 
 </section>
 
@@ -3384,35 +3888,57 @@ let fxHistoryLoaded = false;
 function showTool(tool, options = {}) {
     const tcsPage = document.getElementById("tcsPage");
     const fxPage = document.getElementById("fxPage");
+    const fvmPage = document.getElementById("fvmPage");
+
     const navTcs = document.getElementById("navTcs");
     const navFx = document.getElementById("navFx");
+    const navFvm = document.getElementById("navFvm");
 
-    const selectedTool = tool === "fx" ? "fx" : "tcs";
+    const allowed = ["tcs", "fx", "fvm"];
+    const selectedTool = allowed.includes(tool) ? tool : "tcs";
+
+    [tcsPage, fxPage, fvmPage].forEach(page => {
+        if (page) page.classList.remove("active");
+    });
+
+    [navTcs, navFx, navFvm].forEach(nav => {
+        if (nav) nav.classList.remove("active");
+    });
 
     if (selectedTool === "fx") {
-        tcsPage.classList.remove("active");
         fxPage.classList.add("active");
-        navTcs.classList.remove("active");
         navFx.classList.add("active");
 
         if (!fxLatestData) loadFxRates();
         if (!fxHistoryLoaded) loadFxHistory();
-    } else {
-        fxPage.classList.remove("active");
+    }
+
+    else if (selectedTool === "fvm") {
+        fvmPage.classList.add("active");
+        navFvm.classList.add("active");
+
+        if (!fvmBankData || !fvmFlywireData) {
+            loadFvmData();
+        } else {
+            renderFvmTable();
+        }
+    }
+
+    else {
         tcsPage.classList.add("active");
-        navFx.classList.remove("active");
         navTcs.classList.add("active");
     }
 
-    // Remember the exact tool the user is working in.
-    // Refreshing FX therefore stays on FX instead of jumping to TCS.
     try {
         localStorage.setItem("projectFlyActiveTool", selectedTool);
     } catch (error) {}
 
-    // Give each tool a stable URL without triggering a page reload.
     if (!options.skipHash) {
-        const nextHash = selectedTool === "fx" ? "#fx" : "#tcs";
+        const nextHash =
+            selectedTool === "fx" ? "#fx" :
+            selectedTool === "fvm" ? "#flywire-vs-market" :
+            "#tcs";
+
         if (window.location.hash !== nextHash) {
             history.replaceState(null, "", nextHash);
         }
@@ -3796,15 +4322,366 @@ setInterval(updateFxFooterTime, 1000);
    RESTORE ACTIVE TOOL AFTER REFRESH
 ========================================= */
 
+
+/* =========================================
+   FLYWIRE VS MARKET
+========================================= */
+
+let fvmBankData = null;
+let fvmFlywireData = null;
+
+const FVM_CURRENCIES = ["USD", "GBP", "CAD", "EUR", "AUD", "NZD", "SGD"];
+const FVM_AMOUNTS = [5000, 10000, 15000, 20000, 25000, 30000];
+
+const FVM_FLAGS = {
+    USD: "🇺🇸",
+    GBP: "🇬🇧",
+    CAD: "🇨🇦",
+    EUR: "🇪🇺",
+    AUD: "🇦🇺",
+    NZD: "🇳🇿",
+    SGD: "🇸🇬"
+};
+
+const FVM_BANKS = [
+    { key: "HDFC Bank", label: "HDFC" },
+    { key: "SBI", label: "SBI" },
+    { key: "Canara Bank", label: "Canara" },
+    { key: "Bank of Baroda", label: "Bank of Baroda" },
+    { key: "Axis Bank", label: "Axis Bank" }
+];
+
+function fvmFormatRate(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return "—";
+    return "₹" + n.toLocaleString("en-IN", {
+        minimumFractionDigits: 4,
+        maximumFractionDigits: 4
+    });
+}
+
+function fvmFormatAmount(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return "—";
+    return n.toLocaleString("en-IN");
+}
+
+function fvmMarkup(rate, market) {
+    const r = Number(rate);
+    const m = Number(market);
+    if (!Number.isFinite(r) || !Number.isFinite(m) || m === 0) return null;
+    return ((r - m) / m) * 100;
+}
+
+function fvmMarkupClass(value) {
+    const v = Number(value);
+    if (!Number.isFinite(v)) return "";
+    if (v <= 1) return "good";
+    if (v <= 2) return "mid";
+    return "high";
+}
+
+function fvmMarkupHtml(rate, market) {
+    const markup = fvmMarkup(rate, market);
+    if (!Number.isFinite(markup)) return '<span class="fvm-markup">—</span>';
+
+    return `<span class="fvm-markup ${fvmMarkupClass(markup)}">${markup.toFixed(2)}%</span>`;
+}
+
+function fvmMarketRate(currency) {
+    const fromReference = Number(
+        fvmBankData?.market_reference?.rates?.[currency]
+    );
+
+    if (Number.isFinite(fromReference)) return fromReference;
+
+    const record = (fvmBankData?.rates || []).find(
+        r => r.currency === currency && Number.isFinite(Number(r.market_rate))
+    );
+
+    return record ? Number(record.market_rate) : NaN;
+}
+
+function fvmBankRate(bankName, currency) {
+    const records = fvmBankData?.rates || [];
+
+    const exact = records.find(
+        r => r.currency === currency &&
+             String(r.bank || "").trim().toLowerCase() === bankName.toLowerCase()
+    );
+
+    if (exact) return Number(exact.bank_rate);
+
+    const fuzzy = records.find(
+        r => r.currency === currency &&
+             String(r.bank || "").toLowerCase().includes(bankName.toLowerCase())
+    );
+
+    return fuzzy ? Number(fuzzy.bank_rate) : NaN;
+}
+
+function fvmFlywireRecord(currency, amount) {
+    const quotes = fvmFlywireData?.quotes?.[currency];
+    if (!quotes) return null;
+
+    return quotes[String(amount)] || quotes[amount] || null;
+}
+
+function fvmFlywireRate(currency, amount) {
+    const record = fvmFlywireRecord(currency, amount);
+    return record ? Number(record.effective_rate) : NaN;
+}
+
+function fvmCell(rate, market, isFlywire, isBest) {
+    if (!Number.isFinite(rate)) {
+        return `<td class="${isFlywire ? "fvm-flywire-cell" : ""}"><span class="fvm-rate-main">—</span><span class="fvm-markup">—</span></td>`;
+    }
+
+    const classes = [
+        isFlywire ? "fvm-flywire-cell" : "",
+        isBest ? "fvm-best-cell" : ""
+    ].filter(Boolean).join(" ");
+
+    return `
+        <td class="${classes}">
+            <span class="fvm-rate-main">${fvmFormatRate(rate)}</span>
+            ${isBest
+                ? '<span class="fvm-best-tag">BEST RATE</span>'
+                : fvmMarkupHtml(rate, market)}
+        </td>
+    `;
+}
+
+async function loadFvmData(force = false) {
+    const status = document.getElementById("fvmStatus");
+
+    if (status) {
+        status.textContent = "● Loading data...";
+        status.style.color = "var(--blue)";
+    }
+
+    try {
+        const stamp = Date.now();
+
+        const [bankResponse, flywireResponse] = await Promise.all([
+            fetch(`data/latest.json?ts=${stamp}`, { cache: "no-store" }),
+            fetch(`data/flywire_latest.json?ts=${stamp}`, { cache: "no-store" })
+        ]);
+
+        if (!bankResponse.ok) {
+            throw new Error("data/latest.json returned HTTP " + bankResponse.status);
+        }
+
+        if (!flywireResponse.ok) {
+            throw new Error("data/flywire_latest.json returned HTTP " + flywireResponse.status);
+        }
+
+        fvmBankData = await bankResponse.json();
+        fvmFlywireData = await flywireResponse.json();
+
+        const quoteCount = FVM_CURRENCIES.reduce((total, currency) => {
+            const quotes = fvmFlywireData?.quotes?.[currency] || {};
+            return total + Object.keys(quotes).length;
+        }, 0);
+
+        document.getElementById("fvmQuoteCount").textContent = `${quoteCount} / 42`;
+        document.getElementById("fvmQuoteNote").textContent =
+            quoteCount === 42 ? "100% captured" : `${quoteCount} Flywire quotes available`;
+
+        const latest = fvmFlywireData?.updated_at || fvmBankData?.updated_at;
+        document.getElementById("fvmLastRun").textContent = formatFxDateTime(latest);
+        document.getElementById("fvmUpdated").textContent =
+            "Last updated: " + formatFxDateTime(latest);
+
+        if (status) {
+            status.textContent = quoteCount ? "● Current data loaded" : "● Data loaded";
+            status.style.color = "var(--green)";
+        }
+
+        renderFvmTable();
+    }
+
+    catch (error) {
+        console.error("Flywire vs Market:", error);
+
+        if (status) {
+            status.textContent = "● Data unavailable";
+            status.style.color = "var(--red)";
+        }
+
+        document.getElementById("fvmTableBody").innerHTML =
+            '<tr><td colspan="9" class="fvm-empty">Could not load data/latest.json and data/flywire_latest.json. Confirm both workflow data files exist and refresh.</td></tr>';
+
+        document.getElementById("fvmRowsMeta").textContent = "No comparison data available.";
+    }
+}
+
+function renderFvmTable() {
+    if (!fvmBankData || !fvmFlywireData) return;
+
+    const selectedCurrency = document.getElementById("fvmCurrency").value;
+    const selectedAmount = document.getElementById("fvmAmount").value;
+
+    const currencies =
+        selectedCurrency === "ALL"
+            ? FVM_CURRENCIES
+            : [selectedCurrency];
+
+    const amounts =
+        selectedAmount === "ALL"
+            ? FVM_AMOUNTS
+            : [Number(selectedAmount)];
+
+    const rows = [];
+
+    currencies.forEach(currency => {
+        const market = fvmMarketRate(currency);
+
+        amounts.forEach(amount => {
+            const flywire = fvmFlywireRate(currency, amount);
+
+            const bankRates = FVM_BANKS.map(bank => ({
+                bank: bank.label,
+                rate: fvmBankRate(bank.key, currency)
+            }));
+
+            const comparableRates = [
+                { key: "Flywire", rate: flywire },
+                ...bankRates
+            ].filter(item => Number.isFinite(item.rate));
+
+            const bestRate = comparableRates.length
+                ? Math.min(...comparableRates.map(item => item.rate))
+                : NaN;
+
+            const isBest = rate =>
+                Number.isFinite(rate) &&
+                Number.isFinite(bestRate) &&
+                Math.abs(rate - bestRate) < 0.00005;
+
+            rows.push(`
+                <tr>
+                    <td>
+                        <span class="fvm-currency">
+                            <span class="fvm-flag">${FVM_FLAGS[currency] || ""}</span>
+                            ${currency}
+                        </span>
+                    </td>
+
+                    <td class="fvm-amount">${fvmFormatAmount(amount)}</td>
+
+                    <td class="fvm-market-cell">
+                        <span class="fvm-market-rate">${fvmFormatRate(market)}</span>
+                    </td>
+
+                    ${fvmCell(flywire, market, true, isBest(flywire))}
+
+                    ${bankRates
+                        .map(item => fvmCell(item.rate, market, false, isBest(item.rate)))
+                        .join("")}
+                </tr>
+            `);
+        });
+    });
+
+    document.getElementById("fvmTableBody").innerHTML =
+        rows.length
+            ? rows.join("")
+            : '<tr><td colspan="9" class="fvm-empty">No rows match the selected filters.</td></tr>';
+
+    document.getElementById("fvmRowsMeta").textContent =
+        `Showing ${rows.length} comparison row${rows.length === 1 ? "" : "s"} · ` +
+        `${currencies.length} currenc${currencies.length === 1 ? "y" : "ies"} · ` +
+        `${amounts.length} denomination${amounts.length === 1 ? "" : "s"}`;
+}
+
+function downloadFvmComparison() {
+    if (!fvmBankData || !fvmFlywireData) return;
+
+    const selectedCurrency = document.getElementById("fvmCurrency").value;
+    const selectedAmount = document.getElementById("fvmAmount").value;
+
+    const currencies =
+        selectedCurrency === "ALL"
+            ? FVM_CURRENCIES
+            : [selectedCurrency];
+
+    const amounts =
+        selectedAmount === "ALL"
+            ? FVM_AMOUNTS
+            : [Number(selectedAmount)];
+
+    const rows = [[
+        "Currency",
+        "Amount",
+        "Market Rate",
+        "Flywire Rate",
+        "Flywire Markup %",
+        "HDFC Rate",
+        "HDFC Markup %",
+        "SBI Rate",
+        "SBI Markup %",
+        "Canara Rate",
+        "Canara Markup %",
+        "Bank of Baroda Rate",
+        "Bank of Baroda Markup %",
+        "Axis Bank Rate",
+        "Axis Bank Markup %"
+    ]];
+
+    currencies.forEach(currency => {
+        const market = fvmMarketRate(currency);
+
+        amounts.forEach(amount => {
+            const flywire = fvmFlywireRate(currency, amount);
+            const rates = FVM_BANKS.map(bank => fvmBankRate(bank.key, currency));
+
+            const markupValue = rate => {
+                const m = fvmMarkup(rate, market);
+                return Number.isFinite(m) ? m.toFixed(4) : "";
+            };
+
+            rows.push([
+                currency,
+                amount,
+                Number.isFinite(market) ? market : "",
+                Number.isFinite(flywire) ? flywire : "",
+                markupValue(flywire),
+                Number.isFinite(rates[0]) ? rates[0] : "",
+                markupValue(rates[0]),
+                Number.isFinite(rates[1]) ? rates[1] : "",
+                markupValue(rates[1]),
+                Number.isFinite(rates[2]) ? rates[2] : "",
+                markupValue(rates[2]),
+                Number.isFinite(rates[3]) ? rates[3] : "",
+                markupValue(rates[3]),
+                Number.isFinite(rates[4]) ? rates[4] : "",
+                markupValue(rates[4])
+            ]);
+        });
+    });
+
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Kolkata"
+    });
+
+    triggerCsvDownload(
+        `Flywire-vs-Market-${date}.csv`,
+        rows
+    );
+}
+
+
 function getInitialTool() {
     const hash = String(window.location.hash || "").toLowerCase();
 
     if (hash === "#fx") return "fx";
+    if (hash === "#flywire-vs-market" || hash === "#fvm") return "fvm";
     if (hash === "#tcs") return "tcs";
 
     try {
         const saved = localStorage.getItem("projectFlyActiveTool");
-        if (saved === "fx" || saved === "tcs") return saved;
+        if (saved === "fx" || saved === "fvm" || saved === "tcs") return saved;
     } catch (error) {}
 
     return "tcs";
@@ -3812,11 +4689,26 @@ function getInitialTool() {
 
 window.addEventListener("DOMContentLoaded", function () {
     showTool(getInitialTool(), { skipHash: false });
+
+    const fvmFooter = document.getElementById("fvmFooterTime");
+    if (fvmFooter) {
+        fvmFooter.textContent = new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+        }) + " IST";
+    }
 });
 
 window.addEventListener("hashchange", function () {
     const hash = String(window.location.hash || "").toLowerCase();
+
     if (hash === "#fx") showTool("fx", { skipHash: true });
+    if (hash === "#flywire-vs-market" || hash === "#fvm") showTool("fvm", { skipHash: true });
     if (hash === "#tcs") showTool("tcs", { skipHash: true });
 });
 
