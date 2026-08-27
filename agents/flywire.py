@@ -24,12 +24,27 @@ class QuoteConfig:
     payment_country: str = "India"
 
 
-USD_5000 = QuoteConfig(
-    currency="USD",
-    institution_country="United States",
-    institution="Harvard University",
-    amount=5000,
-)
+USD_AMOUNTS = [
+    5000,
+    10000,
+    15000,
+    20000,
+    25000,
+    30000,
+]
+
+
+def usd_quote_config(amount):
+    return QuoteConfig(
+        currency="USD",
+        institution_country="United States",
+        institution="Harvard University",
+        amount=amount,
+    )
+
+
+# Keep this name for backward compatibility with the working V10 flow.
+USD_5000 = usd_quote_config(5000)
 
 
 def now_ist():
@@ -1141,5 +1156,54 @@ def collect_usd_5000(
     )
 
 
+def collect_usd_denominations(
+    headless=True,
+    amounts=None,
+):
+    """
+    Capture Harvard / USD quotes for all configured denominations.
+
+    Each denomination intentionally starts a fresh Flywire browser session.
+    That is slower than reusing one session, but it preserves the proven V10
+    navigation path and keeps one failed quote from contaminating the next.
+    """
+    if amounts is None:
+        amounts = USD_AMOUNTS
+
+    records = []
+
+    print()
+    print("================================")
+    print("FLYWIRE USD MULTI-DENOMINATION RUN")
+    print("================================")
+    print("Amounts:", ", ".join(f"USD {amount:,}" for amount in amounts))
+
+    for index, amount in enumerate(amounts, start=1):
+        print()
+        print("################################")
+        print(
+            f"USD QUOTE {index}/{len(amounts)}: "
+            f"USD {amount:,}"
+        )
+        print("################################")
+
+        config = usd_quote_config(amount)
+
+        record = collect_quote(
+            config,
+            headless=headless,
+        )
+
+        records.append(record)
+
+        print(
+            f"Captured USD {amount:,} -> "
+            f"INR {record['inr_quote']:,.2f} -> "
+            f"Rate {record['effective_rate']}"
+        )
+
+    return records
+
+
 if __name__ == "__main__":
-    collect_usd_5000()
+    collect_usd_denominations()
