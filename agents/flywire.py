@@ -838,13 +838,35 @@ def collect_quote(
                 "Selecting Full Loan Financing..."
             )
 
-            click_action(
-                page,
-                "Full Loan Financing",
+            # The debug HTML shows this is still the source-of-funds page.
+            # Target the exact desktop Full Loan Financing card and its
+            # Select button, then WAIT for the next page before Bank.
+            source_card = page.locator(
+                '[data-testid="desktop-sourceOfFunds-education_loan"]'
+            )
+            source_card.wait_for(
+                state="visible",
+                timeout=15000,
+            )
+            source_card.get_by_role(
+                "button",
+                name="Select",
+                exact=True,
+            ).click()
+
+            page.get_by_text(
+                "Select your loan provider",
+                exact=False,
+            ).first.wait_for(
+                state="visible",
+                timeout=20000,
             )
 
-            page.wait_for_timeout(
-                1200
+            print(
+                "Full Loan Financing selected."
+            )
+            print(
+                "Loan provider page loaded."
             )
 
             # ==================================================
@@ -855,13 +877,36 @@ def collect_quote(
                 "Selecting Bank..."
             )
 
-            click_action(
-                page,
+            bank_text = page.get_by_text(
                 "Bank",
+                exact=True,
+            ).first
+
+            bank_text.wait_for(
+                state="visible",
+                timeout=15000,
             )
 
-            page.wait_for_timeout(
-                1200
+            bank_card = bank_text.locator(
+                "xpath=ancestor::*[.//button[normalize-space()='Select']][1]"
+            )
+
+            bank_card.get_by_role(
+                "button",
+                name="Select",
+                exact=True,
+            ).click()
+
+            page.get_by_text(
+                "I have taken a loan from SBI",
+                exact=False,
+            ).first.wait_for(
+                state="visible",
+                timeout=20000,
+            )
+
+            print(
+                "Bank selected."
             )
 
             # ==================================================
@@ -872,22 +917,62 @@ def collect_quote(
                 "Selecting SBI loan..."
             )
 
-            click_action(
-                page,
+            sbi_text = page.get_by_text(
                 "I have taken a loan from SBI",
+                exact=False,
+            ).first
+
+            sbi_text.wait_for(
+                state="visible",
+                timeout=15000,
             )
 
-            page.wait_for_timeout(
-                700
-            )
-
+            # Select the SBI option/card.
             try:
-                click_action(
-                    page,
-                    "Continue",
+                sbi_text.click(
+                    timeout=5000
                 )
             except Exception:
-                pass
+                sbi_card = sbi_text.locator(
+                    "xpath=ancestor::*[.//button[normalize-space()='Continue']][1]"
+                )
+                sbi_card.get_by_role(
+                    "button",
+                    name="Continue",
+                    exact=True,
+                ).click()
+
+            page.wait_for_timeout(
+                500
+            )
+
+            # If Flywire uses a shared Continue button after selecting SBI,
+            # press it only when visible and enabled.
+            continue_buttons = page.get_by_role(
+                "button",
+                name="Continue",
+                exact=True,
+            )
+
+            for i in range(
+                continue_buttons.count()
+            ):
+                btn = continue_buttons.nth(i)
+                try:
+                    if (
+                        btn.is_visible()
+                        and btn.is_enabled()
+                    ):
+                        btn.click(
+                            timeout=5000
+                        )
+                        break
+                except Exception:
+                    pass
+
+            print(
+                "SBI loan provider selected."
+            )
 
             page.wait_for_timeout(
                 2500
