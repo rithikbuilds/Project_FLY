@@ -1,0 +1,19 @@
+name: Schedule Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show scheduler time
+        run: |
+          echo "GitHub schedule triggered successfully"
+          echo "UTC:"
+          date -u
+          echo "IST:"
+          TZ=Asia/Kolkata date
