@@ -3,13 +3,6 @@ name: Update FX Rates
 on:
   workflow_dispatch:
 
-  # Fires every 10 minutes across a padded UTC window (03:00-16:00 UTC =
-  # 08:30-21:30 IST) so there's always a nearby attempt even if GitHub
-  # delays or drops a given trigger. The gate step below makes sure the
-  # actual work only runs once per IST hour, 9am-9pm.
-  schedule:
-    - cron: "*/10 3-16 * * *"
-
 permissions:
   contents: write
 
@@ -20,89 +13,50 @@ concurrency:
 jobs:
   update-rates:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      # ============================================================
-      # GATE: only run once per IST hour, 9am-9pm
-      # ============================================================
-      - name: Check IST run window
-        id: gate
-        run: |
-          STATE_FILE="data/.fx_last_run_hour"
-          IST_HOUR=$(TZ='Asia/Kolkata' date +%-H)
-          TODAY=$(TZ='Asia/Kolkata' date +%Y-%m-%d)
-          KEY="${TODAY}-${IST_HOUR}"
-
-          echo "target_key=$KEY" >> "$GITHUB_OUTPUT"
-
-          if [ "$IST_HOUR" -lt 9 ] || [ "$IST_HOUR" -gt 21 ]; then
-            echo "Outside 9am-9pm IST window (IST hour: $IST_HOUR). Skipping."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          LAST_KEY=""
-          if [ -f "$STATE_FILE" ]; then
-            LAST_KEY=$(cat "$STATE_FILE")
-          fi
-
-          if [ "$LAST_KEY" == "$KEY" ]; then
-            echo "Already completed IST hour $IST_HOUR today. Skipping duplicate trigger."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "run=true" >> "$GITHUB_OUTPUT"
-          echo "Running for IST hour $IST_HOUR ($KEY)."
-
       - name: Set up Python
-        if: steps.gate.outputs.run == 'true'
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: "pip"
 
       - name: Install dependencies
-        if: steps.gate.outputs.run == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Fetch outward FX rates
-        if: steps.gate.outputs.run == 'true'
         run: |
           python scripts/fetch_rates.py
 
       - name: Show latest rates
-        if: steps.gate.outputs.run == 'true'
         run: |
           echo "================================"
           echo "LATEST FX DATA"
           echo "================================"
           cat data/latest.json
 
-      # ============================================================
-      # COMMIT VALID DATA (also stamps the hour marker so the gate
-      # step above knows this IST hour is done)
-      # ============================================================
       - name: Commit updated rates
-        if: success() && steps.gate.outputs.run == 'true'
         run: |
           git config user.name "FX Rate Bot"
           git config user.email "actions@github.com"
 
-          echo "${{ steps.gate.outputs.target_key }}" > data/.fx_last_run_hour
+          git add data/latest.json data/history.csv
 
-          git add data/latest.json data/history.csv data/.fx_last_run_hour
           if git diff --cached --quiet; then
             echo "No FX data changes detected."
             echo "Nothing to commit."
             exit 0
           fi
+
           git commit -m "Update outward FX rates"
+
           git pull --rebase origin "${GITHUB_REF_NAME}"
+
           git push origin "HEAD:${GITHUB_REF_NAME}"
