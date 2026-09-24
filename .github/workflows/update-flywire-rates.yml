@@ -3,458 +3,64 @@ name: Update Flywire Rates
 on:
   workflow_dispatch:
 
-  # Fires every 10 minutes across a padded UTC window (03:00-16:00 UTC =
-  # 08:30-21:30 IST) so there's always a nearby attempt even if GitHub
-  # delays or drops a given trigger. The gate step below makes sure the
-  # actual work only runs once per IST hour, 9am-9pm.
-  schedule:
-    - cron: "*/10 3-16 * * *"
-
-
 permissions:
   contents: write
 
-
 concurrency:
-  group: project-fly-flywire-rates
+  group: update-flywire-rates
   cancel-in-progress: false
 
-
 jobs:
-
-  update-flywire-rates:
-
+  update-rates:
     runs-on: ubuntu-latest
 
-    timeout-minutes: 35
-
-
     steps:
-
-      # ============================================================
-      # CHECKOUT
-      # ============================================================
-
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-
-      # ============================================================
-      # GATE: only run once per IST hour, 9am-9pm
-      # ============================================================
-
-      - name: Check IST run window
-        id: gate
-        run: |
-          STATE_FILE="data/.flywire_last_run_hour"
-          IST_HOUR=$(TZ='Asia/Kolkata' date +%-H)
-          TODAY=$(TZ='Asia/Kolkata' date +%Y-%m-%d)
-          KEY="${TODAY}-${IST_HOUR}"
-
-          echo "target_key=$KEY" >> "$GITHUB_OUTPUT"
-
-          if [ "$IST_HOUR" -lt 9 ] || [ "$IST_HOUR" -gt 21 ]; then
-            echo "Outside 9am-9pm IST window (IST hour: $IST_HOUR). Skipping."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          LAST_KEY=""
-          if [ -f "$STATE_FILE" ]; then
-            LAST_KEY=$(cat "$STATE_FILE")
-          fi
-
-          if [ "$LAST_KEY" == "$KEY" ]; then
-            echo "Already completed IST hour $IST_HOUR today. Skipping duplicate trigger."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "run=true" >> "$GITHUB_OUTPUT"
-          echo "Running for IST hour $IST_HOUR ($KEY)."
-
-
-      # ============================================================
-      # PYTHON
-      # ============================================================
-
       - name: Set up Python
-        if: steps.gate.outputs.run == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: "pip"
 
-
-      # ============================================================
-      # DEPENDENCIES
-      # ============================================================
-
-      - name: Install Python dependencies
-        if: steps.gate.outputs.run == 'true'
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-
-      # ============================================================
-      # PLAYWRIGHT
-      # ============================================================
-
-      - name: Install Playwright Chromium
-        if: steps.gate.outputs.run == 'true'
+      - name: Install Playwright browsers
         run: |
           python -m playwright install --with-deps chromium
 
-
-      # ============================================================
-      # RUN FLYWIRE AGENT
-      # ============================================================
-
-      - name: Capture Flywire rates
-        if: steps.gate.outputs.run == 'true'
+      - name: Fetch Flywire rates
         run: |
-          echo "================================"
-          echo "PROJECT FLY - FLYWIRE RATE RUN"
-          echo "================================"
-          echo "Target: 7 currencies x 6 denominations = 42 quotes"
-          echo ""
-
           python scripts/fetch_flywire_rates.py
 
-
-      # ============================================================
-      # VALIDATE DATA
-      # ============================================================
-
-      - name: Validate Flywire data
-        if: steps.gate.outputs.run == 'true'
+      - name: Show latest Flywire rates
         run: |
-          python - <<'PY'
-          import json
-          import math
-          import sys
-          from pathlib import Path
-
-
-          latest_file = Path("data/flywire_latest.json")
-
-
-          EXPECTED_CURRENCIES = [
-              "USD",
-              "GBP",
-              "CAD",
-              "EUR",
-              "AUD",
-              "NZD",
-              "SGD",
-          ]
-
-
-          EXPECTED_AMOUNTS = [
-              "5000",
-              "10000",
-              "15000",
-              "20000",
-              "25000",
-              "30000",
-          ]
-
-
-          RATE_RANGES = {
-              "USD": (50, 150),
-              "GBP": (80, 200),
-              "CAD": (30, 120),
-              "EUR": (60, 180),
-              "AUD": (30, 120),
-              "NZD": (25, 110),
-              "SGD": (30, 120),
-          }
-
-
-          def fail(message):
-              print("")
-              print("FLYWIRE VALIDATION FAILED")
-              print("================================")
-              print(message)
-              sys.exit(1)
-
-
-          if not latest_file.exists():
-              fail(
-                  "data/flywire_latest.json does not exist."
-              )
-
-
-          try:
-              data = json.loads(
-                  latest_file.read_text(
-                      encoding="utf-8"
-                  )
-              )
-
-          except Exception as exc:
-              fail(
-                  f"Could not parse flywire_latest.json: {exc}"
-              )
-
-
-          quotes = data.get("quotes")
-
-
-          if not isinstance(quotes, dict):
-              fail(
-                  'flywire_latest.json does not contain '
-                  'a valid "quotes" object.'
-              )
-
-
-          total = 0
-
-
-          for currency in EXPECTED_CURRENCIES:
-
-              if currency not in quotes:
-                  fail(
-                      f"Missing currency: {currency}"
-                  )
-
-
-              currency_quotes = quotes[currency]
-
-
-              if not isinstance(
-                  currency_quotes,
-                  dict
-              ):
-                  fail(
-                      f"Invalid quote block for {currency}"
-                  )
-
-
-              for amount in EXPECTED_AMOUNTS:
-
-                  if amount not in currency_quotes:
-                      fail(
-                          f"Missing quote: "
-                          f"{currency} {amount}"
-                      )
-
-
-                  record = currency_quotes[amount]
-
-
-                  if not isinstance(
-                      record,
-                      dict
-                  ):
-                      fail(
-                          f"Invalid record: "
-                          f"{currency} {amount}"
-                      )
-
-
-                  try:
-
-                      rate = float(
-                          record["effective_rate"]
-                      )
-
-                      inr_quote = float(
-                          record["inr_quote"]
-                      )
-
-                  except Exception:
-
-                      fail(
-                          f"Invalid numeric data: "
-                          f"{currency} {amount}"
-                      )
-
-
-                  if (
-                      not math.isfinite(rate)
-                      or rate <= 0
-                  ):
-                      fail(
-                          f"Invalid effective rate: "
-                          f"{currency} {amount} "
-                          f"= {rate}"
-                      )
-
-
-                  if (
-                      not math.isfinite(inr_quote)
-                      or inr_quote <= 0
-                  ):
-                      fail(
-                          f"Invalid INR quote: "
-                          f"{currency} {amount} "
-                          f"= {inr_quote}"
-                      )
-
-
-                  minimum, maximum = (
-                      RATE_RANGES[currency]
-                  )
-
-
-                  if not (
-                      minimum
-                      <= rate
-                      <= maximum
-                  ):
-                      fail(
-                          f"Suspicious {currency} rate "
-                          f"for {amount}: {rate}. "
-                          f"Expected broad range "
-                          f"{minimum}-{maximum}."
-                      )
-
-
-                  expected_amount = int(amount)
-
-
-                  record_amount = int(
-                      record.get(
-                          "amount",
-                          0
-                      )
-                  )
-
-
-                  if (
-                      record_amount
-                      != expected_amount
-                  ):
-                      fail(
-                          f"Amount mismatch: "
-                          f"{currency} {amount}"
-                      )
-
-
-                  record_currency = (
-                      str(
-                          record.get(
-                              "currency",
-                              ""
-                          )
-                      )
-                      .upper()
-                  )
-
-
-                  if (
-                      record_currency
-                      != currency
-                  ):
-                      fail(
-                          f"Currency mismatch for "
-                          f"{currency} {amount}: "
-                          f"{record_currency}"
-                      )
-
-
-                  total += 1
-
-
-          if total != 42:
-              fail(
-                  f"Expected 42 quotes, found {total}."
-              )
-
-
-          print("")
-          print("================================")
-          print("FLYWIRE VALIDATION PASSED")
-          print("================================")
-
-          print(
-              f"Validated {total}/42 quotes."
-          )
-
-          print(
-              "Currencies:",
-              ", ".join(
-                  EXPECTED_CURRENCIES
-              ),
-          )
-
-          print(
-              "All rates and INR quotes passed "
-              "basic sanity checks."
-          )
-
-          PY
-
-
-      # ============================================================
-      # SHOW SUMMARY
-      # ============================================================
-
-      - name: Show Flywire summary
-        if: always() && steps.gate.outputs.run == 'true'
+          echo "================================"
+          echo "LATEST FLYWIRE DATA"
+          echo "================================"
+          cat data/flywire_latest.json
+
+      - name: Commit updated Flywire rates
         run: |
-          echo ""
-          echo "===== flywire_latest.json ====="
-
-          if [ -f data/flywire_latest.json ]; then
-            cat data/flywire_latest.json
-          else
-            echo "flywire_latest.json not found"
-          fi
-
-          echo ""
-          echo "===== flywire_history.csv rows ====="
-
-          if [ -f data/flywire_history.csv ]; then
-            wc -l data/flywire_history.csv
-          else
-            echo "flywire_history.csv not found"
-          fi
-
-
-      # ============================================================
-      # DEBUG FILES
-      # ============================================================
-
-      - name: Upload Flywire debug files
-        if: failure() && steps.gate.outputs.run == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: flywire-debug-${{ github.run_number }}
-          path: data/flywire_debug/
-          if-no-files-found: ignore
-          retention-days: 7
-
-
-      # ============================================================
-      # COMMIT VALID DATA (also stamps the hour marker so the gate
-      # step above knows this IST hour is done)
-      # ============================================================
-
-      - name: Commit Flywire rate data
-        if: success() && steps.gate.outputs.run == 'true'
-        run: |
-          git config user.name "Project FLY Bot"
+          git config user.name "Flywire Rate Bot"
           git config user.email "actions@github.com"
 
-          echo "${{ steps.gate.outputs.target_key }}" > data/.flywire_last_run_hour
-
-          git add \
-            data/flywire_latest.json \
-            data/flywire_history.csv \
-            data/.flywire_last_run_hour
+          git add data/flywire_latest.json data/flywire_history.csv data/flywire_debug/
 
           if git diff --cached --quiet; then
-            echo "No Flywire data changes to commit."
+            echo "No Flywire data changes detected."
+            echo "Nothing to commit."
             exit 0
           fi
 
           git commit -m "Update Flywire FX rates"
 
-          git pull --rebase origin main
+          git pull --rebase origin "${GITHUB_REF_NAME}"
 
-          git push origin main
+          git push origin "HEAD:${GITHUB_REF_NAME}"
