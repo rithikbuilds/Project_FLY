@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-09T09:00:55.923617+05:30",
+  "updated_at": "2026-10-09T09:30:53.819863+05:30",
   "rate_type": "TT Selling / Outward Remittance",
   "market_reference": {
     "source": "Open Exchange Rates Reference",
     "source_url": "https://open.er-api.com/v6/latest/USD",
     "source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-    "fetched_at": "2026-10-09T09:00:55.923057+05:30",
+    "fetched_at": "2026-10-09T09:30:53.819421+05:30",
     "rates": {
       "USD": 96.8837,
       "CAD": 68.0802,
@@ -35,7 +35,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:50",
+      "bank": "Punjab National Bank",
+      "currency": "USD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 97.09,
+      "market_rate": 96.8837,
+      "markup_percent": 0.2129,
+      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970068+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -54,7 +73,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -73,30 +92,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "14:15:52",
-      "bank": "Punjab National Bank",
-      "currency": "USD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 97.18,
-      "market_rate": 96.8837,
-      "markup_percent": 0.3058,
-      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.748966+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -106,31 +106,31 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221268+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393163+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:42",
+      "date": "2026-10-09",
+      "time": "09:30:45",
       "bank": "ICICI Bank",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 98.08,
+      "bank_rate": 98.11,
       "market_rate": 96.8837,
-      "markup_percent": 1.2348,
+      "markup_percent": 1.2657,
       "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.035278+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.354022+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -149,26 +149,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:37",
+      "date": "2026-10-09",
+      "time": "09:30:42",
       "bank": "Axis Bank",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 98.34,
+      "bank_rate": 98.33,
       "market_rate": 96.8837,
-      "markup_percent": 1.5031,
+      "markup_percent": 1.4928,
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476303+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345847+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -187,7 +187,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -206,7 +206,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -225,7 +225,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -244,26 +244,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "14:15:52",
-      "bank": "Punjab National Bank",
-      "currency": "CAD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 68.39,
-      "market_rate": 68.0802,
-      "markup_percent": 0.4551,
-      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.749179+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -282,11 +263,30 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:50",
+      "bank": "Punjab National Bank",
+      "currency": "CAD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 68.57,
+      "market_rate": 68.0802,
+      "markup_percent": 0.7194,
+      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970197+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -296,12 +296,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221362+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393205+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -320,7 +320,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -339,45 +339,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:37",
-      "bank": "Axis Bank",
-      "currency": "CAD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 69.67,
-      "market_rate": 68.0802,
-      "markup_percent": 2.3352,
-      "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476338+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:42",
-      "bank": "ICICI Bank",
-      "currency": "CAD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 69.69,
-      "market_rate": 68.0802,
-      "markup_percent": 2.3646,
-      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.035531+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -396,7 +358,45 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:42",
+      "bank": "Axis Bank",
+      "currency": "CAD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 69.89,
+      "market_rate": 68.0802,
+      "markup_percent": 2.6583,
+      "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345870+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:45",
+      "bank": "ICICI Bank",
+      "currency": "CAD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 69.94,
+      "market_rate": 68.0802,
+      "markup_percent": 2.7318,
+      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.354182+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -415,7 +415,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -434,26 +434,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "14:15:52",
-      "bank": "Punjab National Bank",
-      "currency": "AUD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 67.93,
-      "market_rate": 67.3798,
-      "markup_percent": 0.8166,
-      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.749353+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -472,7 +453,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:50",
+      "bank": "Punjab National Bank",
+      "currency": "AUD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 68.0,
+      "market_rate": 67.3798,
+      "markup_percent": 0.9205,
+      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970306+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -491,11 +491,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -505,12 +505,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221395+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393225+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -529,45 +529,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:37",
+      "date": "2026-10-09",
+      "time": "09:30:42",
       "bank": "Axis Bank",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 69.26,
+      "bank_rate": 69.43,
       "market_rate": 67.3798,
-      "markup_percent": 2.7905,
+      "markup_percent": 3.0428,
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476355+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345882+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:42",
-      "bank": "ICICI Bank",
-      "currency": "AUD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 69.65,
-      "market_rate": 67.3798,
-      "markup_percent": 3.3693,
-      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.035768+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -586,7 +567,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:45",
+      "bank": "ICICI Bank",
+      "currency": "AUD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 69.84,
+      "market_rate": 67.3798,
+      "markup_percent": 3.6512,
+      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.354329+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -605,7 +605,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -624,26 +624,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "14:15:52",
+      "date": "2026-10-09",
+      "time": "09:30:50",
       "bank": "Punjab National Bank",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 128.55,
+      "bank_rate": 128.71,
       "market_rate": 128.0656,
-      "markup_percent": 0.3782,
+      "markup_percent": 0.5032,
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.749519+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970434+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -662,11 +662,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -676,12 +676,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221423+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393243+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -700,7 +700,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -719,45 +719,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:42",
-      "bank": "ICICI Bank",
-      "currency": "GBP",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 131.1,
-      "market_rate": 128.0656,
-      "markup_percent": 2.3694,
-      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.036148+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:37",
-      "bank": "Axis Bank",
-      "currency": "GBP",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 131.11,
-      "market_rate": 128.0656,
-      "markup_percent": 2.3772,
-      "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476370+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -776,7 +738,45 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:42",
+      "bank": "Axis Bank",
+      "currency": "GBP",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 131.36,
+      "market_rate": 128.0656,
+      "markup_percent": 2.5724,
+      "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345892+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:45",
+      "bank": "ICICI Bank",
+      "currency": "GBP",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 131.42,
+      "market_rate": 128.0656,
+      "markup_percent": 2.6193,
+      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.354614+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -795,26 +795,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "14:15:52",
-      "bank": "Punjab National Bank",
-      "currency": "EUR",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 109.05,
-      "market_rate": 108.5834,
-      "markup_percent": 0.4297,
-      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.749682+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -833,7 +814,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:50",
+      "bank": "Punjab National Bank",
+      "currency": "EUR",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 109.19,
+      "market_rate": 108.5834,
+      "markup_percent": 0.5586,
+      "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970542+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -852,11 +852,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -866,12 +866,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221449+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393259+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -890,26 +890,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:42",
-      "bank": "ICICI Bank",
-      "currency": "EUR",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 110.64,
-      "market_rate": 108.5834,
-      "markup_percent": 1.894,
-      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.036390+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -928,26 +909,45 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:37",
+      "date": "2026-10-09",
+      "time": "09:30:42",
       "bank": "Axis Bank",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 110.7,
+      "bank_rate": 110.88,
       "market_rate": 108.5834,
-      "markup_percent": 1.9493,
+      "markup_percent": 2.1151,
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476383+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345902+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:45",
+      "bank": "ICICI Bank",
+      "currency": "EUR",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 110.89,
+      "market_rate": 108.5834,
+      "markup_percent": 2.1243,
+      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.354751+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -966,7 +966,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -985,7 +985,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1004,26 +1004,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "14:15:52",
+      "date": "2026-10-09",
+      "time": "09:30:50",
       "bank": "Punjab National Bank",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 76.26,
+      "bank_rate": 76.25,
       "market_rate": 75.63,
-      "markup_percent": 0.833,
+      "markup_percent": 0.8198,
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.749846+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970647+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1042,11 +1042,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1056,12 +1056,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221476+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393275+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1080,26 +1080,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
-    },
-    {
-      "date": "2026-10-08",
-      "time": "16:45:37",
-      "bank": "Axis Bank",
-      "currency": "SGD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 76.9,
-      "market_rate": 75.63,
-      "markup_percent": 1.6792,
-      "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476397+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1118,26 +1099,45 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:42",
-      "bank": "ICICI Bank",
+      "date": "2026-10-09",
+      "time": "09:30:42",
+      "bank": "Axis Bank",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
       "bank_rate": 76.92,
       "market_rate": 75.63,
       "markup_percent": 1.7057,
-      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.036688+05:30",
-      "status": "stale",
+      "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345911+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "09:30:45",
+      "bank": "ICICI Bank",
+      "currency": "SGD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 76.97,
+      "market_rate": 75.63,
+      "markup_percent": 1.7718,
+      "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.354930+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1156,7 +1156,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1175,7 +1175,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1194,26 +1194,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "14:15:52",
+      "date": "2026-10-09",
+      "time": "09:30:50",
       "bank": "Punjab National Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 26.6,
+      "bank_rate": 26.58,
       "market_rate": 26.3808,
-      "markup_percent": 0.8309,
+      "markup_percent": 0.7551,
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.750032+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970756+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1232,7 +1232,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1251,11 +1251,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1265,12 +1265,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221500+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393290+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1289,11 +1289,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:37",
+      "date": "2026-10-09",
+      "time": "09:30:42",
       "bank": "Axis Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1301,14 +1301,14 @@
       "market_rate": 26.3808,
       "markup_percent": 2.8399,
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476411+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345921+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1327,26 +1327,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:42",
+      "date": "2026-10-09",
+      "time": "09:30:45",
       "bank": "ICICI Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 27.15,
+      "bank_rate": 27.16,
       "market_rate": 26.3808,
-      "markup_percent": 2.9158,
+      "markup_percent": 2.9537,
       "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.036976+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.355096+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1365,7 +1365,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1384,26 +1384,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "14:15:52",
+      "date": "2026-10-09",
+      "time": "09:30:50",
       "bank": "Punjab National Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 54.67,
+      "bank_rate": 54.79,
       "market_rate": 54.2615,
-      "markup_percent": 0.7528,
+      "markup_percent": 0.974,
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
-      "source_date": "2026-10-08",
-      "source_time": "02:00 PM",
-      "fetched_at": "2026-10-08T14:15:52.750201+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:00 AM",
+      "fetched_at": "2026-10-09T09:30:50.970857+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1422,11 +1422,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-09",
-      "time": "09:00:35",
+      "time": "09:30:40",
       "bank": "SBI",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1436,12 +1436,12 @@
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
       "source_date": "2026-10-08",
       "source_time": "9:13 AM",
-      "fetched_at": "2026-10-09T09:00:35.221526+05:30",
+      "fetched_at": "2026-10-09T09:30:40.393305+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1460,45 +1460,45 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:37",
+      "date": "2026-10-09",
+      "time": "09:30:42",
       "bank": "Axis Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 55.92,
+      "bank_rate": 56.05,
       "market_rate": 54.2615,
-      "markup_percent": 3.0565,
+      "markup_percent": 3.2961,
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
-      "source_date": "2026-10-08",
-      "source_time": "09:20 AM",
-      "fetched_at": "2026-10-08T16:45:37.476423+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17 AM",
+      "fetched_at": "2026-10-09T09:30:42.345930+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
-      "date": "2026-10-08",
-      "time": "16:45:42",
+      "date": "2026-10-09",
+      "time": "09:30:45",
       "bank": "ICICI Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 56.15,
+      "bank_rate": 56.29,
       "market_rate": 54.2615,
-      "markup_percent": 3.4804,
+      "markup_percent": 3.7384,
       "source_url": "https://www.icici.bank.in/corporate/global-markets/forex/forex-card-rate",
-      "source_date": "2026-10-08",
-      "source_time": "09:11:11 AM",
-      "fetched_at": "2026-10-08T16:45:42.037277+05:30",
-      "status": "stale",
+      "source_date": "2026-10-09",
+      "source_time": "09:17:44 AM",
+      "fetched_at": "2026-10-09T09:30:45.355266+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     },
     {
       "date": "2026-10-08",
@@ -1517,7 +1517,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Fri, 09 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-09T09:00:55.923057+05:30"
+      "market_fetched_at": "2026-10-09T09:30:53.819421+05:30"
     }
   ]
 }
