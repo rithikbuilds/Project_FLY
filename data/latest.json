@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-17T09:01:02.129579+05:30",
+  "updated_at": "2026-10-17T11:31:17.138808+05:30",
   "rate_type": "TT Selling / Outward Remittance",
   "market_reference": {
     "source": "Open Exchange Rates Reference",
     "source_url": "https://open.er-api.com/v6/latest/USD",
     "source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-    "fetched_at": "2026-10-17T09:01:02.128943+05:30",
+    "fetched_at": "2026-10-17T11:31:17.138236+05:30",
     "rates": {
       "USD": 95.112,
       "CAD": 67.2298,
@@ -35,7 +35,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -54,7 +54,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
+    },
+    {
+      "date": "2026-10-17",
+      "time": "11:30:46",
+      "bank": "SBI",
+      "currency": "USD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 95.3,
+      "market_rate": 95.112,
+      "markup_percent": 0.1977,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783345+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -73,26 +92,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
-    },
-    {
-      "date": "2026-10-17",
-      "time": "09:00:39",
-      "bank": "SBI",
-      "currency": "USD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 95.4,
-      "market_rate": 95.112,
-      "markup_percent": 0.3028,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061302+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -111,7 +111,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -130,7 +130,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -149,7 +149,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -168,7 +168,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -187,7 +187,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -206,7 +206,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -225,7 +225,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -244,7 +244,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -263,7 +263,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -282,7 +282,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -301,11 +301,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-17",
-      "time": "09:00:39",
+      "time": "11:30:46",
       "bank": "SBI",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -313,14 +313,14 @@
       "market_rate": 67.2298,
       "markup_percent": 0.8779,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061357+05:30",
-      "status": "stale",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783402+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -339,7 +339,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -358,7 +358,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -377,7 +377,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -396,7 +396,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -415,7 +415,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -434,7 +434,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -453,7 +453,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -472,7 +472,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -491,26 +491,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-17",
-      "time": "09:00:39",
+      "time": "11:30:46",
       "bank": "SBI",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 67.24,
+      "bank_rate": 67.12,
       "market_rate": 66.0675,
-      "markup_percent": 1.7747,
+      "markup_percent": 1.5931,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061389+05:30",
-      "status": "stale",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783434+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -529,7 +529,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -548,7 +548,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -567,7 +567,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -586,7 +586,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -605,7 +605,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -624,7 +624,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -643,7 +643,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -662,7 +662,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -681,26 +681,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-17",
-      "time": "09:00:39",
+      "time": "11:30:46",
       "bank": "SBI",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 127.92,
+      "bank_rate": 127.88,
       "market_rate": 126.6742,
-      "markup_percent": 0.9835,
+      "markup_percent": 0.9519,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061418+05:30",
-      "status": "stale",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783464+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -719,7 +719,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -738,7 +738,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -757,7 +757,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -776,7 +776,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -795,7 +795,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -814,7 +814,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -833,7 +833,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -852,7 +852,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
+    },
+    {
+      "date": "2026-10-17",
+      "time": "11:30:46",
+      "bank": "SBI",
+      "currency": "EUR",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 107.99,
+      "market_rate": 106.9254,
+      "markup_percent": 0.9956,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783490+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -871,26 +890,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
-    },
-    {
-      "date": "2026-10-17",
-      "time": "09:00:39",
-      "bank": "SBI",
-      "currency": "EUR",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 108.11,
-      "market_rate": 106.9254,
-      "markup_percent": 1.1079,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061443+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -909,7 +909,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -928,7 +928,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -947,7 +947,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -966,7 +966,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -985,7 +985,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1004,7 +1004,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1023,7 +1023,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
+    },
+    {
+      "date": "2026-10-17",
+      "time": "11:30:46",
+      "bank": "SBI",
+      "currency": "SGD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 74.94,
+      "market_rate": 74.311,
+      "markup_percent": 0.8464,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783517+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1042,7 +1061,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1061,26 +1080,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
-    },
-    {
-      "date": "2026-10-17",
-      "time": "09:00:39",
-      "bank": "SBI",
-      "currency": "SGD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 75.13,
-      "market_rate": 74.311,
-      "markup_percent": 1.1021,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061470+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1099,7 +1099,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1118,7 +1118,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1137,7 +1137,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -1156,7 +1156,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1175,7 +1175,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1194,7 +1194,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1213,7 +1213,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1232,7 +1232,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1251,26 +1251,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-17",
-      "time": "09:00:39",
+      "time": "11:30:46",
       "bank": "SBI",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 26.51,
+      "bank_rate": 26.49,
       "market_rate": 25.8984,
-      "markup_percent": 2.3615,
+      "markup_percent": 2.2843,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061499+05:30",
-      "status": "stale",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783542+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1289,7 +1289,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1308,7 +1308,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1327,7 +1327,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -1346,7 +1346,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1365,7 +1365,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1384,7 +1384,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1403,7 +1403,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1422,7 +1422,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1441,26 +1441,26 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-17",
-      "time": "09:00:39",
+      "time": "11:30:46",
       "bank": "SBI",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 54.87,
+      "bank_rate": 54.8,
       "market_rate": 53.7739,
-      "markup_percent": 2.0383,
+      "markup_percent": 1.9082,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-16",
-      "source_time": "1:15 PM",
-      "fetched_at": "2026-10-17T09:00:39.061525+05:30",
-      "status": "stale",
+      "source_date": "2026-10-17",
+      "source_time": "9:37 AM",
+      "fetched_at": "2026-10-17T11:30:46.783567+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1479,7 +1479,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-13",
@@ -1498,7 +1498,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     },
     {
       "date": "2026-10-16",
@@ -1517,7 +1517,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Sat, 17 Oct 2026 00:02:32 +0000",
-      "market_fetched_at": "2026-10-17T09:01:02.128943+05:30"
+      "market_fetched_at": "2026-10-17T11:31:17.138236+05:30"
     }
   ]
 }
