@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T17:15:07.589885+05:30",
+  "updated_at": "2026-10-29T18:14:47.408818+05:30",
   "source": "pay.flywire.com",
   "payment_route": "India -> Full Loan Financing -> Bank -> SBI -> Offline bank transfer",
   "institution": "Harvard University",
@@ -14,7 +14,7 @@
   "quotes": {
     "USD": {
       "5000": {
-        "timestamp": "2026-10-29T17:01:09.104546+05:30",
+        "timestamp": "2026-10-29T18:00:54.055003+05:30",
         "currency": "USD",
         "amount": 5000,
         "inr_quote": 486594.0,
@@ -30,7 +30,7 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:01:29.888465+05:30",
+        "timestamp": "2026-10-29T18:01:15.765623+05:30",
         "currency": "USD",
         "amount": 10000,
         "inr_quote": 972194.0,
@@ -46,7 +46,7 @@
         "status": "current"
       },
       "15000": {
-        "timestamp": "2026-10-29T17:01:50.272828+05:30",
+        "timestamp": "2026-10-29T18:01:36.417104+05:30",
         "currency": "USD",
         "amount": 15000,
         "inr_quote": 1458291.0,
@@ -62,7 +62,7 @@
         "status": "current"
       },
       "20000": {
-        "timestamp": "2026-10-29T17:02:10.765644+05:30",
+        "timestamp": "2026-10-29T18:01:56.598380+05:30",
         "currency": "USD",
         "amount": 20000,
         "inr_quote": 1942406.0,
@@ -78,7 +78,7 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:02:31.023703+05:30",
+        "timestamp": "2026-10-29T18:02:17.213987+05:30",
         "currency": "USD",
         "amount": 25000,
         "inr_quote": 2428008.0,
@@ -94,7 +94,7 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:02:51.805418+05:30",
+        "timestamp": "2026-10-29T18:02:37.413164+05:30",
         "currency": "USD",
         "amount": 30000,
         "inr_quote": 2912125.0,
@@ -112,11 +112,11 @@
     },
     "GBP": {
       "5000": {
-        "timestamp": "2026-10-29T17:03:12.245428+05:30",
+        "timestamp": "2026-10-29T18:02:57.572400+05:30",
         "currency": "GBP",
         "amount": 5000,
-        "inr_quote": 647827.0,
-        "effective_rate": 129.5654,
+        "inr_quote": 647705.0,
+        "effective_rate": 129.541,
         "institution_country": "United Kingdom",
         "institution": "Imperial College",
         "payment_country": "India",
@@ -128,26 +128,10 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:03:32.852772+05:30",
+        "timestamp": "2026-10-29T18:03:17.856328+05:30",
         "currency": "GBP",
         "amount": 10000,
-        "inr_quote": 1294332.0,
-        "effective_rate": 129.4332,
-        "institution_country": "United Kingdom",
-        "institution": "Imperial College",
-        "payment_country": "India",
-        "funding_type": "Full Loan Financing",
-        "loan_provider_type": "Bank",
-        "loan_provider": "SBI",
-        "payment_method": "Offline bank transfer",
-        "source_url": "https://pay.flywire.com/",
-        "status": "current"
-      },
-      "15000": {
-        "timestamp": "2026-10-29T17:03:53.319777+05:30",
-        "currency": "GBP",
-        "amount": 15000,
-        "inr_quote": 1941717.0,
+        "inr_quote": 1294478.0,
         "effective_rate": 129.4478,
         "institution_country": "United Kingdom",
         "institution": "Imperial College",
@@ -159,12 +143,28 @@
         "source_url": "https://pay.flywire.com/",
         "status": "current"
       },
+      "15000": {
+        "timestamp": "2026-10-29T18:03:38.070691+05:30",
+        "currency": "GBP",
+        "amount": 15000,
+        "inr_quote": 1942081.0,
+        "effective_rate": 129.4721,
+        "institution_country": "United Kingdom",
+        "institution": "Imperial College",
+        "payment_country": "India",
+        "funding_type": "Full Loan Financing",
+        "loan_provider_type": "Bank",
+        "loan_provider": "SBI",
+        "payment_method": "Offline bank transfer",
+        "source_url": "https://pay.flywire.com/",
+        "status": "current"
+      },
       "20000": {
-        "timestamp": "2026-10-29T17:04:13.667113+05:30",
+        "timestamp": "2026-10-29T18:03:58.295674+05:30",
         "currency": "GBP",
         "amount": 20000,
-        "inr_quote": 2585003.0,
-        "effective_rate": 129.2501,
+        "inr_quote": 2584519.0,
+        "effective_rate": 129.226,
         "institution_country": "United Kingdom",
         "institution": "Imperial College",
         "payment_country": "India",
@@ -176,11 +176,11 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:04:33.966842+05:30",
+        "timestamp": "2026-10-29T18:04:18.508104+05:30",
         "currency": "GBP",
         "amount": 25000,
-        "inr_quote": 3227363.0,
-        "effective_rate": 129.0945,
+        "inr_quote": 3226758.0,
+        "effective_rate": 129.0703,
         "institution_country": "United Kingdom",
         "institution": "Imperial College",
         "payment_country": "India",
@@ -192,11 +192,11 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:04:54.285608+05:30",
+        "timestamp": "2026-10-29T18:04:38.601333+05:30",
         "currency": "GBP",
         "amount": 30000,
-        "inr_quote": 3872836.0,
-        "effective_rate": 129.0945,
+        "inr_quote": 3874288.0,
+        "effective_rate": 129.1429,
         "institution_country": "United Kingdom",
         "institution": "Imperial College",
         "payment_country": "India",
@@ -210,11 +210,11 @@
     },
     "CAD": {
       "5000": {
-        "timestamp": "2026-10-29T17:05:14.570092+05:30",
+        "timestamp": "2026-10-29T18:04:59.128533+05:30",
         "currency": "CAD",
         "amount": 5000,
-        "inr_quote": 349044.0,
-        "effective_rate": 69.8088,
+        "inr_quote": 348819.0,
+        "effective_rate": 69.7638,
         "institution_country": "Canada",
         "institution": "Algoma University",
         "payment_country": "India",
@@ -226,11 +226,11 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:05:34.999921+05:30",
+        "timestamp": "2026-10-29T18:05:19.425101+05:30",
         "currency": "CAD",
         "amount": 10000,
-        "inr_quote": 695214.0,
-        "effective_rate": 69.5214,
+        "inr_quote": 695015.0,
+        "effective_rate": 69.5015,
         "institution_country": "Canada",
         "institution": "Algoma University",
         "payment_country": "India",
@@ -242,11 +242,11 @@
         "status": "current"
       },
       "15000": {
-        "timestamp": "2026-10-29T17:05:55.484253+05:30",
+        "timestamp": "2026-10-29T18:05:39.529121+05:30",
         "currency": "CAD",
         "amount": 15000,
-        "inr_quote": 1041759.0,
-        "effective_rate": 69.4506,
+        "inr_quote": 1041237.0,
+        "effective_rate": 69.4158,
         "institution_country": "Canada",
         "institution": "Algoma University",
         "payment_country": "India",
@@ -258,11 +258,11 @@
         "status": "current"
       },
       "20000": {
-        "timestamp": "2026-10-29T17:06:16.115724+05:30",
+        "timestamp": "2026-10-29T18:05:59.611949+05:30",
         "currency": "CAD",
         "amount": 20000,
-        "inr_quote": 1388912.0,
-        "effective_rate": 69.4456,
+        "inr_quote": 1388416.0,
+        "effective_rate": 69.4208,
         "institution_country": "Canada",
         "institution": "Algoma University",
         "payment_country": "India",
@@ -274,11 +274,11 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:06:36.478850+05:30",
+        "timestamp": "2026-10-29T18:06:20.130140+05:30",
         "currency": "CAD",
         "amount": 25000,
-        "inr_quote": 1736326.0,
-        "effective_rate": 69.453,
+        "inr_quote": 1735520.0,
+        "effective_rate": 69.4208,
         "institution_country": "Canada",
         "institution": "Algoma University",
         "payment_country": "India",
@@ -290,11 +290,11 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:06:56.865017+05:30",
+        "timestamp": "2026-10-29T18:06:40.272263+05:30",
         "currency": "CAD",
         "amount": 30000,
-        "inr_quote": 2080189.0,
-        "effective_rate": 69.3396,
+        "inr_quote": 2079446.0,
+        "effective_rate": 69.3149,
         "institution_country": "Canada",
         "institution": "Algoma University",
         "payment_country": "India",
@@ -308,11 +308,11 @@
     },
     "EUR": {
       "5000": {
-        "timestamp": "2026-10-29T17:07:17.166174+05:30",
+        "timestamp": "2026-10-29T18:07:00.497279+05:30",
         "currency": "EUR",
         "amount": 5000,
-        "inr_quote": 541520.0,
-        "effective_rate": 108.304,
+        "inr_quote": 541228.0,
+        "effective_rate": 108.2456,
         "institution_country": "Germany",
         "institution": "Constructor University Bremen gGmbH",
         "payment_country": "India",
@@ -324,11 +324,11 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:07:37.674885+05:30",
+        "timestamp": "2026-10-29T18:07:20.714824+05:30",
         "currency": "EUR",
         "amount": 10000,
-        "inr_quote": 1081935.0,
-        "effective_rate": 108.1935,
+        "inr_quote": 1081644.0,
+        "effective_rate": 108.1644,
         "institution_country": "Germany",
         "institution": "Constructor University Bremen gGmbH",
         "payment_country": "India",
@@ -340,11 +340,11 @@
         "status": "current"
       },
       "15000": {
-        "timestamp": "2026-10-29T17:07:57.981497+05:30",
+        "timestamp": "2026-10-29T18:07:40.876259+05:30",
         "currency": "EUR",
         "amount": 15000,
-        "inr_quote": 1622903.0,
-        "effective_rate": 108.1935,
+        "inr_quote": 1622029.0,
+        "effective_rate": 108.1353,
         "institution_country": "Germany",
         "institution": "Constructor University Bremen gGmbH",
         "payment_country": "India",
@@ -356,11 +356,11 @@
         "status": "current"
       },
       "20000": {
-        "timestamp": "2026-10-29T17:08:18.345360+05:30",
+        "timestamp": "2026-10-29T18:08:01.602539+05:30",
         "currency": "EUR",
         "amount": 20000,
-        "inr_quote": 2160568.0,
-        "effective_rate": 108.0284,
+        "inr_quote": 2159986.0,
+        "effective_rate": 107.9993,
         "institution_country": "Germany",
         "institution": "Constructor University Bremen gGmbH",
         "payment_country": "India",
@@ -372,11 +372,11 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:08:38.658292+05:30",
+        "timestamp": "2026-10-29T18:08:21.856564+05:30",
         "currency": "EUR",
         "amount": 25000,
-        "inr_quote": 2700710.0,
-        "effective_rate": 108.0284,
+        "inr_quote": 2698893.0,
+        "effective_rate": 107.9557,
         "institution_country": "Germany",
         "institution": "Constructor University Bremen gGmbH",
         "payment_country": "India",
@@ -388,11 +388,11 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:08:58.993520+05:30",
+        "timestamp": "2026-10-29T18:08:42.055050+05:30",
         "currency": "EUR",
         "amount": 30000,
-        "inr_quote": 3240852.0,
-        "effective_rate": 108.0284,
+        "inr_quote": 3240997.0,
+        "effective_rate": 108.0332,
         "institution_country": "Germany",
         "institution": "Constructor University Bremen gGmbH",
         "payment_country": "India",
@@ -406,11 +406,11 @@
     },
     "AUD": {
       "5000": {
-        "timestamp": "2026-10-29T17:09:19.286957+05:30",
+        "timestamp": "2026-10-29T18:09:02.116572+05:30",
         "currency": "AUD",
         "amount": 5000,
-        "inr_quote": 343135.0,
-        "effective_rate": 68.627,
+        "inr_quote": 343159.0,
+        "effective_rate": 68.6318,
         "institution_country": "Australia",
         "institution": "Melbourne Business School",
         "payment_country": "India",
@@ -422,11 +422,11 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:09:39.738379+05:30",
+        "timestamp": "2026-10-29T18:09:22.497926+05:30",
         "currency": "AUD",
         "amount": 10000,
-        "inr_quote": 683470.0,
-        "effective_rate": 68.347,
+        "inr_quote": 683227.0,
+        "effective_rate": 68.3227,
         "institution_country": "Australia",
         "institution": "Melbourne Business School",
         "payment_country": "India",
@@ -438,7 +438,7 @@
         "status": "current"
       },
       "15000": {
-        "timestamp": "2026-10-29T17:10:00.256051+05:30",
+        "timestamp": "2026-10-29T18:09:42.704419+05:30",
         "currency": "AUD",
         "amount": 15000,
         "inr_quote": 1024160.0,
@@ -454,7 +454,7 @@
         "status": "current"
       },
       "20000": {
-        "timestamp": "2026-10-29T17:10:20.600908+05:30",
+        "timestamp": "2026-10-29T18:10:02.806679+05:30",
         "currency": "AUD",
         "amount": 20000,
         "inr_quote": 1365546.0,
@@ -470,11 +470,11 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:10:40.884067+05:30",
+        "timestamp": "2026-10-29T18:10:23.070097+05:30",
         "currency": "AUD",
         "amount": 25000,
-        "inr_quote": 1707176.0,
-        "effective_rate": 68.287,
+        "inr_quote": 1706811.0,
+        "effective_rate": 68.2724,
         "institution_country": "Australia",
         "institution": "Melbourne Business School",
         "payment_country": "India",
@@ -486,11 +486,11 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:11:01.398234+05:30",
+        "timestamp": "2026-10-29T18:10:43.302564+05:30",
         "currency": "AUD",
         "amount": 30000,
-        "inr_quote": 2045485.0,
-        "effective_rate": 68.1828,
+        "inr_quote": 2045048.0,
+        "effective_rate": 68.1683,
         "institution_country": "Australia",
         "institution": "Melbourne Business School",
         "payment_country": "India",
@@ -504,11 +504,11 @@
     },
     "NZD": {
       "5000": {
-        "timestamp": "2026-10-29T17:11:21.703837+05:30",
+        "timestamp": "2026-10-29T18:11:03.536527+05:30",
         "currency": "NZD",
         "amount": 5000,
-        "inr_quote": 274903.0,
-        "effective_rate": 54.9806,
+        "inr_quote": 275050.0,
+        "effective_rate": 55.01,
         "institution_country": "New Zealand",
         "institution": "University of Waikato",
         "payment_country": "India",
@@ -520,11 +520,11 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:11:42.262067+05:30",
+        "timestamp": "2026-10-29T18:11:23.824231+05:30",
         "currency": "NZD",
         "amount": 10000,
-        "inr_quote": 545600.0,
-        "effective_rate": 54.56,
+        "inr_quote": 545843.0,
+        "effective_rate": 54.5843,
         "institution_country": "New Zealand",
         "institution": "University of Waikato",
         "payment_country": "India",
@@ -536,11 +536,11 @@
         "status": "current"
       },
       "15000": {
-        "timestamp": "2026-10-29T17:12:02.412897+05:30",
+        "timestamp": "2026-10-29T18:11:43.943636+05:30",
         "currency": "NZD",
         "amount": 15000,
-        "inr_quote": 818400.0,
-        "effective_rate": 54.56,
+        "inr_quote": 818764.0,
+        "effective_rate": 54.5843,
         "institution_country": "New Zealand",
         "institution": "University of Waikato",
         "payment_country": "India",
@@ -552,11 +552,11 @@
         "status": "current"
       },
       "20000": {
-        "timestamp": "2026-10-29T17:12:23.408752+05:30",
+        "timestamp": "2026-10-29T18:12:04.055873+05:30",
         "currency": "NZD",
         "amount": 20000,
-        "inr_quote": 1090185.0,
-        "effective_rate": 54.5093,
+        "inr_quote": 1090573.0,
+        "effective_rate": 54.5286,
         "institution_country": "New Zealand",
         "institution": "University of Waikato",
         "payment_country": "India",
@@ -568,11 +568,11 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:12:43.754960+05:30",
+        "timestamp": "2026-10-29T18:12:24.351311+05:30",
         "currency": "NZD",
         "amount": 25000,
-        "inr_quote": 1362731.0,
-        "effective_rate": 54.5092,
+        "inr_quote": 1363338.0,
+        "effective_rate": 54.5335,
         "institution_country": "New Zealand",
         "institution": "University of Waikato",
         "payment_country": "India",
@@ -584,11 +584,11 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:13:04.226356+05:30",
+        "timestamp": "2026-10-29T18:12:44.410015+05:30",
         "currency": "NZD",
         "amount": 30000,
-        "inr_quote": 1635277.0,
-        "effective_rate": 54.5092,
+        "inr_quote": 1636296.0,
+        "effective_rate": 54.5432,
         "institution_country": "New Zealand",
         "institution": "University of Waikato",
         "payment_country": "India",
@@ -602,11 +602,11 @@
     },
     "SGD": {
       "5000": {
-        "timestamp": "2026-10-29T17:13:24.468137+05:30",
+        "timestamp": "2026-10-29T18:13:04.583131+05:30",
         "currency": "SGD",
         "amount": 5000,
-        "inr_quote": 380773.0,
-        "effective_rate": 76.1546,
+        "inr_quote": 380684.0,
+        "effective_rate": 76.1368,
         "institution_country": "Singapore",
         "institution": "Curtin Singapore",
         "payment_country": "India",
@@ -618,11 +618,11 @@
         "status": "current"
       },
       "10000": {
-        "timestamp": "2026-10-29T17:13:45.101216+05:30",
+        "timestamp": "2026-10-29T18:13:25.193741+05:30",
         "currency": "SGD",
         "amount": 10000,
-        "inr_quote": 758438.0,
-        "effective_rate": 75.8438,
+        "inr_quote": 758201.0,
+        "effective_rate": 75.8201,
         "institution_country": "Singapore",
         "institution": "Curtin Singapore",
         "payment_country": "India",
@@ -634,11 +634,11 @@
         "status": "current"
       },
       "15000": {
-        "timestamp": "2026-10-29T17:14:05.672046+05:30",
+        "timestamp": "2026-10-29T18:13:45.545203+05:30",
         "currency": "SGD",
         "amount": 15000,
-        "inr_quote": 1136498.0,
-        "effective_rate": 75.7665,
+        "inr_quote": 1136143.0,
+        "effective_rate": 75.7429,
         "institution_country": "Singapore",
         "institution": "Curtin Singapore",
         "payment_country": "India",
@@ -650,11 +650,11 @@
         "status": "current"
       },
       "20000": {
-        "timestamp": "2026-10-29T17:14:26.409568+05:30",
+        "timestamp": "2026-10-29T18:14:06.213760+05:30",
         "currency": "SGD",
         "amount": 20000,
-        "inr_quote": 1515330.0,
-        "effective_rate": 75.7665,
+        "inr_quote": 1514857.0,
+        "effective_rate": 75.7429,
         "institution_country": "Singapore",
         "institution": "Curtin Singapore",
         "payment_country": "India",
@@ -666,11 +666,11 @@
         "status": "current"
       },
       "25000": {
-        "timestamp": "2026-10-29T17:14:46.856835+05:30",
+        "timestamp": "2026-10-29T18:14:27.060627+05:30",
         "currency": "SGD",
         "amount": 25000,
-        "inr_quote": 1894162.0,
-        "effective_rate": 75.7665,
+        "inr_quote": 1893719.0,
+        "effective_rate": 75.7488,
         "institution_country": "Singapore",
         "institution": "Curtin Singapore",
         "payment_country": "India",
@@ -682,11 +682,11 @@
         "status": "current"
       },
       "30000": {
-        "timestamp": "2026-10-29T17:15:07.589885+05:30",
+        "timestamp": "2026-10-29T18:14:47.408818+05:30",
         "currency": "SGD",
         "amount": 30000,
-        "inr_quote": 2269349.0,
-        "effective_rate": 75.645,
+        "inr_quote": 2268995.0,
+        "effective_rate": 75.6332,
         "institution_country": "Singapore",
         "institution": "Curtin Singapore",
         "payment_country": "India",
