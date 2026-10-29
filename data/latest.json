@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-29T10:15:57.808344+05:30",
+  "updated_at": "2026-10-29T10:46:53.062163+05:30",
   "rate_type": "TT Selling / Outward Remittance",
   "market_reference": {
     "source": "Open Exchange Rates Reference",
     "source_url": "https://open.er-api.com/v6/latest/USD",
     "source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-    "fetched_at": "2026-10-29T10:15:57.807491+05:30",
+    "fetched_at": "2026-10-29T10:46:53.061539+05:30",
     "rates": {
       "USD": 95.2961,
       "CAD": 67.9801,
@@ -20,7 +20,7 @@
   "rates": [
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -30,31 +30,12 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.889677+05:30",
+      "fetched_at": "2026-10-29T10:46:51.783616+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
-    },
-    {
-      "date": "2026-10-29",
-      "time": "10:15:34",
-      "bank": "SBI",
-      "currency": "USD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 95.6,
-      "market_rate": 95.2961,
-      "markup_percent": 0.3189,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365398+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -73,11 +54,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -87,12 +68,31 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.325576+05:30",
+      "fetched_at": "2026-10-29T10:46:50.317998+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "10:45:33",
+      "bank": "SBI",
+      "currency": "USD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 95.67,
+      "market_rate": 95.2961,
+      "markup_percent": 0.3924,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298131+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -107,11 +107,11 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079221+05:30",
-      "status": "current",
+      "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -130,11 +130,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -144,16 +144,16 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.161349+05:30",
+      "fetched_at": "2026-10-29T10:46:48.065624+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -163,16 +163,16 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.665896+05:30",
+      "fetched_at": "2026-10-29T10:46:46.412152+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -182,16 +182,16 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972286+05:30",
+      "fetched_at": "2026-10-29T10:45:40.008918+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "USD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -201,16 +201,16 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.715465+05:30",
+      "fetched_at": "2026-10-29T10:46:52.972830+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -220,31 +220,12 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.889799+05:30",
+      "fetched_at": "2026-10-29T10:46:51.783750+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
-    },
-    {
-      "date": "2026-10-29",
-      "time": "10:15:34",
-      "bank": "SBI",
-      "currency": "CAD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 68.46,
-      "market_rate": 67.9801,
-      "markup_percent": 0.7059,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365457+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -263,7 +244,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -282,11 +263,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -296,12 +277,12 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.325737+05:30",
+      "fetched_at": "2026-10-29T10:46:50.318204+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -316,15 +297,34 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079289+05:30",
+      "status": "stale",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "10:45:33",
+      "bank": "SBI",
+      "currency": "CAD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 68.93,
+      "market_rate": 67.9801,
+      "markup_percent": 1.3973,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298183+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -334,16 +334,16 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.715649+05:30",
+      "fetched_at": "2026-10-29T10:46:52.972997+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -353,16 +353,16 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.162307+05:30",
+      "fetched_at": "2026-10-29T10:46:48.066763+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -372,16 +372,16 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972316+05:30",
+      "fetched_at": "2026-10-29T10:45:40.008949+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "CAD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -391,16 +391,16 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.666472+05:30",
+      "fetched_at": "2026-10-29T10:46:46.412800+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -410,12 +410,12 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.889901+05:30",
+      "fetched_at": "2026-10-29T10:46:51.783872+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -434,11 +434,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -448,12 +448,12 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.325877+05:30",
+      "fetched_at": "2026-10-29T10:46:50.318382+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -468,34 +468,15 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079314+05:30",
-      "status": "current",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
-    },
-    {
-      "date": "2026-10-29",
-      "time": "10:15:34",
-      "bank": "SBI",
-      "currency": "AUD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 68.08,
-      "market_rate": 67.1176,
-      "markup_percent": 1.4339,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365486+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -505,12 +486,31 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.163264+05:30",
+      "fetched_at": "2026-10-29T10:46:48.067908+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "10:45:33",
+      "bank": "SBI",
+      "currency": "AUD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 68.34,
+      "market_rate": 67.1176,
+      "markup_percent": 1.8213,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298214+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -529,11 +529,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -543,16 +543,16 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.715812+05:30",
+      "fetched_at": "2026-10-29T10:46:52.973176+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -562,16 +562,16 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972331+05:30",
+      "fetched_at": "2026-10-29T10:45:40.008965+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "AUD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -581,16 +581,16 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.667021+05:30",
+      "fetched_at": "2026-10-29T10:46:46.413529+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -600,16 +600,16 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.890001+05:30",
+      "fetched_at": "2026-10-29T10:46:51.783994+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -619,12 +619,12 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.326015+05:30",
+      "fetched_at": "2026-10-29T10:46:50.318545+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -639,30 +639,11 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079336+05:30",
-      "status": "current",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
-    },
-    {
-      "date": "2026-10-29",
-      "time": "10:15:34",
-      "bank": "SBI",
-      "currency": "GBP",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 127.97,
-      "market_rate": 126.8015,
-      "markup_percent": 0.9215,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365512+05:30",
       "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -681,11 +662,30 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:45:33",
+      "bank": "SBI",
+      "currency": "GBP",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 128.35,
+      "market_rate": 126.8015,
+      "markup_percent": 1.2212,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298242+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -695,12 +695,12 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.164205+05:30",
+      "fetched_at": "2026-10-29T10:46:48.069058+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -719,11 +719,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -733,16 +733,16 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.715971+05:30",
+      "fetched_at": "2026-10-29T10:46:52.973324+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -752,16 +752,16 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972346+05:30",
+      "fetched_at": "2026-10-29T10:45:40.008978+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "GBP",
       "rate_type": "TT Selling / Outward Remittance",
@@ -771,16 +771,16 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.667654+05:30",
+      "fetched_at": "2026-10-29T10:46:46.414309+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -790,16 +790,16 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.890100+05:30",
+      "fetched_at": "2026-10-29T10:46:51.784154+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -809,12 +809,12 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.326163+05:30",
+      "fetched_at": "2026-10-29T10:46:50.318703+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -833,26 +833,7 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
-    },
-    {
-      "date": "2026-10-29",
-      "time": "10:15:34",
-      "bank": "SBI",
-      "currency": "EUR",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 107.18,
-      "market_rate": 106.2133,
-      "markup_percent": 0.9101,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365536+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -867,15 +848,34 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079359+05:30",
+      "status": "stale",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "10:45:33",
+      "bank": "SBI",
+      "currency": "EUR",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 107.53,
+      "market_rate": 106.2133,
+      "markup_percent": 1.2397,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298267+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -885,16 +885,16 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.165139+05:30",
+      "fetched_at": "2026-10-29T10:46:48.070215+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -904,16 +904,16 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.668099+05:30",
+      "fetched_at": "2026-10-29T10:46:46.414831+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -923,12 +923,12 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972360+05:30",
+      "fetched_at": "2026-10-29T10:45:40.008991+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -947,11 +947,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "EUR",
       "rate_type": "TT Selling / Outward Remittance",
@@ -961,16 +961,16 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.716159+05:30",
+      "fetched_at": "2026-10-29T10:46:52.973483+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -980,16 +980,16 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.890214+05:30",
+      "fetched_at": "2026-10-29T10:46:51.784287+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -999,12 +999,12 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.326304+05:30",
+      "fetched_at": "2026-10-29T10:46:50.318863+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -1019,11 +1019,11 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079380+05:30",
-      "status": "current",
+      "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -1042,30 +1042,30 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:34",
+      "time": "10:45:33",
       "bank": "SBI",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 75.17,
+      "bank_rate": 75.32,
       "market_rate": 74.3467,
-      "markup_percent": 1.1074,
+      "markup_percent": 1.3091,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365560+05:30",
-      "status": "stale",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298293+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1075,16 +1075,16 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.166189+05:30",
+      "fetched_at": "2026-10-29T10:46:48.071471+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1094,12 +1094,12 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.668703+05:30",
+      "fetched_at": "2026-10-29T10:46:46.415548+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -1118,11 +1118,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1132,16 +1132,16 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972373+05:30",
+      "fetched_at": "2026-10-29T10:45:40.009004+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "SGD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1151,16 +1151,16 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.716321+05:30",
+      "fetched_at": "2026-10-29T10:46:52.973635+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1170,12 +1170,12 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.890314+05:30",
+      "fetched_at": "2026-10-29T10:46:51.784401+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -1190,15 +1190,15 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079403+05:30",
-      "status": "current",
+      "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1208,12 +1208,12 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.326446+05:30",
+      "fetched_at": "2026-10-29T10:46:50.319027+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-27",
@@ -1232,11 +1232,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1246,35 +1246,35 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.716479+05:30",
+      "fetched_at": "2026-10-29T10:46:52.973782+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:34",
+      "time": "10:45:33",
       "bank": "SBI",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 26.57,
+      "bank_rate": 26.59,
       "market_rate": 25.9486,
-      "markup_percent": 2.3947,
+      "markup_percent": 2.4718,
       "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365583+05:30",
-      "status": "stale",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298317+05:30",
+      "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1284,16 +1284,16 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.167212+05:30",
+      "fetched_at": "2026-10-29T10:46:48.072559+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1303,16 +1303,16 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.669279+05:30",
+      "fetched_at": "2026-10-29T10:46:46.416227+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "AED",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1322,12 +1322,12 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972386+05:30",
+      "fetched_at": "2026-10-29T10:45:40.009016+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -1346,11 +1346,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:55",
+      "time": "10:46:51",
       "bank": "Union Bank of India",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1360,12 +1360,12 @@
       "source_url": "https://www.unionbankofindia.bank.in/pdf/foreign-exchange-card-rates-applicable-to-various-forex-transactions.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:15:24",
-      "fetched_at": "2026-10-29T10:15:55.890416+05:30",
+      "fetched_at": "2026-10-29T10:46:51.784528+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
@@ -1380,15 +1380,15 @@
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
       "fetched_at": "2026-10-29T10:15:49.079423+05:30",
-      "status": "current",
+      "status": "stale",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:54",
+      "time": "10:46:50",
       "bank": "Punjab National Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1398,35 +1398,16 @@
       "source_url": "https://www.pnb.bank.in/downloadprocess.aspx?fid=A+rrvZeJc+PIaxfEqVTIQQ%3D%3D",
       "source_date": "2026-10-29",
       "source_time": "09:00 AM",
-      "fetched_at": "2026-10-29T10:15:54.326585+05:30",
+      "fetched_at": "2026-10-29T10:46:50.319208+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:34",
-      "bank": "SBI",
-      "currency": "NZD",
-      "rate_type": "TT Selling / Outward Remittance",
-      "bank_rate": 54.46,
-      "market_rate": 53.5944,
-      "markup_percent": 1.6151,
-      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
-      "source_date": "2026-10-28",
-      "source_time": "10:19 AM",
-      "fetched_at": "2026-10-29T10:15:34.365605+05:30",
-      "status": "stale",
-      "market_source": "Open Exchange Rates Reference",
-      "market_source_url": "https://open.er-api.com/v6/latest/USD",
-      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
-    },
-    {
-      "date": "2026-10-29",
-      "time": "10:15:57",
+      "time": "10:46:52",
       "bank": "Deutsche Bank India",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1436,16 +1417,35 @@
       "source_url": "https://forms.deutsche.bank.in/DBForms/private/ViewRates",
       "source_date": "2026-10-29",
       "source_time": null,
-      "fetched_at": "2026-10-29T10:15:57.716699+05:30",
+      "fetched_at": "2026-10-29T10:46:52.973928+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:52",
+      "time": "10:45:33",
+      "bank": "SBI",
+      "currency": "NZD",
+      "rate_type": "TT Selling / Outward Remittance",
+      "bank_rate": 54.62,
+      "market_rate": 53.5944,
+      "markup_percent": 1.9136,
+      "source_url": "https://sbi.co.in/documents/16012/1400784/FOREX_CARD_RATES.pdf",
+      "source_date": "2026-10-29",
+      "source_time": "9:07 AM",
+      "fetched_at": "2026-10-29T10:45:33.298342+05:30",
+      "status": "current",
+      "market_source": "Open Exchange Rates Reference",
+      "market_source_url": "https://open.er-api.com/v6/latest/USD",
+      "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
+    },
+    {
+      "date": "2026-10-29",
+      "time": "10:46:48",
       "bank": "IndusInd Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1455,12 +1455,12 @@
       "source_url": "https://www.indusind.bank.in/in/en/personal/rates.html",
       "source_date": "2026-10-29",
       "source_time": "09:55:04",
-      "fetched_at": "2026-10-29T10:15:52.168147+05:30",
+      "fetched_at": "2026-10-29T10:46:48.073687+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-13",
@@ -1479,11 +1479,11 @@
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:38",
+      "time": "10:45:40",
       "bank": "Axis Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1493,16 +1493,16 @@
       "source_url": "https://application.axis.bank.in/webforms/corporatecardrate/index.aspx",
       "source_date": "2026-10-29",
       "source_time": "09:25 AM",
-      "fetched_at": "2026-10-29T10:15:38.972399+05:30",
+      "fetched_at": "2026-10-29T10:45:40.009028+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     },
     {
       "date": "2026-10-29",
-      "time": "10:15:50",
+      "time": "10:46:46",
       "bank": "HDFC Bank",
       "currency": "NZD",
       "rate_type": "TT Selling / Outward Remittance",
@@ -1512,12 +1512,12 @@
       "source_url": "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/personal-banking/discover-products/interest-rates/hdfc-bank-treasury-forex-card-rates.pdf",
       "source_date": "2026-10-29",
       "source_time": "09:25:19AM",
-      "fetched_at": "2026-10-29T10:15:50.669829+05:30",
+      "fetched_at": "2026-10-29T10:46:46.416864+05:30",
       "status": "current",
       "market_source": "Open Exchange Rates Reference",
       "market_source_url": "https://open.er-api.com/v6/latest/USD",
       "market_source_timestamp": "Thu, 29 Oct 2026 00:02:31 +0000",
-      "market_fetched_at": "2026-10-29T10:15:57.807491+05:30"
+      "market_fetched_at": "2026-10-29T10:46:53.061539+05:30"
     }
   ]
 }
